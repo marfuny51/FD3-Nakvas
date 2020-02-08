@@ -1,22 +1,18 @@
 var Ishop = React.createClass({
     displayName: 'Ishop',
 
-    getDefaultProps: function() {
-        return {nameShop: 'Магазин не работает', products: [],}
-    },
-
-    propTypes: {
+    /*propTypes: {
         nameShop: React.PropTypes.string.isRequired,
             
         products:React.PropTypes.arrayOf(
           React.PropTypes.shape({
             nameproduct: React.PropTypes.string.isRequired,
+            code: React.PropTypes.number.isRequired,
             price: React.PropTypes.number.isRequired,
             stock: React.PropTypes.number.isRequired,
-            foto: React.PropTypes.any.isRequired,
           })
         )
-    },
+    },*/
 
     render: function() {
 
