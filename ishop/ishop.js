@@ -1,0 +1,27 @@
+var Ishop = React.createClass({
+    displayName: 'Ishop',
+
+    getDefaultProps: function() {
+        return {nameShop: 'Магазин не работает', products: [],}
+    },
+
+    render: function() {
+
+        var productsCode=[];
+        for (var i=0; i<this.props.products.length; i++) {
+            var product=this.props.products[i];
+            var productCode = 
+            React.DOM.div({key:product.code, className: 'Product'},
+                React.DOM.span({className:'PrName'}, product.nameproduct),
+                React.DOM.span({className:'Price'}, product.price),
+                React.DOM.span({className:'Stock'}, product.stock),
+                React.DOM.div({className:'Foto'}, product.foto),
+            );
+            productsCode.push(productCode);
+        }
+        return React.Dom.div( {className:'Ishop'},
+            React.DOM.div( {className:'NameShop'}, this.props.nameShop),
+            React.DOM.div( {className:'Products'}, productsCode),
+        );
+    },
+});

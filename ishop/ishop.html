@@ -11,12 +11,12 @@
     <script scr='ishop.js'></script>
     <link rel='stylesheet' type='text/css' href='ishop.css'/>
     <script>
-        var nameShopText='Свежесть';
+        var nameShopText='Fresh';
         var productArr = [
-          {nameproduct:'tomato', code:1, price:'4', foto:'', stock:'450',},
-          {nameproduct:'potatoes', code:2, price:'1', foto:'', stock:'1000',},
-          {nameproduct:'cabbage', code:3, price:'2', foto:'', stock:'325',},
-          {nameproduct:'avocado', code:4, price:'8', foto:'', stock:'206',},
+          {nameproduct:'Tomato', code:1, price:'4', foto:'images/tomato.jpg', stock:'450',},
+          {nameproduct:'Potatoes', code:2, price:'1', foto:'images/potatoes.jpg', stock:'1000',},
+          {nameproduct:'Cabbage', code:3, price:'2', foto:'images/cabbage.jpg', stock:'325',},
+          {nameproduct:'Avocado', code:4, price:'8', foto:'images/avocado.jpg', stock:'206',},
         ]
         ReactDOM.render(
             React.createElement(Ishop, {nameShop:nameShopText,products:productArr}),

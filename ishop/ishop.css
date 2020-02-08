@@ -1,0 +1,38 @@
+.Ishop {
+    border: double gray 3px;
+    width: 180px;
+    padding: 3px 7px;
+    background-color: #F0F0F0; 
+}
+
+.Ishop .Products {
+    padding-top: 5px;
+}
+
+.Ishop .NameShop {
+    font-weight: bold; 
+}
+
+.Ishop .Products .Product {
+    padding: 2px 0;
+}
+
+.Ishop .Products .Product .PrName {
+    float: right;
+    width: 30px;
+    font-weight: bold;
+    text-align: right;
+}
+
+.Ishop .Products .Product .Price {
+    width: 30px;
+    margin-right: 30px;
+}
+
+.Ishop .Products .Product .Stock {
+    margin-right: 60px;
+}
+
+.Ishop .Products .Product .Foto {
+    width: 50px;
+}
