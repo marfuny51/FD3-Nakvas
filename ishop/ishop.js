@@ -8,8 +8,7 @@ var Ishop = React.createClass({
     render: function() {
 
         var productsCode=[];
-        for (var i=0; i<this.props.products.length; i++) {
-            var product=this.props.products[i];
+        productArr.forEach(product => {
             var productCode = 
             React.DOM.div({key:product.code, className: 'Product'},
                 React.DOM.span({className:'PrName'}, product.nameproduct),
@@ -17,8 +16,9 @@ var Ishop = React.createClass({
                 React.DOM.span({className:'Stock'}, 'Stock: ' + product.stock),
                 React.DOM.img({className:'Foto', src: product.foto}),
             );
-            productsCode.push(productCode);
-        }
+            productsCode.push(productCode);  
+        });
+        
         return React.DOM.div( {className:'Ishop'},
             React.DOM.div( {className:'NameShop'}, this.props.nameShop),
             React.DOM.div( {className:'Products'}, productsCode),
