@@ -25,8 +25,8 @@ var Ishop = React.createClass({
             var productCode = 
             React.DOM.div({key:product.code, className: 'Product'},
                 React.DOM.span({className:'PrName'}, product.nameproduct),
-                React.DOM.span({className:'Price'}, 'Price: ' + product.price),
-                React.DOM.span({className:'Stock'}, 'Stock: ' + product.stock),
+                React.DOM.span({className:'Price'}, 'Price: ' + product.price + '$'),
+                React.DOM.span({className:'Stock'}, 'Stock: ' + product.stock + 'kg'),
                 React.DOM.img({className:'Foto', src: product.foto}),
             );
             productsCode.push(productCode);  
