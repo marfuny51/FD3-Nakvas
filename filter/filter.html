@@ -1,1 +1,24 @@
-
+<!DOCTYPE html>
+<html>
+    <head>
+    <title>Filter_Nakvas</title>
+    <meta charset='utf-8'>
+    </head>
+    <body>
+    <div id='filter'></div>
+    <script src='https://unpkg.com/react@15/dist/react.js'></script>
+    <script src='https://unpkg.com/react-dom@15/dist/react-dom.js'></script>
+    <script src='filter.js'></script>
+    <link rel='stylesheet' type='text/css' href='filter.css'>
+    <script>
+        var langArr = [
+            {namelang:'JavaScript', code:1},
+            {namelang:'Java', code:1},
+        ];
+        ReactDOM.render(
+            React.createElement(Filter, {langs:langArr}),
+            document.getElementById('filter')
+        );
+    </script>
+    </body>
+</html>
