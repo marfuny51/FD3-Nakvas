@@ -1,14 +1,11 @@
 var Filter = React.createClass ({
     displayName: 'Filter',
 
-   /* propTypes: {
-        langs: React.propTypes.arrayOf(
-            React.propTypes.shape({
-                namelang: React.PropTypes.string.isRequired,
-                code: React.PropTypes.number.isRequired,
-            })
-        )
-    },*/
+    propTypes: {
+        namelang: React.PropTypes.string,
+        code: React.PropTypes.number,
+        enterText: React.PropTypes.string,
+    },
 
     render: function() {
 
@@ -21,7 +18,7 @@ var Filter = React.createClass ({
 
         return React.DOM.div( {className:'Filter'},
             React.DOM.input({type:'checkbox'}),
-            React.DOM.input({type:'text'}),
+            React.DOM.input({type:'text', value: , className: 'Text'}),
             React.DOM.input({type:'button', value:'сброс'}),
             React.DOM.div({className:'List'}, langsCode),
         );
