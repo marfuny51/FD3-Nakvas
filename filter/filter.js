@@ -7,8 +7,17 @@ var Filter = React.createClass ({
         enterText: React.PropTypes.string,
     },
 
-    render: function() {
+    sortList: function(EO) {
+        console.log('нажали чекбокс!'); 
+        this.setState( {langs:langArr.sort()} );
+    },
 
+    findInList: function() {
+        
+    }
+
+    render: function() {
+        
         var langsCode=[];
         langArr.forEach(lang => {
             var langCode = 
@@ -17,8 +26,8 @@ var Filter = React.createClass ({
         });
 
         return React.DOM.div( {className:'Filter'},
-            React.DOM.input({type:'checkbox'}),
-            React.DOM.input({type:'text', value: , className: 'Text'}),
+            React.DOM.input({type:'checkbox', onClick: this.sortList}),
+            React.DOM.input({type:'text', className: 'Text', onChange: this.findInList}),
             React.DOM.input({type:'button', value:'сброс'}),
             React.DOM.div({className:'List'}, langsCode),
         );

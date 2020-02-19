@@ -23,10 +23,10 @@
             {namelang:'Scala', code:9},
             {namelang:'Mozart', code:10}
         ];
-        var defaultText = '';
+        var defaultText = '???';
         
         ReactDOM.render(
-            React.createElement(Filter, {langs:langArr, enterText: defaultText}),
+            React.createElement(Filter, {langs:langArr, enterText:defaultText}),
             document.getElementById('filter')
         );
     </script>
