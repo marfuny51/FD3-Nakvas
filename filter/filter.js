@@ -35,7 +35,7 @@ var Filter = React.createClass ({
     },
 
     cbReturn: function() {
-        this.setState({sortLangs: false, lineLangs: this.props.enterTeaxt});
+        this.setState({sortLangs: false, lineLangs: ''});
         this.processList;
     },
 
