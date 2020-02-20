@@ -7,11 +7,17 @@ var Filter = React.createClass ({
         enterText: React.PropTypes.string,
     },
     
+    let langsCode=[];
+        langArr.forEach(lang => {
+            langsCode.push(lang);
+        });  
+    
+
     getInitialState: function () {
         return { 
             ourList: this.props.langs,
-            sortLangs: this.props.isSotr,
-            lineLangs:this.props.enterTeaxt,
+            sortLangs: false,
+            lineLangs:'dff',
           };
     },
       
@@ -21,7 +27,7 @@ var Filter = React.createClass ({
             langs = langs.filter(lang => lang.indexOf(this.state.lineLangs)!=-1);
         if (this.state.sortLangs)
             langs.sort();
-        this.setState({langs:langs});
+        this.setState({ourList:langs});
     },
 
     cbSortLangs: function() {
@@ -40,17 +46,15 @@ var Filter = React.createClass ({
     },
 
     render: function() {
-        var langsCode=[];
-        this.props.langs.forEach(lang => {
-            var langCode = 
-            React.DOM.p({key:lang.code, className:'Lang'}, lang.namelang);
-            langsCode.push(langCode);
-        });
         return React.DOM.div( {className:'Filter'},
-            React.DOM.input({type:'checkbox', onClick:this.cbSortLangs}, this.sortLangs),
-            React.DOM.input({type:'text', className: 'Text', onChange:this.cblineLangs}, this.lineLangs),
+            React.DOM.input({type:'checkbox', onClick:this.cbSortLangs}),
+            React.DOM.input({type:'text', className: 'Text', value: this.lineLangs, onChange:this.cblineLangs}),
             React.DOM.input({type:'button', value:'сброс', onClick:this.cbReturn}),
-            React.DOM.div({className:'List'}, langsCode),
+            React.DOM.div({className:'List'}, 
+            langsCode.forEach(lang => {
+                React.DOM.p({className:'Lang'}, lang);
+            })
+            ),
         );
     },
 });
