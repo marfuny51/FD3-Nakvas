@@ -24,9 +24,10 @@
             {namelang:'Mozart', code:10}
         ];
         var freeText = '';
+        var listSort = false;
         
         ReactDOM.render(
-            React.createElement(Filter, {langs:langArr, checked: 1, entertext: freeText}),
+            React.createElement(Filter, {langs:langArr, enterTeaxt: freeText, isSotr: listSort}),
             document.getElementById('filter')
         );
     </script>
