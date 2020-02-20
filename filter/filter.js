@@ -7,17 +7,11 @@ var Filter = React.createClass ({
         enterText: React.PropTypes.string,
     },
     
-    let langsCode=[];
-        langArr.forEach(lang => {
-            langsCode.push(lang);
-        });  
-    
-
     getInitialState: function () {
         return { 
             ourList: this.props.langs,
             sortLangs: false,
-            lineLangs:'dff',
+            lineLangs:'',
           };
     },
       
@@ -48,11 +42,11 @@ var Filter = React.createClass ({
     render: function() {
         return React.DOM.div( {className:'Filter'},
             React.DOM.input({type:'checkbox', onClick:this.cbSortLangs}),
-            React.DOM.input({type:'text', className: 'Text', value: this.lineLangs, onChange:this.cblineLangs}),
+            React.DOM.input({type:'text', className: 'Text', value: this.state.lineLangs, onChange:this.cblineLangs}),
             React.DOM.input({type:'button', value:'сброс', onClick:this.cbReturn}),
             React.DOM.div({className:'List'}, 
-            langsCode.forEach(lang => {
-                React.DOM.p({className:'Lang'}, lang);
+            this.state.ourList.forEach(lang => {
+                React.DOM.p({className:'Lang'}, lang.namelang);
             })
             ),
         );
