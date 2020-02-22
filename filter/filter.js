@@ -46,7 +46,7 @@ var Filter = React.createClass ({
             React.DOM.input({type:'button', value:'сброс', onClick:this.cbReturn}),
             React.DOM.div({className:'List'}, 
             this.state.ourList.forEach(lang => {
-                React.DOM.p({className:'Lang'}, lang.namelang);
+                React.DOM.p({key: lang.code, className:'Lang'}, lang.namelang);
             })
             ),
         );
