@@ -15,7 +15,7 @@ var Goods = React.createClass ({
 
     render: function() {
     
-        return React.DOM.tr({key:this.props.code, className: 'Product', onClick:this.lineClicked},
+        return React.DOM.tr({key:this.props.code, className: this.props.className, onClick:this.lineClicked},
                 React.DOM.td({className:'PrName'}, this.props.nameproduct),
                 React.DOM.td({className:'Price'}, this.props.price),
                 React.DOM.td({className:'URL'}, this.props.url),

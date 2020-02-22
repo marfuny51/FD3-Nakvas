@@ -16,8 +16,9 @@ var Ishop2 = React.createClass ({
 
     getInitialState: function() {
         return { 
+          ourProductsTR: this.props.products,
           selectedChooseLine: null,
-          
+          defaultClassTR: 'Product',
         };
       },
 
@@ -31,6 +32,7 @@ var Ishop2 = React.createClass ({
             React.createElement(Goods, {key:v.code,
                 nameproduct:v.nameproduct, price:v.price, code:v.code,
                 url:v.url, stock:v.stock,
+                className: this.state.defaultClassTR,
                 cbSelected:this.lineSelected,
                 selectedLineCode:this.state.selectedLineCode, 
             })

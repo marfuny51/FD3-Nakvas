@@ -30,6 +30,10 @@
     border: 1px solid black; 
 }
 
+.Ishop2 .GoodsTable .ProductChange > td {
+    background-color: antiquewhite; 
+}
+
 .Ishop2 .Title .Title2 > th{
     text-align: center; 
     padding: 5px; 
