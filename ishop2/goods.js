@@ -10,19 +10,35 @@ var Goods = React.createClass ({
     },
 
     lineClicked: function(EO) {
-        this.props.cbSelected(this.props.code);
+        this.props.cblineSelected(this.props.code);
+    },
+
+    lineDeleted: function(EO) {
+        this.props.cblineDelete(this.props.code);
     },
 
     render: function() {
-    
-        return React.DOM.tr({key:this.props.code, className: this.props.className, onClick:this.lineClicked},
+        if (this.props.selectedCode === this.props.code) {
+            return React.DOM.tr({key:this.props.code, className:'ProductChange', onClick:this.lineClicked},
                 React.DOM.td({className:'PrName'}, this.props.nameproduct),
                 React.DOM.td({className:'Price'}, this.props.price),
                 React.DOM.td({className:'URL'}, this.props.url),
                 React.DOM.td({className:'Stock'}, this.props.stock),
                 React.DOM.td({className:'Control'}, 
-                    React.DOM.input({className:'ButtonControl', type: 'button', value: 'Delete'}),
+                    React.DOM.input({className:'ButtonControl', type: 'button', value: 'Delete', onClick:this.lineDeleted}),
+                    ),
+                );
+        }
+        else {
+            return React.DOM.tr({key:this.props.code, className:'Product', onClick:this.lineClicked},
+                React.DOM.td({className:'PrName'}, this.props.nameproduct),
+                React.DOM.td({className:'Price'}, this.props.price),
+                React.DOM.td({className:'URL'}, this.props.url),
+                React.DOM.td({className:'Stock'}, this.props.stock),
+                React.DOM.td({className:'Control'}, 
+                    React.DOM.input({className:'ButtonControl', type: 'button', value: 'Delete', onClick:this.lineDeleted}),
                 ),
             );
-    },
+        }
+    }
 });

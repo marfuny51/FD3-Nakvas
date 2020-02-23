@@ -16,28 +16,31 @@ var Ishop2 = React.createClass ({
 
     getInitialState: function() {
         return { 
-          ourProductsTR: this.props.products,
-          selectedChooseLine: null,
-          defaultClassTR: 'Product',
+          oursProducts: this.props.products,
+          selectedCode: null,
+          deleteCode: null,
         };
       },
 
-    lineSelected: function(code) {
-        console.log('выбран строка с кодом '+ code);
-        this.setState( {selectedChooseLine:code} );
-      },
+    deleteLine: function() {
+        let products = this.props.products.slice();
+            products = products.filter(product => product.code.indexOf(this.state.deleteCode)=-1);
+        this.setState({oursProducts: products});
+    },
+
+    cblineSelected: function(code) {
+        this.setState( {selectedCode:code});
+    },
+
+    cblineDelete: function(code) {
+        var question = confirm('Do you want to delete this product?');
+        if (question== true) {
+            this.setState( {deleteCode:code}, this.deleteLine);
+        }  
+    },
 
     render: function() {
-        var productsCode=this.props.products.map( v =>
-            React.createElement(Goods, {key:v.code,
-                nameproduct:v.nameproduct, price:v.price, code:v.code,
-                url:v.url, stock:v.stock,
-                className: this.state.defaultClassTR,
-                cbSelected:this.lineSelected,
-                selectedLineCode:this.state.selectedLineCode, 
-            })
-          );
-        
+      
         return React.DOM.div({className:'Ishop2'},
         React.DOM.div( {className:'NameShop'}, this.props.nameShop),
         React.DOM.div({className:'MainCont'},
@@ -50,9 +53,20 @@ var Ishop2 = React.createClass ({
                 React.DOM.th({className:'Control'}, 'Control'),
             ),
         ),
-        React.DOM.table( {className:'GoodsTable'}, productsCode),
-
+        React.DOM.table( {className:'GoodsTable'}, 
+        this.state.oursProducts.map( v => 
+            React.createElement(Goods, {key:v.code,
+                nameproduct:v.nameproduct, price:v.price, code:v.code,
+                url:v.url, stock:v.stock,
+                cblineSelected:this.cblineSelected,
+                selectedCode:this.state.selectedCode,
+                cblineDelete: this.cblineDelete,
+                deleteCode:this.state.deleteCode,
+            }) 
+        )
         ),
-        );
+          
+        ),
+        )
     },
 });

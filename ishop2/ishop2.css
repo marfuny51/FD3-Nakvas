@@ -30,8 +30,16 @@
     border: 1px solid black; 
 }
 
-.Ishop2 .GoodsTable .ProductChange > td {
-    background-color: antiquewhite; 
+.Ishop2 .GoodsTable .ProductChange > td{
+    width: 200px;
+    text-align: center; 
+    padding: 5px; 
+    border: 1px solid black; 
+    background-color: #F44336; 
+}
+
+.Ishop2 .GoodsTable .ProductDelete > td{
+    display: none; 
 }
 
 .Ishop2 .Title .Title2 > th{
