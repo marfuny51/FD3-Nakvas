@@ -15,31 +15,24 @@ var Ishop2 = React.createClass ({
             ),
     },
 
-
     getInitialState: function() {
         return { 
           oursProducts: this.props.products,
-          newProducts: [],
           selectedCode: null,
           deleteCode: null,
         };
       },
-    refresh: function() {
-        this.setState( {oursProducts:this.state.newProducts});
-    },
-
 
     deleteLine: function() {
         let products = this.state.oursProducts;
         products = products.filter(product => product.code !== this.state.deleteCode);
-        this.setState({newProducts: products}, this.refresh);
+        this.setState({oursProducts: products});
     },
 
 
     cblineSelected: function(code) {
         this.setState( {selectedCode:code});
     },
-
 
     cblineDelete: function(code) {
         var question = confirm('Do you want to delete this product?');
