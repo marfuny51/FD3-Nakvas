@@ -51,15 +51,7 @@ var Filter = React.createClass ({
             React.DOM.input({type:'checkbox', checked: this.state.sortLangs, onClick:this.cbSortLangs}),
             React.DOM.input({type:'text', className: 'Text', value: this.state.lineLangs, onChange:this.cblineLangs}),
             React.DOM.input({type:'button', value:'сброс', onClick:this.cbReturn}),
-<<<<<<< HEAD
-            React.DOM.div({className:'List'}, 
-            this.state.ourList.forEach(lang => {
-                React.DOM.p({key: lang.code, className:'Lang'}, lang.namelang);
-            })
-            ),
-=======
             React.DOM.div({className:'List'}, langsCode),
->>>>>>> d75168a5d496349ff9286022c3b15694ebdddb20
         );
     },
 });
