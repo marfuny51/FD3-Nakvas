@@ -24,7 +24,7 @@ var Ishop2 = React.createClass ({
 
     deleteLine: function() {
         let products = this.props.products.slice();
-            products = products.filter(product => product.code.indexOf(this.state.deleteCode)=-1);
+        products = products.filter(product => product.code.indexOf(this.state.deleteCode)=-1);
         this.setState({oursProducts: products});
     },
 
