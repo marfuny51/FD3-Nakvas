@@ -7,27 +7,27 @@
 
 .Ishop2 .MainCont {
     margin: auto;
-    width: 300px;
+    width: 375px;
     height: 180px;
 }
 
 .Ishop2 .Title {
-    width: 329px;
-    border: 4px double black; 
-    border-collapse: separate; 
+    width: 332px;
+    border: 1px solid black; 
+    border-collapse: collapse;
 }
 
 .Ishop2 .GoodsTable {
     width: 300px;
-    border: 4px double black; 
-    border-collapse: separate; 
+    border: 1px solid black; 
+    border-collapse: collapse;
 }
 
 .Ishop2 .GoodsTable .Product > td {
-    width: 200px;
     text-align: center; 
     padding: 5px; 
     border: 1px solid black; 
+    border-collapse: collapse;
 }
 
 .Ishop2 .GoodsTable .ProductChange > td{
@@ -35,15 +35,13 @@
     text-align: center; 
     padding: 5px; 
     border: 1px solid black; 
-    background-color: #F44336; 
-}
-
-.Ishop2 .GoodsTable .ProductDelete > td{
-    display: none; 
+    background-color: #f9b57a; 
+    border-collapse: collapse;
 }
 
 .Ishop2 .Title .Title2 > th{
     text-align: center; 
     padding: 5px; 
     border: 1px solid black; 
+    border-collapse: collapse;
 }

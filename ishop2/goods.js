@@ -7,6 +7,8 @@ var Goods = React.createClass ({
         price: React.PropTypes.number,
         url: React.PropTypes.string,
         stock: React.PropTypes.number,
+        lineClicked: React.PropTypes.func,
+        lineDeleted: React.PropTypes.func
     },
 
     lineClicked: function(EO) {
@@ -18,27 +20,14 @@ var Goods = React.createClass ({
     },
 
     render: function() {
-        if (this.props.selectedCode === this.props.code) {
-            return React.DOM.tr({key:this.props.code, className:'ProductChange', onClick:this.lineClicked},
-                React.DOM.td({className:'PrName'}, this.props.nameproduct),
-                React.DOM.td({className:'Price'}, this.props.price),
-                React.DOM.td({className:'URL'}, this.props.url),
-                React.DOM.td({className:'Stock'}, this.props.stock),
-                React.DOM.td({className:'Control'}, 
-                    React.DOM.input({className:'ButtonControl', type: 'button', value: 'Delete', onClick:this.lineDeleted}),
+        return React.DOM.tr({key:this.props.code, className:(this.props.selectedCode === this.props.code)?'ProductChange':'Product', onClick:this.lineClicked},
+                  React.DOM.td({className:'PrName'}, this.props.nameproduct),
+                  React.DOM.td({className:'Price'}, this.props.price),
+                  React.DOM.td({className:'UR'}, this.props.url),
+                  React.DOM.td({className:'Stoc'}, this.props.stock),
+                  React.DOM.td({className:'Contro'}, 
+                    React.DOM.input({className:'ButtonContro', type: 'button', value: 'Delete', onClick:this.lineDeleted}),
                     ),
-                );
-        }
-        else {
-            return React.DOM.tr({key:this.props.code, className:'Product', onClick:this.lineClicked},
-                React.DOM.td({className:'PrName'}, this.props.nameproduct),
-                React.DOM.td({className:'Price'}, this.props.price),
-                React.DOM.td({className:'URL'}, this.props.url),
-                React.DOM.td({className:'Stock'}, this.props.stock),
-                React.DOM.td({className:'Control'}, 
-                    React.DOM.input({className:'ButtonControl', type: 'button', value: 'Delete', onClick:this.lineDeleted}),
-                ),
-            );
-        }
+               );
     }
 });

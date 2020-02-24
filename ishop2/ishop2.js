@@ -11,21 +11,25 @@ var Ishop2 = React.createClass ({
                 url: React.PropTypes.string,
                 stock: React.PropTypes.number,
             })
-    )
+            ),
     },
 
     getInitialState: function() {
         return { 
           oursProducts: this.props.products,
+          newProducts: [],
           selectedCode: null,
           deleteCode: null,
         };
       },
+    refresh: function() {
+        this.setState( {oursProducts:this.state.newProducts});
+    },
 
     deleteLine: function() {
-        let products = this.props.products.slice();
-            products = products.filter(product => product.code.indexOf(this.state.deleteCode)=-1);
-        this.setState({oursProducts: products});
+        let products = this.state.oursProducts;
+        products = products.filter(product => product.code !== this.state.deleteCode);
+        this.setState({newProducts: products}, this.refresh);
     },
 
     cblineSelected: function(code) {
@@ -40,11 +44,12 @@ var Ishop2 = React.createClass ({
     },
 
     render: function() {
-      
+
         return React.DOM.div({className:'Ishop2'},
         React.DOM.div( {className:'NameShop'}, this.props.nameShop),
         React.DOM.div({className:'MainCont'},
         React.DOM.table( {className:'Title'}, 
+          React.DOM.thead({className:'Thead'},
             React.DOM.tr({className:'Title2'},
                 React.DOM.th({className:'PrName'}, 'Name'),
                 React.DOM.th({className:'Price'}, 'Price'),
@@ -52,21 +57,22 @@ var Ishop2 = React.createClass ({
                 React.DOM.th({className:'Stock'}, 'Quantity'),
                 React.DOM.th({className:'Control'}, 'Control'),
             ),
-        ),
-        React.DOM.table( {className:'GoodsTable'}, 
-        this.state.oursProducts.map( v => 
-            React.createElement(Goods, {key:v.code,
+          ),
+        
+          React.DOM.tbody( {className: 'GoodsTable'},
+            this.state.oursProducts.map( v => 
+                React.createElement(Goods, {key:v.code,
                 nameproduct:v.nameproduct, price:v.price, code:v.code,
                 url:v.url, stock:v.stock,
                 cblineSelected:this.cblineSelected,
                 selectedCode:this.state.selectedCode,
                 cblineDelete: this.cblineDelete,
                 deleteCode:this.state.deleteCode,
-            }) 
-        )
+                }) 
+           ),
+          ),
         ),
-          
         ),
-        )
+        );
     },
 });
