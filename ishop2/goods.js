@@ -1,6 +1,7 @@
 var Goods = React.createClass ({
     displayname: 'Goods',
 
+
     propTypes: {
         nameproduct: React.PropTypes.string,
         code: React.PropTypes.number,
@@ -11,13 +12,16 @@ var Goods = React.createClass ({
         lineDeleted: React.PropTypes.func
     },
 
+
     lineClicked: function(EO) {
         this.props.cblineSelected(this.props.code);
     },
 
+
     lineDeleted: function(EO) {
         this.props.cblineDelete(this.props.code);
     },
+
 
     render: function() {
         return React.DOM.tr({key:this.props.code, className:(this.props.selectedCode === this.props.code)?'ProductChange':'Product', onClick:this.lineClicked},

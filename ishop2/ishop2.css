@@ -5,11 +5,13 @@
     color: green; 
 }
 
+
 .Ishop2 .MainCont {
     margin: auto;
     width: 375px;
     height: 180px;
 }
+
 
 .Ishop2 .Title {
     width: 332px;
@@ -17,11 +19,13 @@
     border-collapse: collapse;
 }
 
+
 .Ishop2 .GoodsTable {
     width: 300px;
     border: 1px solid black; 
     border-collapse: collapse;
 }
+
 
 .Ishop2 .GoodsTable .Product > td {
     text-align: center; 
@@ -29,6 +33,7 @@
     border: 1px solid black; 
     border-collapse: collapse;
 }
+
 
 .Ishop2 .GoodsTable .ProductChange > td{
     width: 200px;
@@ -38,6 +43,7 @@
     background-color: #f9b57a; 
     border-collapse: collapse;
 }
+
 
 .Ishop2 .Title .Title2 > th{
     text-align: center; 
