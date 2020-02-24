@@ -1,6 +1,7 @@
 var Ishop2 = React.createClass ({
     displayName: 'Ishop2',
 
+
     propTypes: {
         nameShop: React.PropTypes.string,
         products: React.PropTypes.arrayOf(
@@ -14,6 +15,7 @@ var Ishop2 = React.createClass ({
             ),
     },
 
+
     getInitialState: function() {
         return { 
           oursProducts: this.props.products,
@@ -26,21 +28,18 @@ var Ishop2 = React.createClass ({
         this.setState( {oursProducts:this.state.newProducts});
     },
 
+
     deleteLine: function() {
-<<<<<<< HEAD
-        let products = this.props.products.slice();
-        products = products.filter(product => product.code.indexOf(this.state.deleteCode)=-1);
-        this.setState({oursProducts: products});
-=======
         let products = this.state.oursProducts;
         products = products.filter(product => product.code !== this.state.deleteCode);
         this.setState({newProducts: products}, this.refresh);
->>>>>>> c958ab9fe2d336a6757a5f40e4e1c9e7bd3c97fc
     },
+
 
     cblineSelected: function(code) {
         this.setState( {selectedCode:code});
     },
+
 
     cblineDelete: function(code) {
         var question = confirm('Do you want to delete this product?');
@@ -49,7 +48,9 @@ var Ishop2 = React.createClass ({
         }  
     },
 
+
     render: function() {
+
 
         return React.DOM.div({className:'Ishop2'},
         React.DOM.div( {className:'NameShop'}, this.props.nameShop),
