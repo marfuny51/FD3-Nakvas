@@ -62,7 +62,7 @@ class Ishop3 extends React.Component {
           </thead>
         
           <tbody className= 'GoodsTable'>
-            this.state.oursProducts.map( v => 
+            {this.state.oursProducts.map( v => 
                 <Goods key={v.code}
                 nameproduct={v.nameproduct} price={v.price} code={v.code}
                 url={v.url} stock={v.stock}
@@ -71,7 +71,7 @@ class Ishop3 extends React.Component {
                 cblineDelete= {this.cblineDelete}
                 deleteCode={this.state.deleteCode}
                 />
-           );
+           )}
           </tbody>
         </table>
         </div>
