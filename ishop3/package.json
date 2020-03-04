@@ -17,13 +17,16 @@
     "babel-preset-stage-0": "^6.24.1",
     "css-loader": "^3.4.2",
     "lite-server": "^2.5.4",
+    "mode": "^0.3.2",
     "prop-types": "^15.7.2",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
     "react-dom-factories": "^1.0.2",
     "webpack": "^4.42.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "webpack-cli": "^3.3.11"
+  },
   "author": "",
   "license": "ISC"
 }

@@ -27,12 +27,12 @@ class Goods extends React.Component {
     render() {
         return (
             <tr key={this.props.code} className={(this.props.selectedCode === this.props.code)?'ProductChange':'Product'} onClick={this.lineClicked}>
-                <td className={PrName}>{this.props.nameproduct}</td>
-                <td className={Price}>{this.props.price}</td>
-                <td className={UR}>{this.props.url}</td>
-                <td className={Stoc}>{this.props.stock}</td>
-                <td className={Contro}>
-                    <input className={ButtonContro} type={button} value={Delete} onClick={this.lineDeleted}/>
+                <td className='PrName'>{this.props.nameproduct}</td>
+                <td className='Price'>{this.props.price}</td>
+                <td className='UR'>{this.props.url}</td>
+                <td className='Stoc'>{this.props.stock}</td>
+                <td className='Contro'>
+                    <input className='ButtonContro' type='button' value='Delete' onClick={this.lineDeleted}/>
                 </td>
             </tr>
         )
