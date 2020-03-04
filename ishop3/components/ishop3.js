@@ -47,35 +47,35 @@ class Ishop3 extends React.Component {
     render() {
 
         return (
-        React.DOM.div({className:'Ishop2'},
-        React.DOM.div( {className:'NameShop'}, this.props.nameShop),
-        React.DOM.div({className:'MainCont'},
-        React.DOM.table( {className:'Title'}, 
-          React.DOM.thead({className:'Thead'},
-            React.DOM.tr({className:'Title2'},
-                React.DOM.th({className:'PrName'}, 'Name'),
-                React.DOM.th({className:'Price'}, 'Price'),
-                React.DOM.th({className:'URL'}, 'URL'),
-                React.DOM.th({className:'Stock'}, 'Quantity'),
-                React.DOM.th({className:'Control'}, 'Control'),
-            ),
-          ),
+        <div className='Ishop2'>
+        <div className='NameShop'>{this.props.nameShop}</div>
+        <div className='MainCont'>
+        <table className='Title'>
+          <thead className='Thead'>
+            <tr className='Title2'>
+                <th className='PrName'>Name</th>
+                <th className='Price'>Price</th>
+                <th className='URL'>URL</th>
+                <th className='Stock'>Quantity</th>
+                <th className='Control'>Control</th>
+            </tr>
+          </thead>
         
-          React.DOM.tbody( {className: 'GoodsTable'},
+          <tbody className= 'GoodsTable'>
             this.state.oursProducts.map( v => 
-                React.createElement(Goods, {key:v.code,
-                nameproduct:v.nameproduct, price:v.price, code:v.code,
-                url:v.url, stock:v.stock,
-                cblineSelected:this.cblineSelected,
-                selectedCode:this.state.selectedCode,
-                cblineDelete: this.cblineDelete,
-                deleteCode:this.state.deleteCode,
-                }) 
-           ),
-          ),
-        ),
-        ),
-        )
+                <Goods key={v.code}
+                nameproduct={v.nameproduct} price={v.price} code={v.code}
+                url={v.url} stock={v.stock}
+                cblineSelected={this.cblineSelected}
+                selectedCode={this.state.selectedCode}
+                cblineDelete= {this.cblineDelete}
+                deleteCode={this.state.deleteCode}
+                />
+           );
+          </tbody>
+        </table>
+        </div>
+        </div>
         );
     }
 }
