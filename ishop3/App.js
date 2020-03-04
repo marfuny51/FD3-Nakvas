@@ -3,18 +3,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import VotesBlock from './components/VotesBlock';
+import Ishop3 from './components/ishop3';
 
-let questionText='Как вы относитесь к программированию?';
-let answersArr=require('./answers.json');
-let defaultFreeAnswerText="???";
+let nameShopText='Fresh';
+let productArr=require('./products.json');
 
 ReactDOM.render(
-  <VotesBlock 
-    question={questionText}
-    answers={answersArr}
-    deffreeanswertext={defaultFreeAnswerText}
-    startWorkMode={1}
+  <Ishop3 
+    nameShop={nameShopText}
+    products={productArr}
   />
-  , document.getElementById('container') 
+  , document.getElementById('ishop3') 
 );
