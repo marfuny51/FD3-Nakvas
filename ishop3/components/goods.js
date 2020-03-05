@@ -12,7 +12,8 @@ class Goods extends React.Component {
         url: PropTypes.string,
         stock: PropTypes.number,
         lineClicked: PropTypes.func,
-        lineDeleted: PropTypes.func
+        lineDeleted: PropTypes.func,
+        lineEdit: PropTypes.func
     };
 
     lineClicked = (EO) => {
@@ -36,7 +37,7 @@ class Goods extends React.Component {
                 <td className='Stoc'>{this.props.stock}</td>
                 <td className='Contro'>
                     <input className='ButtonContro' type='button' value='Delete' onClick={this.lineDeleted}/>
-                    <input className='ButtonContro' type='button' value='Edit' onClick={this.lineEdit}/>
+                    <input className='ButtonContro2' type='button' value='Edit' onClick={this.lineEdit}/>
                 </td>
             </tr>
         )

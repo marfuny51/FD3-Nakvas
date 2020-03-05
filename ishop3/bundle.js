@@ -564,6 +564,41 @@ module.exports = warning;
 /* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
+/* WEBPACK VAR INJECTION */(function(process) {/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+if (process.env.NODE_ENV !== 'production') {
+  var REACT_ELEMENT_TYPE = (typeof Symbol === 'function' &&
+    Symbol.for &&
+    Symbol.for('react.element')) ||
+    0xeac7;
+
+  var isValidElement = function(object) {
+    return typeof object === 'object' &&
+      object !== null &&
+      object.$$typeof === REACT_ELEMENT_TYPE;
+  };
+
+  // By explicitly using `prop-types` you are opting into new development behavior.
+  // http://fb.me/prop-types-in-prod
+  var throwOnDirectAccess = true;
+  module.exports = __webpack_require__(31)(isValidElement, throwOnDirectAccess);
+} else {
+  // By explicitly using `prop-types` you are opting into new production behavior.
+  // http://fb.me/prop-types-in-prod
+  module.exports = __webpack_require__(32)();
+}
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {/**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -577,7 +612,7 @@ module.exports = warning;
 if (process.env.NODE_ENV !== 'production') {
   var invariant = __webpack_require__(2);
   var warning = __webpack_require__(6);
-  var ReactPropTypesSecret = __webpack_require__(8);
+  var ReactPropTypesSecret = __webpack_require__(9);
   var loggedTypeFailures = {};
 }
 
@@ -628,7 +663,7 @@ module.exports = checkPropTypes;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -647,7 +682,7 @@ module.exports = ReactPropTypesSecret;
 
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -684,41 +719,6 @@ var ExecutionEnvironment = {
 };
 
 module.exports = ExecutionEnvironment;
-
-/***/ }),
-/* 10 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/* WEBPACK VAR INJECTION */(function(process) {/**
- * Copyright (c) 2013-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-if (process.env.NODE_ENV !== 'production') {
-  var REACT_ELEMENT_TYPE = (typeof Symbol === 'function' &&
-    Symbol.for &&
-    Symbol.for('react.element')) ||
-    0xeac7;
-
-  var isValidElement = function(object) {
-    return typeof object === 'object' &&
-      object !== null &&
-      object.$$typeof === REACT_ELEMENT_TYPE;
-  };
-
-  // By explicitly using `prop-types` you are opting into new development behavior.
-  // http://fb.me/prop-types-in-prod
-  var throwOnDirectAccess = true;
-  module.exports = __webpack_require__(31)(isValidElement, throwOnDirectAccess);
-} else {
-  // By explicitly using `prop-types` you are opting into new production behavior.
-  // http://fb.me/prop-types-in-prod
-  module.exports = __webpack_require__(32)();
-}
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
 /* 11 */
@@ -1015,7 +1015,7 @@ var _ishop2 = _interopRequireDefault(_ishop);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var nameShopText = 'Fresh';
-var productArr = __webpack_require__(35);
+var productArr = __webpack_require__(37);
 
 _reactDom2.default.render(_react2.default.createElement(_ishop2.default, {
   nameShop: nameShopText,
@@ -1078,7 +1078,7 @@ var require$$0 = __webpack_require__(6);
 var emptyObject = __webpack_require__(5);
 var invariant = __webpack_require__(2);
 var emptyFunction = __webpack_require__(1);
-var checkPropTypes = __webpack_require__(7);
+var checkPropTypes = __webpack_require__(8);
 
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -2819,7 +2819,7 @@ if (process.env.NODE_ENV === 'production') {
  LICENSE file in the root directory of this source tree.
  Modernizr 3.0.0pre (Custom Build) | MIT
 */
-var aa=__webpack_require__(3);__webpack_require__(2);var l=__webpack_require__(9),n=__webpack_require__(4),ba=__webpack_require__(11),ca=__webpack_require__(1),da=__webpack_require__(5),ea=__webpack_require__(12),fa=__webpack_require__(13),ha=__webpack_require__(14),ia=__webpack_require__(15);
+var aa=__webpack_require__(3);__webpack_require__(2);var l=__webpack_require__(10),n=__webpack_require__(4),ba=__webpack_require__(11),ca=__webpack_require__(1),da=__webpack_require__(5),ea=__webpack_require__(12),fa=__webpack_require__(13),ha=__webpack_require__(14),ia=__webpack_require__(15);
 function w(a){for(var b=arguments.length-1,c="Minified React error #"+a+"; visit http://facebook.github.io/react/docs/error-decoder.html?invariant\x3d"+a,d=0;d<b;d++)c+="\x26args[]\x3d"+encodeURIComponent(arguments[d+1]);b=Error(c+" for the full message or use the non-minified dev environment for full errors and additional helpful warnings.");b.name="Invariant Violation";b.framesToPop=1;throw b;}aa?void 0:w("227");
 function ja(a){switch(a){case "svg":return"http://www.w3.org/2000/svg";case "math":return"http://www.w3.org/1998/Math/MathML";default:return"http://www.w3.org/1999/xhtml"}}
 var ka={Namespaces:{html:"http://www.w3.org/1999/xhtml",mathml:"http://www.w3.org/1998/Math/MathML",svg:"http://www.w3.org/2000/svg"},getIntrinsicNamespace:ja,getChildNamespace:function(a,b){return null==a||"http://www.w3.org/1999/xhtml"===a?ja(b):"http://www.w3.org/2000/svg"===a&&"foreignObject"===b?"http://www.w3.org/1999/xhtml":a}},la=null,oa={};
@@ -3146,7 +3146,7 @@ if (process.env.NODE_ENV !== "production") {
 
 var react = __webpack_require__(3);
 var invariant = __webpack_require__(2);
-var ExecutionEnvironment = __webpack_require__(9);
+var ExecutionEnvironment = __webpack_require__(10);
 var _assign = __webpack_require__(4);
 var EventListener = __webpack_require__(11);
 var require$$0 = __webpack_require__(6);
@@ -3154,9 +3154,9 @@ var hyphenateStyleName = __webpack_require__(25);
 var emptyFunction = __webpack_require__(1);
 var camelizeStyleName = __webpack_require__(27);
 var performanceNow = __webpack_require__(29);
-var propTypes = __webpack_require__(10);
+var propTypes = __webpack_require__(7);
 var emptyObject = __webpack_require__(5);
-var checkPropTypes = __webpack_require__(7);
+var checkPropTypes = __webpack_require__(8);
 var shallowEqual = __webpack_require__(12);
 var containsNode = __webpack_require__(13);
 var focusNode = __webpack_require__(14);
@@ -20561,7 +20561,7 @@ module.exports = performanceNow;
 
 
 
-var ExecutionEnvironment = __webpack_require__(9);
+var ExecutionEnvironment = __webpack_require__(10);
 
 var performance;
 
@@ -20590,8 +20590,8 @@ var invariant = __webpack_require__(2);
 var warning = __webpack_require__(6);
 var assign = __webpack_require__(4);
 
-var ReactPropTypesSecret = __webpack_require__(8);
-var checkPropTypes = __webpack_require__(7);
+var ReactPropTypesSecret = __webpack_require__(9);
+var checkPropTypes = __webpack_require__(8);
 
 module.exports = function(isValidElement, throwOnDirectAccess) {
   /* global Symbol */
@@ -21137,7 +21137,7 @@ module.exports = function(isValidElement, throwOnDirectAccess) {
 
 var emptyFunction = __webpack_require__(1);
 var invariant = __webpack_require__(2);
-var ReactPropTypesSecret = __webpack_require__(8);
+var ReactPropTypesSecret = __webpack_require__(9);
 
 module.exports = function() {
   function shim(props, propName, componentName, location, propFullName, secret) {
@@ -21203,7 +21203,7 @@ var _react = __webpack_require__(3);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = __webpack_require__(10);
+var _propTypes = __webpack_require__(7);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
@@ -21212,6 +21212,10 @@ __webpack_require__(16);
 var _goods = __webpack_require__(34);
 
 var _goods2 = _interopRequireDefault(_goods);
+
+var _view = __webpack_require__(35);
+
+var _view2 = _interopRequireDefault(_view);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -21252,6 +21256,10 @@ var Ishop3 = function (_React$Component) {
             if (question == true) {
                 _this.setState({ deleteCode: code }, _this.deleteLine);
             }
+        }, _this.cblineEdit = function (code) {
+            _this.setState({ selectedCode: code });
+        }, _this.newProduct = function (code) {
+            _this.setState({ selectedCode: code });
         }, _temp), _possibleConstructorReturn(_this, _ret);
     }
 
@@ -21317,12 +21325,19 @@ var Ishop3 = function (_React$Component) {
                                     cblineSelected: _this2.cblineSelected,
                                     selectedCode: _this2.state.selectedCode,
                                     cblineDelete: _this2.cblineDelete,
-                                    deleteCode: _this2.state.deleteCode
+                                    deleteCode: _this2.state.deleteCode,
+                                    cblineEdit: _this2.cblineEdit
                                 });
                             })
                         )
-                    )
-                )
+                    ),
+                    _react2.default.createElement('input', { type: 'button', value: 'New product', onClick: this.newProduct })
+                ),
+                ' ',
+                this.state.selectedCode === this.props.code && _react2.default.createElement(_view2.default, { key: this.props.code,
+                    nameproduct: this.props.nameproduct, price: this.props.price, code: this.props.code,
+                    url: this.props.url, stock: this.props.stock
+                })
             );
         }
     }]);
@@ -21359,7 +21374,7 @@ var _react = __webpack_require__(3);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = __webpack_require__(10);
+var _propTypes = __webpack_require__(7);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
@@ -21391,6 +21406,8 @@ var Goods = function (_React$Component) {
             _this.props.cblineSelected(_this.props.code);
         }, _this.lineDeleted = function (EO) {
             _this.props.cblineDelete(_this.props.code);
+        }, _this.lineEdit = function (EO) {
+            _this.props.cblineEdit(_this.props.code);
         }, _temp), _possibleConstructorReturn(_this, _ret);
     }
 
@@ -21423,7 +21440,8 @@ var Goods = function (_React$Component) {
                 _react2.default.createElement(
                     'td',
                     { className: 'Contro' },
-                    _react2.default.createElement('input', { className: 'ButtonContro', type: 'button', value: 'Delete', onClick: this.lineDeleted })
+                    _react2.default.createElement('input', { className: 'ButtonContro', type: 'button', value: 'Delete', onClick: this.lineDeleted }),
+                    _react2.default.createElement('input', { className: 'ButtonContro2', type: 'button', value: 'Edit', onClick: this.lineEdit })
                 )
             );
         }
@@ -21439,12 +21457,101 @@ Goods.propTypes = {
     url: _propTypes2.default.string,
     stock: _propTypes2.default.number,
     lineClicked: _propTypes2.default.func,
-    lineDeleted: _propTypes2.default.func
+    lineDeleted: _propTypes2.default.func,
+    lineEdit: _propTypes2.default.func
 };
 exports.default = Goods;
 
 /***/ }),
 /* 35 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(3);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(7);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+__webpack_require__(36);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var ViewProduct = function (_React$Component) {
+    _inherits(ViewProduct, _React$Component);
+
+    function ViewProduct() {
+        _classCallCheck(this, ViewProduct);
+
+        return _possibleConstructorReturn(this, (ViewProduct.__proto__ || Object.getPrototypeOf(ViewProduct)).apply(this, arguments));
+    }
+
+    _createClass(ViewProduct, [{
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                'div',
+                { key: this.props.code },
+                _react2.default.createElement(
+                    'div',
+                    { className: 'PrName' },
+                    this.props.nameproduct
+                ),
+                _react2.default.createElement(
+                    'div',
+                    { className: 'Price' },
+                    this.props.price
+                ),
+                _react2.default.createElement(
+                    'div',
+                    { className: 'UR' },
+                    this.props.url
+                ),
+                _react2.default.createElement(
+                    'div',
+                    { className: 'Stoc' },
+                    this.props.stock
+                )
+            );
+        }
+    }]);
+
+    return ViewProduct;
+}(_react2.default.Component);
+
+ViewProduct.propTypes = {
+    nameproduct: _propTypes2.default.string,
+    code: _propTypes2.default.number,
+    price: _propTypes2.default.number,
+    url: _propTypes2.default.string,
+    stock: _propTypes2.default.number
+};
+exports.default = ViewProduct;
+
+/***/ }),
+/* 36 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 37 */
 /***/ (function(module, exports) {
 
 module.exports = [{"nameproduct":"Tomato","code":1,"price":4,"url":"https://111.com","stock":450},{"nameproduct":"Potatoes","code":2,"price":1,"url":"https://asdf.com","stock":980},{"nameproduct":"Cabbage","code":3,"price":2,"url":"https://lk.com","stock":325},{"nameproduct":"Avocado","code":4,"price":8,"url":"https://eee.com","stock":206},{"nameproduct":"Apple","code":5,"price":2,"url":"https://weqr.com","stock":125}]

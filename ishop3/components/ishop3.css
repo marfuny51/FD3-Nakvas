@@ -12,13 +12,11 @@
 }
 
 .Ishop2 .Title {
-    width: 332px;
     border: 1px solid black; 
     border-collapse: collapse;
 }
 
 .Ishop2 .GoodsTable {
-    width: 300px;
     border: 1px solid black; 
     border-collapse: collapse;
 }
@@ -31,7 +29,6 @@
 }
 
 .Ishop2 .GoodsTable .ProductChange > td{
-    width: 200px;
     text-align: center; 
     padding: 5px; 
     border: 1px solid black; 

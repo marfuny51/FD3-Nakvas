@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import './ishop3.css';
 
 import Goods from './goods';
+import ViewProduct from './view';
 
 class Ishop3 extends React.Component {
 
@@ -44,7 +45,11 @@ class Ishop3 extends React.Component {
     }
 
     cblineEdit = (code) => {
+        this.setState( {selectedCode:code} );
+    }
 
+    newProduct = (code) => {
+        this.setState( {selectedCode:code} );
     }
 
     render() {
@@ -78,7 +83,14 @@ class Ishop3 extends React.Component {
            )}
           </tbody>
         </table>
-        </div>
+        <input type='button' value='New product' onClick={this.newProduct}/>
+        </div> {
+        (this.state.selectedCode === this.props.code)&&
+            <ViewProduct key={this.props.code}
+            nameproduct={this.props.nameproduct} price={this.props.price} code={this.props.code}
+            url={this.props.url} stock={this.props.stock}
+            />
+        }
         </div>
         );
     }
