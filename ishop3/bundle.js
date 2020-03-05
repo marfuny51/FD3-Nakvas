@@ -29366,10 +29366,11 @@ var Ishop3 = function (_React$Component) {
                     ),
                     _react2.default.createElement('input', { type: 'button', value: 'New product', onClick: this.newProduct })
                 ),
-                ' ',
-                this.state.selectedCode === this.props.code && _react2.default.createElement(_view2.default, { key: this.props.code,
-                    nameproduct: this.props.nameproduct, price: this.props.price, code: this.props.code,
-                    url: this.props.url, stock: this.props.stock
+                this.state.oursProducts.map(function (v) {
+                    return _this2.props.selectedCode === v.code && _react2.default.createElement(_view2.default, { key: v.code,
+                        nameproduct: v.nameproduct, price: v.price, code: v.code,
+                        url: v.url, stock: v.stock
+                    });
                 })
             );
         }
@@ -30421,25 +30422,25 @@ var ViewProduct = function (_React$Component) {
         value: function render() {
             return _react2.default.createElement(
                 'div',
-                null,
+                { key: this.props.code, className: 'ViewProduct' },
                 _react2.default.createElement(
                     'div',
-                    { className: 'PrName' },
+                    null,
                     this.props.nameproduct
                 ),
                 _react2.default.createElement(
                     'div',
-                    { className: 'Price' },
+                    null,
                     this.props.price
                 ),
                 _react2.default.createElement(
                     'div',
-                    { className: 'UR' },
+                    null,
                     this.props.url
                 ),
                 _react2.default.createElement(
                     'div',
-                    { className: 'Stoc' },
+                    null,
                     this.props.stock
                 )
             );

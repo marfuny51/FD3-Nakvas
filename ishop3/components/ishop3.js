@@ -85,10 +85,15 @@ class Ishop3 extends React.Component {
         </table>
         <input type='button' value='New product' onClick={this.newProduct}/>
         </div> 
-            <ViewProduct key={this.props.code}
-            nameproduct={this.props.nameproduct} price={this.props.price} code={this.props.code}
-            url={this.props.url} stock={this.props.stock}
+        <div className='ViewProduct'>
+        {this.state.oursProducts.map( v => 
+            (this.props.selectedCode === v.code)&&
+            <ViewProduct key={v.code}
+            nameproduct={v.nameproduct} price={v.price} code={v.code}
+            url={v.url} stock={v.stock}
             />
+           )} 
+           </div>      
         </div>
         );
     }
