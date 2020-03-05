@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import './goods.css';
+import './ishop3.css';
 
 class Goods extends React.Component {
 
@@ -23,6 +23,10 @@ class Goods extends React.Component {
         this.props.cblineDelete(this.props.code);
     };
 
+    lineEdit = (EO) => {
+        this.props.cblineEdit(this.props.code);
+    };
+
     render() {
         return (
             <tr key={this.props.code} className={(this.props.selectedCode === this.props.code)?'ProductChange':'Product'} onClick={this.lineClicked}>
@@ -32,9 +36,12 @@ class Goods extends React.Component {
                 <td className='Stoc'>{this.props.stock}</td>
                 <td className='Contro'>
                     <input className='ButtonContro' type='button' value='Delete' onClick={this.lineDeleted}/>
+                    <input className='ButtonContro' type='button' value='Edit' onClick={this.lineEdit}/>
                 </td>
             </tr>
         )
     }
 
 }
+
+export default Goods;

@@ -43,6 +43,10 @@ class Ishop3 extends React.Component {
         }  
     }
 
+    cblineEdit = (code) => {
+
+    }
+
     render() {
 
         return (
@@ -69,6 +73,7 @@ class Ishop3 extends React.Component {
                 selectedCode={this.state.selectedCode}
                 cblineDelete= {this.cblineDelete}
                 deleteCode={this.state.deleteCode}
+                cblineEdit={this.cblineEdit}
                 />
            )}
           </tbody>
