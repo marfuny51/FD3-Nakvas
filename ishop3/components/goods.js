@@ -19,7 +19,6 @@ class Goods extends React.Component {
         this.props.cblineSelected(this.props.code);
     };
 
-
     lineDeleted = (EO) => {
         this.props.cblineDelete(this.props.code);
     };
@@ -39,4 +38,3 @@ class Goods extends React.Component {
     }
 
 }
-

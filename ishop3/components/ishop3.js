@@ -43,7 +43,6 @@ class Ishop3 extends React.Component {
         }  
     }
 
-
     render() {
 
         return (

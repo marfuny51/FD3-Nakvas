@@ -3,5 +3,5 @@
     {"nameproduct":"Potatoes", "code":2, "price":1, "url": "https://asdf.com", "stock":980},
     {"nameproduct":"Cabbage", "code":3, "price":2, "url": "https://lk.com", "stock":325},
     {"nameproduct":"Avocado", "code":4, "price":8, "url": "https://eee.com", "stock":206},
-    {"nameproduct":"Apple", "code":5, "price":2, "url": "https://weqr.com", "stock":125},
+    {"nameproduct":"Apple", "code":5, "price":2, "url": "https://weqr.com", "stock":125}
   ]
