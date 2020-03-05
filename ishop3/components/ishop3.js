@@ -84,13 +84,11 @@ class Ishop3 extends React.Component {
           </tbody>
         </table>
         <input type='button' value='New product' onClick={this.newProduct}/>
-        </div> {
-        (this.state.selectedCode === this.props.code)&&
+        </div> 
             <ViewProduct key={this.props.code}
             nameproduct={this.props.nameproduct} price={this.props.price} code={this.props.code}
             url={this.props.url} stock={this.props.stock}
             />
-        }
         </div>
         );
     }

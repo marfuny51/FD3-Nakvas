@@ -15,6 +15,7 @@ class ViewProduct extends React.Component {
 
     render() {
         return (
+            (this.props.selectedCode === this.props.code)&&
             <div>
                 <div className='PrName'>{this.props.nameproduct}</div>
                 <div className='Price'>{this.props.price}</div>
