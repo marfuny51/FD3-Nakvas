@@ -15,11 +15,11 @@ class ViewProduct extends React.Component {
 
     render() {
         return (
-            <div>
-                <div className='PrName'>{this.props.nameproduct}</div>
-                <div className='Price'>{this.props.price}</div>
-                <div className='UR'>{this.props.url}</div>
-                <div className='Stoc'>{this.props.stock}</div>
+             <div key={this.props.code} className='ViewProduct'>
+                <div>{this.props.nameproduct}</div>
+                <div>{this.props.price}</div>
+                <div>{this.props.url}</div>
+                <div>{this.props.stock}</div>
             </div>
         )
     }
