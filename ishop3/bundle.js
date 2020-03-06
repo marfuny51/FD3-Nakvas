@@ -21507,7 +21507,7 @@ var ViewProduct = function (_React$Component) {
         value: function render() {
             return _react2.default.createElement(
                 'div',
-                { key: this.props.code },
+                null,
                 _react2.default.createElement(
                     'div',
                     { className: 'PrName' },
