@@ -15,7 +15,7 @@ class ViewProduct extends React.Component {
 
     render() {
         return (
-             <div key={this.props.code} className='ViewProduct'>
+            <div key={this.props.code} className='ViewProduct'>
                 <div>{this.props.nameproduct}</div>
                 <div>{this.props.price}</div>
                 <div>{this.props.url}</div>
