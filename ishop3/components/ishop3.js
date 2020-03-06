@@ -53,6 +53,9 @@ class Ishop3 extends React.Component {
     }
 
     render() {
+       var foundProduct = this.state.oursProducts.find( p => 
+                p.code === this.state.selectedCode
+            );
 
         return (
         <div className='Ishop2'>
@@ -86,17 +89,13 @@ class Ishop3 extends React.Component {
         <input type='button' value='New product' onClick={this.newProduct}/>
         </div> 
         <div className='ViewProduct'>
-        {(this.state.oursProducts.find( p => 
-                (p.code === this.props.selectedCode)&&
-                <ViewProduct key={p.code}
-                nameproduct={p.nameproduct} price={p.price} code={p.code}
-                url={p.url} stock={p.stock}
+        <ViewProduct {...foundProduct}
                 />
-           ))}
-           </div>      
+        </div>      
         </div>
         );
     }
 }
 
 export default Ishop3;
+
