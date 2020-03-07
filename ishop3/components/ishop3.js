@@ -5,6 +5,7 @@ import './ishop3.css';
 
 import Goods from './goods';
 import ViewProduct from './view';
+import EditAddProduct from './editadd';
 
 class Ishop3 extends React.Component {
 
@@ -25,6 +26,8 @@ class Ishop3 extends React.Component {
           oursProducts: this.props.products,
           selectedCode: null,
           deleteCode: null,
+          editaddCode: null,
+          mode: 0, //1- edit, 2 - add
     }
 
     deleteLine = () => {
@@ -45,20 +48,23 @@ class Ishop3 extends React.Component {
     }
 
     cblineEdit = (code) => {
-        this.setState( {selectedCode:code} );
+        this.setState( {editaddCode:code, mode:1} );
     }
 
     newProduct = (code) => {
-        this.setState( {selectedCode:code} );
+        this.setState( {editaddCode:code, mode:2} );
     }
 
     render() {
-       var foundProduct = this.state.oursProducts.find( p => 
+        var foundProduct = this.state.oursProducts.find( p => 
                 p.code === this.state.selectedCode
+            );
+        var editProduct = this.state.oursProducts.find( p => 
+                p.code === this.state.editaddCode
             );
 
         return (
-        <div className='Ishop2'>
+        <div className='Ishop3'>
         <div className='NameShop'>{this.props.nameShop}</div>
         <div className='MainCont'>
         <table className='Title'>
@@ -88,10 +94,14 @@ class Ishop3 extends React.Component {
         </table>
         <input type='button' value='New product' onClick={this.newProduct}/>
         </div> 
-        <div className='ViewProduct'>
-        <ViewProduct {...foundProduct}
-                />
-        </div>      
+        {
+            (this.state.mode===0)&&
+            <ViewProduct {...foundProduct}/>
+        }    
+        {
+            (this.state.mode===1)&&
+            <EditAddProduct {...editProduct}/>
+        }     
         </div>
         );
     }

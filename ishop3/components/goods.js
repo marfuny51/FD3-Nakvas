@@ -35,9 +35,9 @@ class Goods extends React.Component {
                 <td>{this.props.price}</td>
                 <td>{this.props.url}</td>
                 <td>{this.props.stock}</td>
-                <td>
-                    <input className='ButtonContro' type='button' value='Delete' onClick={this.lineDeleted}/>
+                <td className='Control'>
                     <input className='ButtonContro2' type='button' value='Edit' onClick={this.lineEdit}/>
+                    <input className='ButtonContro' type='button' value='Delete' onClick={this.lineDeleted}/>
                 </td>
             </tr>
         )

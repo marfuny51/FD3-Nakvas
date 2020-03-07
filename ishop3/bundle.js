@@ -369,6 +369,32 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 /* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
+/* WEBPACK VAR INJECTION */(function(process) {/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+if (process.env.NODE_ENV !== 'production') {
+  var ReactIs = __webpack_require__(7);
+
+  // By explicitly using `prop-types` you are opting into new development behavior.
+  // http://fb.me/prop-types-in-prod
+  var throwOnDirectAccess = true;
+  module.exports = __webpack_require__(23)(ReactIs.isElement, throwOnDirectAccess);
+} else {
+  // By explicitly using `prop-types` you are opting into new production behavior.
+  // http://fb.me/prop-types-in-prod
+  module.exports = __webpack_require__(24)();
+}
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {/**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -382,7 +408,7 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 var printWarning = function() {};
 
 if (process.env.NODE_ENV !== 'production') {
-  var ReactPropTypesSecret = __webpack_require__(4);
+  var ReactPropTypesSecret = __webpack_require__(5);
   var loggedTypeFailures = {};
   var has = Function.call.bind(Object.prototype.hasOwnProperty);
 
@@ -476,7 +502,7 @@ module.exports = checkPropTypes;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -493,32 +519,6 @@ var ReactPropTypesSecret = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
 
 module.exports = ReactPropTypesSecret;
 
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/* WEBPACK VAR INJECTION */(function(process) {/**
- * Copyright (c) 2013-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-if (process.env.NODE_ENV !== 'production') {
-  var ReactIs = __webpack_require__(7);
-
-  // By explicitly using `prop-types` you are opting into new development behavior.
-  // http://fb.me/prop-types-in-prod
-  var throwOnDirectAccess = true;
-  module.exports = __webpack_require__(23)(ReactIs.isElement, throwOnDirectAccess);
-} else {
-  // By explicitly using `prop-types` you are opting into new production behavior.
-  // http://fb.me/prop-types-in-prod
-  module.exports = __webpack_require__(24)();
-}
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
 /* 6 */
@@ -578,7 +578,7 @@ var _ishop2 = _interopRequireDefault(_ishop);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var nameShopText = 'Fresh';
-var productArr = __webpack_require__(28);
+var productArr = __webpack_require__(30);
 
 _reactDom2.default.render(_react2.default.createElement(_ishop2.default, {
   nameShop: nameShopText,
@@ -640,7 +640,7 @@ if (process.env.NODE_ENV !== "production") {
 'use strict';
 
 var _assign = __webpack_require__(2);
-var checkPropTypes = __webpack_require__(3);
+var checkPropTypes = __webpack_require__(4);
 
 var ReactVersion = '16.13.0';
 
@@ -3801,7 +3801,7 @@ if (process.env.NODE_ENV !== "production") {
 var React = __webpack_require__(1);
 var _assign = __webpack_require__(2);
 var Scheduler = __webpack_require__(6);
-var checkPropTypes = __webpack_require__(3);
+var checkPropTypes = __webpack_require__(4);
 var tracing = __webpack_require__(17);
 
 var ReactSharedInternals = React.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED; // Prevent newer renderers from RTE when used with older react package versions.
@@ -29236,7 +29236,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = __webpack_require__(5);
+var _propTypes = __webpack_require__(3);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
@@ -29249,6 +29249,10 @@ var _goods2 = _interopRequireDefault(_goods);
 var _view = __webpack_require__(26);
 
 var _view2 = _interopRequireDefault(_view);
+
+var _editadd = __webpack_require__(28);
+
+var _editadd2 = _interopRequireDefault(_editadd);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -29275,7 +29279,8 @@ var Ishop3 = function (_React$Component) {
         return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Ishop3.__proto__ || Object.getPrototypeOf(Ishop3)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
             oursProducts: _this.props.products,
             selectedCode: null,
-            deleteCode: null
+            deleteCode: null,
+            mode: 0 //1- edit, 2 - add
         }, _this.deleteLine = function () {
             var products = _this.state.oursProducts;
             products = products.filter(function (product) {
@@ -29283,16 +29288,16 @@ var Ishop3 = function (_React$Component) {
             });
             _this.setState({ oursProducts: products });
         }, _this.cblineSelected = function (code) {
-            _this.setState({ selectedCode: code });
+            _this.setState({ selectedCode: code, mode: 0 });
         }, _this.cblineDelete = function (code) {
             var question = confirm('Do you want to delete this product?');
             if (question == true) {
                 _this.setState({ deleteCode: code }, _this.deleteLine);
             }
         }, _this.cblineEdit = function (code) {
-            _this.setState({ selectedCode: code });
+            _this.setState({ selectedCode: code, mode: 1 });
         }, _this.newProduct = function (code) {
-            _this.setState({ selectedCode: code });
+            _this.setState({ selectedCode: code, mode: 2 });
         }, _temp), _possibleConstructorReturn(_this, _ret);
     }
 
@@ -29307,7 +29312,7 @@ var Ishop3 = function (_React$Component) {
 
             return _react2.default.createElement(
                 'div',
-                { className: 'Ishop2' },
+                { className: 'Ishop3' },
                 _react2.default.createElement(
                     'div',
                     { className: 'NameShop' },
@@ -29370,11 +29375,8 @@ var Ishop3 = function (_React$Component) {
                     ),
                     _react2.default.createElement('input', { type: 'button', value: 'New product', onClick: this.newProduct })
                 ),
-                _react2.default.createElement(
-                    'div',
-                    { className: 'ViewProduct' },
-                    _react2.default.createElement(_view2.default, foundProduct)
-                )
+                this.state.mode === 0 && _react2.default.createElement(_view2.default, foundProduct),
+                this.state.mode === 1 && _react2.default.createElement(_editadd2.default, foundProduct)
             );
         }
     }]);
@@ -29622,8 +29624,8 @@ exports.typeOf = typeOf;
 var ReactIs = __webpack_require__(7);
 var assign = __webpack_require__(2);
 
-var ReactPropTypesSecret = __webpack_require__(4);
-var checkPropTypes = __webpack_require__(3);
+var ReactPropTypesSecret = __webpack_require__(5);
+var checkPropTypes = __webpack_require__(4);
 
 var has = Function.call.bind(Object.prototype.hasOwnProperty);
 var printWarning = function() {};
@@ -30218,7 +30220,7 @@ module.exports = function(isValidElement, throwOnDirectAccess) {
 
 
 
-var ReactPropTypesSecret = __webpack_require__(4);
+var ReactPropTypesSecret = __webpack_require__(5);
 
 function emptyFunction() {}
 function emptyFunctionWithReset() {}
@@ -30292,7 +30294,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = __webpack_require__(5);
+var _propTypes = __webpack_require__(3);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
@@ -30357,9 +30359,9 @@ var Goods = function (_React$Component) {
                 ),
                 _react2.default.createElement(
                     'td',
-                    null,
-                    _react2.default.createElement('input', { className: 'ButtonContro', type: 'button', value: 'Delete', onClick: this.lineDeleted }),
-                    _react2.default.createElement('input', { className: 'ButtonContro2', type: 'button', value: 'Edit', onClick: this.lineEdit })
+                    { className: 'Control' },
+                    _react2.default.createElement('input', { className: 'ButtonContro2', type: 'button', value: 'Edit', onClick: this.lineEdit }),
+                    _react2.default.createElement('input', { className: 'ButtonContro', type: 'button', value: 'Delete', onClick: this.lineDeleted })
                 )
             );
         }
@@ -30397,7 +30399,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = __webpack_require__(5);
+var _propTypes = __webpack_require__(3);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
@@ -30425,27 +30427,31 @@ var ViewProduct = function (_React$Component) {
         value: function render() {
             return _react2.default.createElement(
                 'div',
-                { key: this.props.code },
+                { key: this.props.code, className: 'ViewProduct' },
                 _react2.default.createElement(
-                    'div',
+                    'span',
                     null,
                     this.props.nameproduct
                 ),
+                _react2.default.createElement('br', null),
                 _react2.default.createElement(
-                    'div',
+                    'span',
                     null,
                     this.props.price
                 ),
+                _react2.default.createElement('br', null),
                 _react2.default.createElement(
-                    'div',
+                    'span',
                     null,
                     this.props.url
                 ),
+                _react2.default.createElement('br', null),
                 _react2.default.createElement(
-                    'div',
+                    'span',
                     null,
                     this.props.stock
-                )
+                ),
+                _react2.default.createElement('br', null)
             );
         }
     }]);
@@ -30470,6 +30476,129 @@ exports.default = ViewProduct;
 
 /***/ }),
 /* 28 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(3);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+__webpack_require__(29);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var EditAddProduct = function (_React$Component) {
+    _inherits(EditAddProduct, _React$Component);
+
+    function EditAddProduct() {
+        var _ref;
+
+        var _temp, _this, _ret;
+
+        _classCallCheck(this, EditAddProduct);
+
+        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+            args[_key] = arguments[_key];
+        }
+
+        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = EditAddProduct.__proto__ || Object.getPrototypeOf(EditAddProduct)).call.apply(_ref, [this].concat(args))), _this), _this.save = function (code) {}, _this.cancel = function (code) {}, _temp), _possibleConstructorReturn(_this, _ret);
+    }
+
+    _createClass(EditAddProduct, [{
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                'div',
+                { key: this.props.code },
+                _react2.default.createElement(
+                    'span',
+                    null,
+                    'Edit existing Product'
+                ),
+                _react2.default.createElement('br', null),
+                _react2.default.createElement(
+                    'span',
+                    null,
+                    'ID: '
+                ),
+                _react2.default.createElement(
+                    'span',
+                    null,
+                    this.props.code
+                ),
+                _react2.default.createElement('br', null),
+                _react2.default.createElement(
+                    'span',
+                    null,
+                    'Name: '
+                ),
+                _react2.default.createElement('input', { type: 'text', value: this.props.nameproduct }),
+                _react2.default.createElement('br', null),
+                _react2.default.createElement(
+                    'span',
+                    null,
+                    'Price: '
+                ),
+                _react2.default.createElement('input', { type: 'text', value: this.props.price }),
+                _react2.default.createElement('br', null),
+                _react2.default.createElement(
+                    'span',
+                    null,
+                    'URL: '
+                ),
+                _react2.default.createElement('input', { type: 'text', value: this.props.url }),
+                _react2.default.createElement('br', null),
+                _react2.default.createElement(
+                    'span',
+                    null,
+                    'Quantity: '
+                ),
+                _react2.default.createElement('input', { type: 'text', value: this.props.stock }),
+                _react2.default.createElement('br', null),
+                _react2.default.createElement('input', { type: 'button', value: 'Save', onClick: this.save }),
+                _react2.default.createElement('input', { type: 'button', value: 'Cancel', onClick: this.cancel })
+            );
+        }
+    }]);
+
+    return EditAddProduct;
+}(_react2.default.Component);
+
+EditAddProduct.propTypes = {
+    code: _propTypes2.default.number,
+    nameproduct: _propTypes2.default.string,
+    price: _propTypes2.default.number,
+    url: _propTypes2.default.string,
+    stock: _propTypes2.default.number
+};
+exports.default = EditAddProduct;
+
+/***/ }),
+/* 29 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 30 */
 /***/ (function(module, exports) {
 
 module.exports = [{"nameproduct":"Tomato","code":1,"price":4,"url":"https://111.com","stock":450},{"nameproduct":"Potatoes","code":2,"price":1,"url":"https://asdf.com","stock":980},{"nameproduct":"Cabbage","code":3,"price":2,"url":"https://lk.com","stock":325},{"nameproduct":"Avocado","code":4,"price":8,"url":"https://eee.com","stock":206},{"nameproduct":"Apple","code":5,"price":2,"url":"https://weqr.com","stock":125}]

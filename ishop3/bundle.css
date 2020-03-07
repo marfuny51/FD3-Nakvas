@@ -1,34 +1,34 @@
-.Ishop2 .NameShop {
+.Ishop3 .NameShop {
     font-size: 32px;
     text-align: center;
     font-weight: bold;
     color: green; 
 }
 
-.Ishop2 .MainCont {
+.Ishop3 .MainCont {
     margin: auto;
     width: 375px;
     height: 328px;
 }
 
-.Ishop2 .Title {
+.Ishop3 .Title {
     border: 1px solid black; 
     border-collapse: collapse;
 }
 
-.Ishop2 .GoodsTable {
+.Ishop3 .GoodsTable {
     border: 1px solid black; 
     border-collapse: collapse;
 }
 
-.Ishop2 .GoodsTable .Product > td {
+.Ishop3 .GoodsTable .Product > td {
     text-align: center; 
     padding: 5px; 
     border: 1px solid black; 
     border-collapse: collapse;
 }
 
-.Ishop2 .GoodsTable .ProductChange > td{
+.Ishop3 .GoodsTable .ProductChange > td{
     text-align: center; 
     padding: 5px; 
     border: 1px solid black; 
@@ -36,13 +36,17 @@
     border-collapse: collapse;
 }
 
-.Ishop2 .Title .Title2 > th{
+.Ishop3 .Title .Title2 > th{
     text-align: center; 
     padding: 5px; 
     border: 1px solid black; 
     border-collapse: collapse;
 }
 .ViewProduct {
+    margin: auto;
+    width: 370px;
+    padding-top: 30px;
+}.EditAddProduct {
     margin: auto;
     width: 370px;
     padding-top: 30px;
