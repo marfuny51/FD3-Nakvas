@@ -27,7 +27,7 @@ class Ishop3 extends React.Component {
           selectedCode: null,
           deleteCode: null,
           editaddCode: null,
-          mode: 0, //1- edit, 2 - add
+          mode: null, //0 -view, 1- edit, 2 - add
     }
 
     deleteLine = () => {
@@ -37,12 +37,12 @@ class Ishop3 extends React.Component {
     }
 
     cblineSelected = (code) => {
-        this.setState( {selectedCode:code});
+        this.setState( {selectedCode:code, mode:0});
     }
 
     cblineDelete = (code) => {
         var question = confirm('Do you want to delete this product?');
-        if (question== true) {
+        if (question == true) {
             this.setState( {deleteCode:code}, this.deleteLine);
         }  
     }
@@ -92,7 +92,7 @@ class Ishop3 extends React.Component {
            )}
           </tbody>
         </table>
-        <input type='button' value='New product' onClick={this.newProduct}/>
+        <input type='button' value='New product' onClick={this.newProduct} disabled={(this.state.mode===1)?true:false}/>
         </div> 
         {
             (this.state.mode===0)&&

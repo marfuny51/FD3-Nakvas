@@ -37,7 +37,7 @@ class Goods extends React.Component {
                 <td>{this.props.stock}</td>
                 <td className='Control'>
                     <input className='ButtonContro2' type='button' value='Edit' onClick={this.lineEdit}/>
-                    <input className='ButtonContro' type='button' value='Delete' onClick={this.lineDeleted}/>
+                    <input className='ButtonContro' type='button' value='Delete' onClick={this.lineDeleted} disabled={(this.props.editaddCode===this.props.code)?true:false}/>
                 </td>
             </tr>
         )

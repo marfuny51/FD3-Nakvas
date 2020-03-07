@@ -23,6 +23,7 @@ class EditAddProduct extends React.Component {
         errorUrl: '',
         errorStock: '',
         valide: true,
+        changeProduct: false,
     };
 
     save = (code) => {
