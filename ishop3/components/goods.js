@@ -25,6 +25,7 @@ class Goods extends React.Component {
     };
 
     lineEdit = (EO) => {
+        EO.stopPropagation();
         this.props.cblineEdit(this.props.code);
     };
 
@@ -37,7 +38,7 @@ class Goods extends React.Component {
                 <td>{this.props.stock}</td>
                 <td className='Control'>
                     <input className='ButtonContro2' type='button' value='Edit' onClick={this.lineEdit}/>
-                    <input className='ButtonContro' type='button' value='Delete' onClick={this.lineDeleted} disabled={(this.props.editaddCode===this.props.code)?true:false}/>
+                    <input className='ButtonContro' type='button' value='Delete' disabled={(this.props.mode===0)?false:true} onClick={this.lineDeleted}/>
                 </td>
             </tr>
         )

@@ -27,7 +27,7 @@ class Ishop3 extends React.Component {
           selectedCode: null,
           deleteCode: null,
           editaddCode: null,
-          mode: null, //0 -view, 1- edit, 2 - add
+          mode: '', //0 -view, 1- edit, 2 - add
     }
 
     deleteLine = () => {
@@ -35,6 +35,16 @@ class Ishop3 extends React.Component {
         products = products.filter(product => product.code !== this.state.deleteCode);
         this.setState({oursProducts: products});
     }
+
+    /*saveChange = () => {
+        let products = this.state.oursProducts;
+        let item = products.find(product => product.code === this.state.editaddCode);
+        item.nameproduct = this.props.nameproduct;
+        item.price = this.props.price;
+        item.url = this.props.url;
+        item.stock = this.props.stock;
+        this.setState({oursProducts: products});
+    }*/
 
     cblineSelected = (code) => {
         this.setState( {selectedCode:code, mode:0});
@@ -50,6 +60,10 @@ class Ishop3 extends React.Component {
     cblineEdit = (code) => {
         this.setState( {editaddCode:code, mode:1} );
     }
+
+    cbSave = (code) => {
+        this.setState( {editaddCode:code}, this.saveChange );
+    };
 
     newProduct = (code) => {
         this.setState( {editaddCode:code, mode:2} );
@@ -88,11 +102,12 @@ class Ishop3 extends React.Component {
                 cblineDelete= {this.cblineDelete}
                 deleteCode={this.state.deleteCode}
                 cblineEdit={this.cblineEdit}
+                cbSave={this.cbSave}
                 />
            )}
           </tbody>
         </table>
-        <input type='button' value='New product' onClick={this.newProduct} disabled={(this.state.mode===1)?true:false}/>
+        <input type='button' value='New product' onClick={this.newProduct} disabled={(this.state.mode!==0)?true:false}/>
         </div> 
         {
             (this.state.mode===0)&&
@@ -100,7 +115,15 @@ class Ishop3 extends React.Component {
         }    
         {
             (this.state.mode===1)&&
-            <EditAddProduct {...editProduct}/>
+            <EditAddProduct key={editProduct.code}
+            nameproduct={editProduct.nameproduct} price={editProduct.price} code={editProduct.code}
+            url={editProduct.url} stock={editProduct.stock}/>
+        }     
+        {
+            (this.state.mode===2)&&
+            <EditAddProduct key={this.state.oursProducts.lenght+1}
+            nameproduct='' price='' code={this.state.oursProducts.lenght+1}
+            url='' stock=''/>
         }     
         </div>
         );
