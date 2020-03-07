@@ -29280,6 +29280,7 @@ var Ishop3 = function (_React$Component) {
             oursProducts: _this.props.products,
             selectedCode: null,
             deleteCode: null,
+            editaddCode: null,
             mode: 0 //1- edit, 2 - add
         }, _this.deleteLine = function () {
             var products = _this.state.oursProducts;
@@ -29288,16 +29289,16 @@ var Ishop3 = function (_React$Component) {
             });
             _this.setState({ oursProducts: products });
         }, _this.cblineSelected = function (code) {
-            _this.setState({ selectedCode: code, mode: 0 });
+            _this.setState({ selectedCode: code });
         }, _this.cblineDelete = function (code) {
             var question = confirm('Do you want to delete this product?');
             if (question == true) {
                 _this.setState({ deleteCode: code }, _this.deleteLine);
             }
         }, _this.cblineEdit = function (code) {
-            _this.setState({ selectedCode: code, mode: 1 });
+            _this.setState({ editaddCode: code, mode: 1 });
         }, _this.newProduct = function (code) {
-            _this.setState({ selectedCode: code, mode: 2 });
+            _this.setState({ editaddCode: code, mode: 2 });
         }, _temp), _possibleConstructorReturn(_this, _ret);
     }
 
@@ -29308,6 +29309,9 @@ var Ishop3 = function (_React$Component) {
 
             var foundProduct = this.state.oursProducts.find(function (p) {
                 return p.code === _this2.state.selectedCode;
+            });
+            var editProduct = this.state.oursProducts.find(function (p) {
+                return p.code === _this2.state.editaddCode;
             });
 
             return _react2.default.createElement(
@@ -29376,7 +29380,7 @@ var Ishop3 = function (_React$Component) {
                     _react2.default.createElement('input', { type: 'button', value: 'New product', onClick: this.newProduct })
                 ),
                 this.state.mode === 0 && _react2.default.createElement(_view2.default, foundProduct),
-                this.state.mode === 1 && _react2.default.createElement(_editadd2.default, foundProduct)
+                this.state.mode === 1 && _react2.default.createElement(_editadd2.default, editProduct)
             );
         }
     }]);
@@ -30519,7 +30523,46 @@ var EditAddProduct = function (_React$Component) {
             args[_key] = arguments[_key];
         }
 
-        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = EditAddProduct.__proto__ || Object.getPrototypeOf(EditAddProduct)).call.apply(_ref, [this].concat(args))), _this), _this.save = function (code) {}, _this.cancel = function (code) {}, _temp), _possibleConstructorReturn(_this, _ret);
+        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = EditAddProduct.__proto__ || Object.getPrototypeOf(EditAddProduct)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+            nameproduct: _this.props.nameproduct,
+            price: _this.props.price,
+            url: _this.props.url,
+            stock: _this.props.stock,
+            errorName: '',
+            errorPrice: '',
+            errorUrl: '',
+            errorStock: '',
+            valide: true
+        }, _this.save = function (code) {}, _this.cancel = function (code) {}, _this.changeName = function (EO) {
+            _this.setState({ nameproduct: EO.target.value }, _this.error);
+        }, _this.changePrice = function (EO) {
+            _this.setState({ price: EO.target.value }, _this.error);
+        }, _this.changeUrl = function (EO) {
+            _this.setState({ url: EO.target.value }, _this.error);
+        }, _this.changeStock = function (EO) {
+            _this.setState({ stock: EO.target.value }, _this.error);
+        }, _this.error = function () {
+            if (!_this.state.nameproduct.match(/^[A-Za-z]+$/)) {
+                _this.setState({ errorName: 'Name should includes only letters!', valide: false });
+            } else {
+                _this.setState({ errorName: '' });
+            }
+            if (!String(_this.state.price).match(/^[0-9]{1,5}$/)) {
+                _this.setState({ errorPrice: 'Price should includes of no more than 5 numerals. Do not enter letters!', valide: false });
+            } else {
+                _this.setState({ errorPrice: '' });
+            }
+            if (!_this.state.url.match(/^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/)) {
+                _this.setState({ errorUrl: 'Url should start with http://!', valide: false });
+            } else {
+                _this.setState({ errorUrl: '' });
+            }
+            if (!String(_this.state.stock).match(/^[0-9]{1,10}$/)) {
+                _this.setState({ errorStock: 'Stock should includes of no more than 10 numerals. Do not enter letters!', valide: false });
+            } else {
+                _this.setState({ errorStock: '' });
+            }
+        }, _temp), _possibleConstructorReturn(_this, _ret);
     }
 
     _createClass(EditAddProduct, [{
@@ -30527,7 +30570,7 @@ var EditAddProduct = function (_React$Component) {
         value: function render() {
             return _react2.default.createElement(
                 'div',
-                { key: this.props.code },
+                { key: this.props.code, className: 'EditAddProduct' },
                 _react2.default.createElement(
                     'span',
                     null,
@@ -30550,30 +30593,50 @@ var EditAddProduct = function (_React$Component) {
                     null,
                     'Name: '
                 ),
-                _react2.default.createElement('input', { type: 'text', value: this.props.nameproduct }),
+                _react2.default.createElement('input', { type: 'text', defaultValue: this.state.nameproduct, onChange: this.changeName }),
+                _react2.default.createElement(
+                    'span',
+                    null,
+                    this.state.errorName
+                ),
                 _react2.default.createElement('br', null),
                 _react2.default.createElement(
                     'span',
                     null,
                     'Price: '
                 ),
-                _react2.default.createElement('input', { type: 'text', value: this.props.price }),
+                _react2.default.createElement('input', { type: 'text', defaultValue: this.state.price, onChange: this.changePrice }),
+                _react2.default.createElement(
+                    'span',
+                    null,
+                    this.state.errorPrice
+                ),
                 _react2.default.createElement('br', null),
                 _react2.default.createElement(
                     'span',
                     null,
                     'URL: '
                 ),
-                _react2.default.createElement('input', { type: 'text', value: this.props.url }),
+                _react2.default.createElement('input', { type: 'text', defaultValue: this.state.url, onChange: this.changeUrl }),
+                _react2.default.createElement(
+                    'span',
+                    null,
+                    this.state.errorUrl
+                ),
                 _react2.default.createElement('br', null),
                 _react2.default.createElement(
                     'span',
                     null,
                     'Quantity: '
                 ),
-                _react2.default.createElement('input', { type: 'text', value: this.props.stock }),
+                _react2.default.createElement('input', { type: 'text', defaultValue: this.state.stock, onChange: this.changeStock }),
+                _react2.default.createElement(
+                    'span',
+                    null,
+                    this.state.errorStock
+                ),
                 _react2.default.createElement('br', null),
-                _react2.default.createElement('input', { type: 'button', value: 'Save', onClick: this.save }),
+                _react2.default.createElement('input', { type: 'button', value: 'Save', onClick: this.save, disabled: this.state.valide ? false : true }),
                 _react2.default.createElement('input', { type: 'button', value: 'Cancel', onClick: this.cancel })
             );
         }
