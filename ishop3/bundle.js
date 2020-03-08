@@ -29289,14 +29289,14 @@ var Ishop3 = function (_React$Component) {
             });
             _this.setState({ oursProducts: products });
         }, _this.cblineSelected = function (code) {
-            _this.setState({ selectedCode: code, mode: 0 });
+            if (!_this.props.changeProduct) _this.setState({ selectedCode: code, mode: 0 });
         }, _this.cblineDelete = function (code) {
             var question = confirm('Do you want to delete this product?');
             if (question == true) {
                 _this.setState({ deleteCode: code }, _this.deleteLine);
             }
         }, _this.cblineEdit = function (code) {
-            _this.setState({ editaddCode: code, mode: 1 });
+            if (!_this.props.changeProduct) _this.setState({ editaddCode: code, mode: 1 });
         }, _this.cbSave = function (code) {
             _this.setState({ editaddCode: code }, _this.saveChange);
         }, _this.newProduct = function (code) {
@@ -29394,10 +29394,12 @@ var Ishop3 = function (_React$Component) {
                 ),
                 this.state.mode === 0 && _react2.default.createElement(_view2.default, foundProduct),
                 this.state.mode === 1 && _react2.default.createElement(_editadd2.default, { key: editProduct.code,
+                    title: 'Edit existing Product',
                     nameproduct: editProduct.nameproduct, price: editProduct.price, code: editProduct.code,
                     url: editProduct.url, stock: editProduct.stock }),
                 this.state.mode === 2 && _react2.default.createElement(_editadd2.default, { key: this.state.oursProducts.lenght + 1,
-                    nameproduct: '', price: '', code: this.state.oursProducts.lenght + 1,
+                    title: 'Add new product',
+                    nameproduct: '', price: '', code: '7',
                     url: '', stock: '' })
             );
         }
@@ -30563,6 +30565,7 @@ var EditAddProduct = function (_React$Component) {
         }
 
         return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = EditAddProduct.__proto__ || Object.getPrototypeOf(EditAddProduct)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+            title: '',
             nameproduct: '',
             price: '',
             url: '',
@@ -30619,7 +30622,7 @@ var EditAddProduct = function (_React$Component) {
                 _react2.default.createElement(
                     'span',
                     null,
-                    this.props.mode === 1 ? 'Edit existing Product' : 'Add new product'
+                    this.props.title
                 ),
                 _react2.default.createElement('br', null),
                 _react2.default.createElement(
@@ -30691,6 +30694,7 @@ var EditAddProduct = function (_React$Component) {
 }(_react2.default.Component);
 
 EditAddProduct.propTypes = {
+    title: _propTypes2.default.string,
     code: _propTypes2.default.number,
     nameproduct: _propTypes2.default.string,
     price: _propTypes2.default.number,

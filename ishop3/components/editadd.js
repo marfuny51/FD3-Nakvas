@@ -6,6 +6,7 @@ import './editadd.css';
 class EditAddProduct extends React.Component {
 
     static propTypes= {
+        title: PropTypes.string,
         code: PropTypes.number,
         nameproduct: PropTypes.string,
         price: PropTypes.number,
@@ -14,6 +15,7 @@ class EditAddProduct extends React.Component {
     };
 
     state= {
+        title: '',
         nameproduct: '',
         price: '',
         url: '',
@@ -89,7 +91,7 @@ class EditAddProduct extends React.Component {
     render() {
         return (
             <div key={this.props.code} className='EditAddProduct'>
-                <span>{(this.props.mode===1)?'Edit existing Product':'Add new product'}</span><br/>
+                <span>{this.props.title}</span><br/>
                 <span>ID: </span><span>{this.props.code}</span><br/>
                 <span>Name: </span><input type='text' defaultValue={this.props.nameproduct} onChange= {this.changeName}/><span>{this.state.errorName}</span><br/>
                 <span>Price: </span><input type='text' defaultValue = {this.props.price} onChange= {this.changePrice}/><span>{this.state.errorPrice}</span><br/>
