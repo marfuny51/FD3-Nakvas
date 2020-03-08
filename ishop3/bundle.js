@@ -29297,22 +29297,21 @@ var Ishop3 = function (_React$Component) {
             }
         }, _this.cblineEdit = function (code) {
             if (!_this.props.changeProduct) _this.setState({ editaddCode: code, mode: 1 });
-        }, _this.cbSave = function (code) {
-            _this.setState({ editaddCode: code }, _this.saveChange);
+        }, _this.cbSave = function (code, nameproduct, price, url, stock) {
+            var products = _this.state.oursProducts;
+            products.map(function (product) {
+                if (product.code === _this.state.editaddCode) {
+                    product.nameproduct = nameproduct;
+                    product.price = price;
+                    product.url = url;
+                    product.stock = stock;
+                }
+            });
+            _this.setState({ oursProducts: products });
         }, _this.newProduct = function (code) {
             _this.setState({ editaddCode: code, mode: 2 });
         }, _temp), _possibleConstructorReturn(_this, _ret);
     }
-
-    /*saveChange = () => {
-        let products = this.state.oursProducts;
-        let item = products.find(product => product.code === this.state.editaddCode);
-        item.nameproduct = this.props.nameproduct;
-        item.price = this.props.price;
-        item.url = this.props.url;
-        item.stock = this.props.stock;
-        this.setState({oursProducts: products});
-    }*/
 
     _createClass(Ishop3, [{
         key: 'render',
@@ -29384,8 +29383,7 @@ var Ishop3 = function (_React$Component) {
                                     selectedCode: _this2.state.selectedCode,
                                     cblineDelete: _this2.cblineDelete,
                                     deleteCode: _this2.state.deleteCode,
-                                    cblineEdit: _this2.cblineEdit,
-                                    cbSave: _this2.cbSave
+                                    cblineEdit: _this2.cblineEdit
                                 });
                             })
                         )
@@ -29396,7 +29394,7 @@ var Ishop3 = function (_React$Component) {
                 this.state.mode === 1 && _react2.default.createElement(_editadd2.default, { key: editProduct.code,
                     title: 'Edit existing Product',
                     nameproduct: editProduct.nameproduct, price: editProduct.price, code: editProduct.code,
-                    url: editProduct.url, stock: editProduct.stock }),
+                    url: editProduct.url, stock: editProduct.stock, cbSave: this.cbSave }),
                 this.state.mode === 2 && _react2.default.createElement(_editadd2.default, { key: this.state.oursProducts.lenght + 1,
                     title: 'Add new product',
                     nameproduct: '', price: '', code: '7',
@@ -30386,7 +30384,7 @@ var Goods = function (_React$Component) {
                     'td',
                     { className: 'Control' },
                     _react2.default.createElement('input', { className: 'ButtonContro2', type: 'button', value: 'Edit', onClick: this.lineEdit }),
-                    _react2.default.createElement('input', { className: 'ButtonContro', type: 'button', value: 'Delete', disabled: this.props.mode === 0 ? false : true, onClick: this.lineDeleted })
+                    _react2.default.createElement('input', { className: 'ButtonContro', type: 'button', value: 'Delete', onClick: this.lineDeleted })
                 )
             );
         }
@@ -30577,7 +30575,7 @@ var EditAddProduct = function (_React$Component) {
             valide: true,
             changeProduct: false
         }, _this.save = function (EO) {
-            _this.props.cbSave(_this.props.code);
+            _this.props.cbSave(_this.props.code, _this.props.nameproduct, _this.props.price, _this.props.url, _this.props.stock);
         }, _this.cancel = function (code) {}, _this.changeName = function (EO) {
             _this.setState({ nameproduct: EO.target.value, changeProduct: true }, _this.errorName);
         }, _this.changePrice = function (EO) {

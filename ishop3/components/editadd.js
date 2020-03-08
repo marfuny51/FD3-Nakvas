@@ -29,7 +29,7 @@ class EditAddProduct extends React.Component {
     };
 
     save = (EO) => {
-        this.props.cbSave(this.props.code);
+        this.props.cbSave(this.props.code, this.props.nameproduct, this.props.price, this.props.url, this.props.stock);
     };
 
     cancel = (code) => {
