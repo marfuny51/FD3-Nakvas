@@ -3,12 +3,11 @@ import PropTypes from 'prop-types';
 
 import './RainbowFrame.css';
 
-import Frames from './Frames';
+import Frame from './Frame';
 
 class RainbowFrame extends React.Component {
 
     static propTypes = {
-      text: PropTypes.string.isRequired,
       colors: PropTypes.arrayOf(
         PropTypes.shape({
             color: PropTypes.string,
@@ -18,20 +17,34 @@ class RainbowFrame extends React.Component {
   
     state = {
       ourColors: this.props.colors,
+      curColor: ''
+    }
+
+    componentWillMount = () => {
+        var colors = this.state.ourColors.slice();
+        var newColor = colors[Math.floor(Math.random() * colors.length)];
+        this.setState({curColor:newColor, ourColors: colors.filter(c => c!==newColor)});
     }
 
     render() {
-
-        let colors = this.state.ourColors;
-        
+    
         return (
             <div className='RainbowFrame'>
-                {colors.map(color => {
-                    <Frames color={color}>
-                        <div className='Text'>{this.props.text}</div>
-                    </Frames>
-                })
-                }
+                <Frame color={this.state.curColor}>
+                <Frame >
+                <Frame >
+                <Frame >
+                <Frame >
+                <Frame >
+                <Frame >
+                    Hello!
+                </Frame>
+                </Frame>
+                </Frame>
+                </Frame>
+                </Frame>
+                </Frame>
+                </Frame>
             </div>
         );
     }

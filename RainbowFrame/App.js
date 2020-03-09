@@ -3,7 +3,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import RainbowFrame  from './components/Frame';
+import RainbowFrame  from './components/RainbowFrame';
 
 let text='Hello!';
 let colorsArr = ['red','orange', 'yellow','green', '#00BFFF', 'blue', 'purple'];
