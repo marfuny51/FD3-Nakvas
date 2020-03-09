@@ -29288,6 +29288,17 @@ var Ishop3 = function (_React$Component) {
                 return product.code !== _this.state.deleteCode;
             });
             _this.setState({ oursProducts: products });
+        }, _this.saveChange = function () {
+            var products = _this.state.oursProducts;
+            products.map(function (product) {
+                if (product.code === _this.state.editaddCode) {
+                    product.nameproduct = _this.props.nameproduct;
+                    product.price = _this.props.price;
+                    product.url = _this.props.url;
+                    product.stock = _this.props.stock;
+                }
+            });
+            _this.setState({ oursProducts: products });
         }, _this.cblineSelected = function (code) {
             if (!_this.props.changeProduct) _this.setState({ selectedCode: code, mode: 0 });
         }, _this.cblineDelete = function (code) {
@@ -29298,16 +29309,7 @@ var Ishop3 = function (_React$Component) {
         }, _this.cblineEdit = function (code) {
             if (!_this.props.changeProduct) _this.setState({ editaddCode: code, mode: 1 });
         }, _this.cbSave = function (code, nameproduct, price, url, stock) {
-            var products = _this.state.oursProducts;
-            products.map(function (product) {
-                if (product.code === _this.state.editaddCode) {
-                    product.nameproduct = nameproduct;
-                    product.price = price;
-                    product.url = url;
-                    product.stock = stock;
-                }
-            });
-            _this.setState({ oursProducts: products });
+            _this.setState({ editaddCode: code }, _this.saveChange);
         }, _this.newProduct = function (code) {
             _this.setState({ editaddCode: code, mode: 2 });
         }, _temp), _possibleConstructorReturn(_this, _ret);
