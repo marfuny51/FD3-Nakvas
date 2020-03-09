@@ -18,6 +18,7 @@ class Ishop3 extends React.Component {
                 price: PropTypes.number,
                 url: PropTypes.string,
                 stock: PropTypes.number,
+                mode: PropTypes.number,
             })
             ),
     };
@@ -27,7 +28,7 @@ class Ishop3 extends React.Component {
           selectedCode: null,
           deleteCode: null,
           editaddCode: null,
-          mode: '', //0 -view, 1- edit, 2 - add
+          mode: null, //0 -view, 1- edit, 2 - add
     }
 
     deleteLine = () => {
@@ -65,8 +66,8 @@ class Ishop3 extends React.Component {
         this.setState( {editaddCode:code, mode:1} );
     }
 
-    cbSave = (code, nameproduct, price, url, stock) => {
-        this.setState( {editaddCode:code}, this.saveChange );
+    cbSave = (code) => {
+        this.setState( {editaddCode:code, mode:''}, this.saveChange );
     };
 
     newProduct = (code) => {
@@ -105,12 +106,13 @@ class Ishop3 extends React.Component {
                 selectedCode={this.state.selectedCode}
                 cblineDelete= {this.cblineDelete}
                 deleteCode={this.state.deleteCode}
+                editaddCode={this.state.editaddCode}
                 cblineEdit={this.cblineEdit}
                 />
            )}
           </tbody>
         </table>
-        <input type='button' value='New product' onClick={this.newProduct} disabled={(this.state.mode!==0)?true:false}/>
+        <input type='button' value='New product' onClick={this.newProduct} disabled={(this.state.mode===1||this.state.mode===2)?true:false}/>
         </div> 
         {
             (this.state.mode===0)&&
@@ -121,14 +123,14 @@ class Ishop3 extends React.Component {
             <EditAddProduct key={editProduct.code}
             title='Edit existing Product'
             nameproduct={editProduct.nameproduct} price={editProduct.price} code={editProduct.code}
-            url={editProduct.url} stock={editProduct.stock} cbSave={this.cbSave}/>
+            url={editProduct.url} stock={editProduct.stock} editaddCode={this.state.editaddCode} cblineEdit={this.cblineEdit} cbSave={this.cbSave}/>
         }     
         {
             (this.state.mode===2)&&
-            <EditAddProduct key={this.state.oursProducts.lenght+1}
+            <EditAddProduct key={7}
             title='Add new product'
-            nameproduct='' price='' code='7'
-            url='' stock=''/>
+            nameproduct='' price={0} code={7}
+            url='' stock={0}/>
         }     
         </div>
         );

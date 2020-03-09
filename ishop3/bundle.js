@@ -29281,7 +29281,7 @@ var Ishop3 = function (_React$Component) {
             selectedCode: null,
             deleteCode: null,
             editaddCode: null,
-            mode: '' //0 -view, 1- edit, 2 - add
+            mode: null //0 -view, 1- edit, 2 - add
         }, _this.deleteLine = function () {
             var products = _this.state.oursProducts;
             products = products.filter(function (product) {
@@ -29308,8 +29308,8 @@ var Ishop3 = function (_React$Component) {
             }
         }, _this.cblineEdit = function (code) {
             if (!_this.props.changeProduct) _this.setState({ editaddCode: code, mode: 1 });
-        }, _this.cbSave = function (code, nameproduct, price, url, stock) {
-            _this.setState({ editaddCode: code }, _this.saveChange);
+        }, _this.cbSave = function (code) {
+            _this.setState({ editaddCode: code, mode: '' }, _this.saveChange);
         }, _this.newProduct = function (code) {
             _this.setState({ editaddCode: code, mode: 2 });
         }, _temp), _possibleConstructorReturn(_this, _ret);
@@ -29385,22 +29385,23 @@ var Ishop3 = function (_React$Component) {
                                     selectedCode: _this2.state.selectedCode,
                                     cblineDelete: _this2.cblineDelete,
                                     deleteCode: _this2.state.deleteCode,
+                                    editaddCode: _this2.state.editaddCode,
                                     cblineEdit: _this2.cblineEdit
                                 });
                             })
                         )
                     ),
-                    _react2.default.createElement('input', { type: 'button', value: 'New product', onClick: this.newProduct, disabled: this.state.mode !== 0 ? true : false })
+                    _react2.default.createElement('input', { type: 'button', value: 'New product', onClick: this.newProduct, disabled: this.state.mode === 1 || this.state.mode === 2 ? true : false })
                 ),
                 this.state.mode === 0 && _react2.default.createElement(_view2.default, foundProduct),
                 this.state.mode === 1 && _react2.default.createElement(_editadd2.default, { key: editProduct.code,
                     title: 'Edit existing Product',
                     nameproduct: editProduct.nameproduct, price: editProduct.price, code: editProduct.code,
-                    url: editProduct.url, stock: editProduct.stock, cbSave: this.cbSave }),
-                this.state.mode === 2 && _react2.default.createElement(_editadd2.default, { key: this.state.oursProducts.lenght + 1,
+                    url: editProduct.url, stock: editProduct.stock, editaddCode: this.state.editaddCode, cblineEdit: this.cblineEdit, cbSave: this.cbSave }),
+                this.state.mode === 2 && _react2.default.createElement(_editadd2.default, { key: 7,
                     title: 'Add new product',
-                    nameproduct: '', price: '', code: '7',
-                    url: '', stock: '' })
+                    nameproduct: '', price: 0, code: 7,
+                    url: '', stock: 0 })
             );
         }
     }]);
@@ -29415,7 +29416,8 @@ Ishop3.propTypes = {
         code: _propTypes2.default.number,
         price: _propTypes2.default.number,
         url: _propTypes2.default.string,
-        stock: _propTypes2.default.number
+        stock: _propTypes2.default.number,
+        mode: _propTypes2.default.number
     }))
 };
 exports.default = Ishop3;
@@ -30386,7 +30388,7 @@ var Goods = function (_React$Component) {
                     'td',
                     { className: 'Control' },
                     _react2.default.createElement('input', { className: 'ButtonContro2', type: 'button', value: 'Edit', onClick: this.lineEdit }),
-                    _react2.default.createElement('input', { className: 'ButtonContro', type: 'button', value: 'Delete', onClick: this.lineDeleted })
+                    _react2.default.createElement('input', { className: 'ButtonContro', type: 'button', value: 'Delete', onClick: this.lineDeleted, disabled: this.props.mode === 1 || this.props.mode === 2 ? true : false })
                 )
             );
         }
@@ -30566,10 +30568,10 @@ var EditAddProduct = function (_React$Component) {
 
         return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = EditAddProduct.__proto__ || Object.getPrototypeOf(EditAddProduct)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
             title: '',
-            nameproduct: '',
-            price: '',
-            url: '',
-            stock: '',
+            nameproduct: _this.props.nameproduct,
+            price: _this.props.price,
+            url: _this.props.url,
+            stock: _this.props.stock,
             errorName: '',
             errorPrice: '',
             errorUrl: '',
@@ -30583,7 +30585,7 @@ var EditAddProduct = function (_React$Component) {
         }, _this.changePrice = function (EO) {
             _this.setState({ price: EO.target.value, changeProduct: true }, _this.errorPrice);
         }, _this.changeUrl = function (EO) {
-            _this.setState({ url: EO.target.valu, changeProduct: true }, _this.errorUrl);
+            _this.setState({ url: EO.target.value, changeProduct: true }, _this.errorUrl);
         }, _this.changeStock = function (EO) {
             _this.setState({ stock: EO.target.value, changeProduct: true }, _this.errorStock);
         }, _this.errorName = function () {
@@ -30684,7 +30686,7 @@ var EditAddProduct = function (_React$Component) {
                     this.state.errorStock
                 ),
                 _react2.default.createElement('br', null),
-                _react2.default.createElement('input', { type: 'button', value: 'Save', onClick: this.save, disabled: this.state.valide ? false : true }),
+                _react2.default.createElement('input', { type: 'button', value: this.props.mode === 2 ? 'Add' : 'Save', onClick: this.save, disabled: this.state.valide ? false : true }),
                 _react2.default.createElement('input', { type: 'button', value: 'Cancel', onClick: this.cancel })
             );
         }

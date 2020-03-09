@@ -16,10 +16,10 @@ class EditAddProduct extends React.Component {
 
     state= {
         title: '',
-        nameproduct: '',
-        price: '',
-        url: '',
-        stock: '',
+        nameproduct: this.props.nameproduct,
+        price: this.props.price,
+        url: this.props.url,
+        stock: this.props.stock,
         errorName: '',
         errorPrice: '',
         errorUrl: '',
@@ -45,7 +45,7 @@ class EditAddProduct extends React.Component {
     };
 
     changeUrl = (EO) => {
-        this.setState({url: EO.target.valu, changeProduct: true}, this.errorUrl);
+        this.setState({url: EO.target.value, changeProduct: true}, this.errorUrl);
     };
 
     changeStock = (EO) => {
@@ -97,7 +97,7 @@ class EditAddProduct extends React.Component {
                 <span>Price: </span><input type='text' defaultValue = {this.props.price} onChange= {this.changePrice}/><span>{this.state.errorPrice}</span><br/>
                 <span>URL: </span><input type='text' defaultValue = {this.props.url} onChange= {this.changeUrl}/><span>{this.state.errorUrl}</span><br/>
                 <span>Quantity: </span><input type='text' defaultValue = {this.props.stock} onChange= {this.changeStock}/><span>{this.state.errorStock}</span><br/>
-                <input type='button' value='Save' onClick={this.save} disabled = {(this.state.valide)?false:true}/>
+                <input type='button' value={(this.props.mode===2)?'Add':'Save'} onClick={this.save} disabled = {(this.state.valide)?false:true}/>
                 <input type='button' value='Cancel' onClick={this.cancel}/>
             </div>
         )
