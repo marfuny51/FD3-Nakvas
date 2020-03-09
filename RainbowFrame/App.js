@@ -3,14 +3,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import Frames  from './components/Frames';
+import RainbowFrame  from './components/Frame';
 
 let text='Hello!';
-let colors = ['red','orange', 'yellow','green', '#00BFFF', 'blue', 'purple'];
+let colorsArr = ['red','orange', 'yellow','green', '#00BFFF', 'blue', 'purple'];
 
 ReactDOM.render(
-  <Frames 
-    colors={colors}
+  <RainbowFrame 
+    colors={colorsArr}
     ourText={text}
   />
   , document.getElementById('rainbowFrame') 
