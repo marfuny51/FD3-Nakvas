@@ -29288,28 +29288,31 @@ var Ishop3 = function (_React$Component) {
                 return product.code !== _this.state.deleteCode;
             });
             _this.setState({ oursProducts: products });
-        }, _this.saveChange = function () {
-            var products = _this.state.oursProducts;
-            products.map(function (product) {
-                if (product.code === _this.state.editaddCode) {
-                    product.nameproduct = nameproduct;
-                    product.price = price;
-                    product.url = url;
-                    product.stock = stock;
-                }
-            });
-            _this.setState({ oursProducts: products });
         }, _this.cblineSelected = function (code) {
-            if (!_this.props.changeProduct) _this.setState({ selectedCode: code, mode: 0 });
+            if (!_this.props.changeproduct) _this.setState({ selectedCode: code, mode: 0 });
         }, _this.cblineDelete = function (code) {
             var question = confirm('Do you want to delete this product?');
             if (question == true) {
                 _this.setState({ deleteCode: code }, _this.deleteLine);
             }
         }, _this.cblineEdit = function (code) {
-            if (!_this.props.changeProduct) _this.setState({ editaddCode: code, mode: 1 });
+            if (!_this.props.changeproduct) _this.setState({ editaddCode: code, mode: 1 });
         }, _this.cbSave = function (code, nameproduct, price, url, stock) {
-            _this.setState({ editaddCode: code, mode: '' }, _this.saveChange);
+            var products = _this.state.oursProducts;
+            console.log(products.length + 1);
+            _this.state.mode === 1 ? products.forEach(function (product) {
+                if (product.code === code) {
+                    product.nameproduct = nameproduct;
+                    product.price = parseInt(price);
+                    product.url = url;
+                    product.stock = stock;
+                }
+            }) : products.push(newObject);
+            var newObject = { code: products.length + 1, nameproduct: nameproduct, price: parseInt(price), url: url, stock: stock };
+            _this.setState({ editaddCode: code, mode: '', oursProducts: products });
+        }, _this.cbCancel = function (code) {
+            var products = _this.state.oursProducts;
+            _this.setState({ editaddCode: code, mode: '', oursProducts: products });
         }, _this.newProduct = function (code) {
             _this.setState({ editaddCode: code, mode: 2 });
         }, _temp), _possibleConstructorReturn(_this, _ret);
@@ -29320,12 +29323,16 @@ var Ishop3 = function (_React$Component) {
         value: function render() {
             var _this2 = this;
 
-            var foundProduct = this.state.oursProducts.find(function (p) {
-                return p.code === _this2.state.selectedCode;
-            });
-            var editProduct = this.state.oursProducts.find(function (p) {
-                return p.code === _this2.state.editaddCode;
-            });
+            if (this.state.mode === 0) {
+                var foundProduct = this.state.oursProducts.find(function (p) {
+                    return p.code === _this2.state.selectedCode;
+                });
+            }
+            if (this.state.mode === 1) {
+                var editProduct = this.state.oursProducts.find(function (p) {
+                    return p.code === _this2.state.editaddCode;
+                });
+            }
 
             return _react2.default.createElement(
                 'div',
@@ -29396,12 +29403,11 @@ var Ishop3 = function (_React$Component) {
                 this.state.mode === 0 && _react2.default.createElement(_view2.default, foundProduct),
                 this.state.mode === 1 && _react2.default.createElement(_editadd2.default, { key: editProduct.code,
                     title: 'Edit existing Product',
-                    nameproduct: editProduct.nameproduct, price: editProduct.price, code: editProduct.code,
-                    url: editProduct.url, stock: editProduct.stock, editaddCode: this.state.editaddCode, cblineEdit: this.cblineEdit, cbSave: this.cbSave }),
-                this.state.mode === 2 && _react2.default.createElement(_editadd2.default, { key: 7,
+                    nameproduct: editProduct.nameproduct, price: editProduct.price, code: editProduct.code, changeproduct: editProduct.changeproduct,
+                    url: editProduct.url, stock: editProduct.stock, button: 'Save', editaddCode: this.state.editaddCode, cblineEdit: this.cblineEdit, cbSave: this.cbSave, cbCancel: this.cbCancel }),
+                this.state.mode === 2 && _react2.default.createElement(_editadd2.default, { key: this.props.code,
                     title: 'Add new product',
-                    nameproduct: '', price: 0, code: 7,
-                    url: '', stock: 0 })
+                    button: 'Add', editaddCode: this.state.editaddCode, cblineEdit: this.cblineEdit, cbSave: this.cbSave, cbCancel: this.cbCancel })
             );
         }
     }]);
@@ -30576,11 +30582,14 @@ var EditAddProduct = function (_React$Component) {
             errorPrice: '',
             errorUrl: '',
             errorStock: '',
+            button: '',
             valide: true,
             changeProduct: false
         }, _this.save = function (EO) {
             _this.props.cbSave(_this.props.code, _this.state.nameproduct, _this.state.price, _this.state.url, _this.state.stock);
-        }, _this.cancel = function (code) {}, _this.changeName = function (EO) {
+        }, _this.cancel = function (code) {
+            _this.props.cbCancel(_this.props.code, _this.state.nameproduct, _this.state.price, _this.state.url, _this.state.stock);
+        }, _this.changeName = function (EO) {
             _this.setState({ nameproduct: EO.target.value, changeProduct: true }, _this.errorName);
         }, _this.changePrice = function (EO) {
             _this.setState({ price: EO.target.value, changeProduct: true }, _this.errorPrice);
@@ -30620,7 +30629,7 @@ var EditAddProduct = function (_React$Component) {
         value: function render() {
             return _react2.default.createElement(
                 'div',
-                { key: this.props.code, className: 'EditAddProduct' },
+                { key: this.props.code, changeproduct: this.state.changeProduct ? 'true' : 'false', className: 'EditAddProduct' },
                 _react2.default.createElement(
                     'span',
                     null,
@@ -30686,7 +30695,7 @@ var EditAddProduct = function (_React$Component) {
                     this.state.errorStock
                 ),
                 _react2.default.createElement('br', null),
-                _react2.default.createElement('input', { type: 'button', value: this.props.mode === 2 ? 'Add' : 'Save', onClick: this.save, disabled: this.state.valide ? false : true }),
+                _react2.default.createElement('input', { type: 'button', value: this.props.button, onClick: this.save, disabled: this.state.valide ? false : true }),
                 _react2.default.createElement('input', { type: 'button', value: 'Cancel', onClick: this.cancel })
             );
         }
@@ -30701,7 +30710,8 @@ EditAddProduct.propTypes = {
     nameproduct: _propTypes2.default.string,
     price: _propTypes2.default.number,
     url: _propTypes2.default.string,
-    stock: _propTypes2.default.number
+    stock: _propTypes2.default.number,
+    changeProduct: _propTypes2.default.bool
 };
 exports.default = EditAddProduct;
 

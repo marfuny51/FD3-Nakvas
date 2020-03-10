@@ -12,7 +12,6 @@ class EditAddProduct extends React.Component {
         price: PropTypes.number,
         url: PropTypes.string,
         stock: PropTypes.number,
-        changeProduct: PropTypes.bool,
     };
 
     state= {
@@ -34,24 +33,28 @@ class EditAddProduct extends React.Component {
         this.props.cbSave(this.props.code, this.state.nameproduct, this.state.price, this.state.url, this.state.stock);
     };
 
-    cancel = (code) => {
+    cancel = (EO) => {
         this.props.cbCancel(this.props.code, this.state.nameproduct, this.state.price, this.state.url, this.state.stock);
     };
 
     changeName = (EO) => {
         this.setState({nameproduct: EO.target.value, changeProduct: true}, this.errorName);
+        this.props.cbChange(this.state.changeProduct);
     };
 
     changePrice = (EO) => {
         this.setState({price: EO.target.value, changeProduct: true}, this.errorPrice);
+        this.props.cbChange(this.state.changeProduct);
     };
 
     changeUrl = (EO) => {
         this.setState({url: EO.target.value, changeProduct: true}, this.errorUrl);
+        this.props.cbChange(this.state.changeProduct);
     };
 
     changeStock = (EO) => {
         this.setState({stock: EO.target.value, changeProduct: true}, this.errorStock);
+        this.props.cbChange(this.state.changeProduct);
     };
 
     errorName = () => {
@@ -92,7 +95,7 @@ class EditAddProduct extends React.Component {
 
     render() {
         return (
-            <div key={this.props.code} changeproduct= {(this.state.changeProduct)?'true':'false'} className='EditAddProduct'>
+            <div key={this.props.code} className='EditAddProduct'>
                 <span>{this.props.title}</span><br/>
                 <span>ID: </span><span>{this.props.code}</span><br/>
                 <span>Name: </span><input type='text' defaultValue={this.props.nameproduct} onChange= {this.changeName}/><span>{this.state.errorName}</span><br/>

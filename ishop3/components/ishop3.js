@@ -29,6 +29,7 @@ class Ishop3 extends React.Component {
           deleteCode: null,
           editaddCode: null,
           mode: null, //0 -view, 1- edit, 2 - add
+          changeproduct: false,
     }
 
     deleteLine = () => {
@@ -38,8 +39,12 @@ class Ishop3 extends React.Component {
     }
 
     cblineSelected = (code) => {
-        if(!this.props.changeproduct)
+        if(this.state.mode===2){
+            this.setState( {selectedCode:null});
+        }
+        else {
         this.setState( {selectedCode:code, mode:0});
+        }
     }
 
     cblineDelete = (code) => {
@@ -50,23 +55,29 @@ class Ishop3 extends React.Component {
     }
 
     cblineEdit = (code) => {
-        if(!this.props.changeproduct)
         this.setState( {editaddCode:code, mode:1} );
+    }
+
+    cbChange = (changeProduct) => {
+        this.setState({changeproduct:changeProduct});
     }
 
     cbSave = (code, nameproduct, price, url, stock) => {
         let products = this.state.oursProducts;
         console.log(products.length+1);
-        (this.state.mode===1)?
-        products.forEach(product => {
-        if (product.code === code) {
-            product.nameproduct = nameproduct;
-            product.price = parseInt(price);
-            product.url = url;
-            product.stock = stock}
-        }):
-        products.push(newObject);
-        let newObject = {code:products.length+1, nameproduct: nameproduct, price: parseInt(price), url: url, stock: stock};     
+        if (this.state.mode===1) {
+            products.forEach(product => {
+                if (product.code === code) {
+                    product.nameproduct = nameproduct;
+                    product.price = parseInt(price);
+                    product.url = url;
+                    product.stock = stock}
+            })
+        };
+        if (this.state.mode===2) {
+            let newObject = {code:products.length+1, nameproduct: nameproduct, price: parseInt(price), url: url, stock: stock}; 
+            products.push(newObject);
+        }
         this.setState({editaddCode:code, mode:'', oursProducts: products});
     };
 
@@ -109,6 +120,7 @@ class Ishop3 extends React.Component {
                 <Goods key={v.code}
                 nameproduct={v.nameproduct} price={v.price} code={v.code}
                 url={v.url} stock={v.stock}
+                mode={this.state.mode}
                 cblineSelected={this.cblineSelected}
                 selectedCode={this.state.selectedCode}
                 cblineDelete= {this.cblineDelete}
@@ -128,15 +140,31 @@ class Ishop3 extends React.Component {
         {
             (this.state.mode===1)&&
             <EditAddProduct key={editProduct.code}
+            mode={this.state.mode}
             title='Edit existing Product'
-            nameproduct={editProduct.nameproduct} price={editProduct.price} code={editProduct.code} changeproduct ={editProduct.changeproduct}
-            url={editProduct.url} stock={editProduct.stock} button='Save' editaddCode={this.state.editaddCode} cblineEdit={this.cblineEdit} cbSave={this.cbSave} cbCancel={this.cbCancel}/>
+            nameproduct={editProduct.nameproduct} 
+            price={editProduct.price} 
+            code={editProduct.code} 
+            url={editProduct.url} 
+            stock={editProduct.stock} 
+            button='Save' 
+            editaddCode={this.state.editaddCode} 
+            cblineEdit={this.cblineEdit} 
+            cbSave={this.cbSave} 
+            cbCancel={this.cbCancel}
+            cbChange={this.cbChange}/>
         }     
         {
             (this.state.mode===2)&&
             <EditAddProduct key={this.props.code}
+            mode={this.state.mode}
             title='Add new product'
-            button='Add' editaddCode={this.state.editaddCode} cblineEdit={this.cblineEdit} cbSave={this.cbSave} cbCancel={this.cbCancel}/>
+            button='Add' 
+            editaddCode={this.state.editaddCode} 
+            cblineEdit={this.cblineEdit} 
+            cbSave={this.cbSave} 
+            cbCancel={this.cbCancel}
+            cbChange={this.cbChange}/>
         }     
         </div>
         );
