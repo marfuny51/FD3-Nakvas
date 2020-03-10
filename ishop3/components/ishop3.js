@@ -37,20 +37,8 @@ class Ishop3 extends React.Component {
         this.setState({oursProducts: products});
     }
 
-    saveChange = () => {
-        let products = this.state.oursProducts;
-        products.map(product => {
-        if (product.code === this.state.editaddCode) {
-            product.nameproduct = this.props.nameproduct;
-            product.price = this.props.price;
-            product.url = this.props.url;
-            product.stock = this.props.stock}
-        })
-        this.setState({oursProducts: products});
-    }
-
     cblineSelected = (code) => {
-        if(!this.props.changeProduct)
+        if(!this.props.changeproduct)
         this.setState( {selectedCode:code, mode:0});
     }
 
@@ -62,12 +50,29 @@ class Ishop3 extends React.Component {
     }
 
     cblineEdit = (code) => {
-        if(!this.props.changeProduct)
+        if(!this.props.changeproduct)
         this.setState( {editaddCode:code, mode:1} );
     }
 
-    cbSave = (code) => {
-        this.setState( {editaddCode:code, mode:''}, this.saveChange );
+    cbSave = (code, nameproduct, price, url, stock) => {
+        let products = this.state.oursProducts;
+        console.log(products.length+1);
+        (this.state.mode===1)?
+        products.forEach(product => {
+        if (product.code === code) {
+            product.nameproduct = nameproduct;
+            product.price = parseInt(price);
+            product.url = url;
+            product.stock = stock}
+        }):
+        products.push(newObject);
+        let newObject = {code:products.length+1, nameproduct: nameproduct, price: parseInt(price), url: url, stock: stock};     
+        this.setState({editaddCode:code, mode:'', oursProducts: products});
+    };
+
+    cbCancel = (code) => {
+        let products = this.state.oursProducts;
+        this.setState({editaddCode:code, mode:'', oursProducts: products});
     };
 
     newProduct = (code) => {
@@ -75,12 +80,14 @@ class Ishop3 extends React.Component {
     }
 
     render() {
+        if (this.state.mode===0) {
         var foundProduct = this.state.oursProducts.find( p => 
                 p.code === this.state.selectedCode
-            );
+            );}
+        if (this.state.mode===1) {
         var editProduct = this.state.oursProducts.find( p => 
                 p.code === this.state.editaddCode
-            );
+            );}
 
         return (
         <div className='Ishop3'>
@@ -122,15 +129,14 @@ class Ishop3 extends React.Component {
             (this.state.mode===1)&&
             <EditAddProduct key={editProduct.code}
             title='Edit existing Product'
-            nameproduct={editProduct.nameproduct} price={editProduct.price} code={editProduct.code}
-            url={editProduct.url} stock={editProduct.stock} editaddCode={this.state.editaddCode} cblineEdit={this.cblineEdit} cbSave={this.cbSave}/>
+            nameproduct={editProduct.nameproduct} price={editProduct.price} code={editProduct.code} changeproduct ={editProduct.changeproduct}
+            url={editProduct.url} stock={editProduct.stock} button='Save' editaddCode={this.state.editaddCode} cblineEdit={this.cblineEdit} cbSave={this.cbSave} cbCancel={this.cbCancel}/>
         }     
         {
             (this.state.mode===2)&&
-            <EditAddProduct key={7}
+            <EditAddProduct key={this.props.code}
             title='Add new product'
-            nameproduct='' price={0} code={7}
-            url='' stock={0}/>
+            button='Add' editaddCode={this.state.editaddCode} cblineEdit={this.cblineEdit} cbSave={this.cbSave} cbCancel={this.cbCancel}/>
         }     
         </div>
         );

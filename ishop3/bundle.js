@@ -29292,10 +29292,10 @@ var Ishop3 = function (_React$Component) {
             var products = _this.state.oursProducts;
             products.map(function (product) {
                 if (product.code === _this.state.editaddCode) {
-                    product.nameproduct = _this.props.nameproduct;
-                    product.price = _this.props.price;
-                    product.url = _this.props.url;
-                    product.stock = _this.props.stock;
+                    product.nameproduct = nameproduct;
+                    product.price = price;
+                    product.url = url;
+                    product.stock = stock;
                 }
             });
             _this.setState({ oursProducts: products });
@@ -29308,7 +29308,7 @@ var Ishop3 = function (_React$Component) {
             }
         }, _this.cblineEdit = function (code) {
             if (!_this.props.changeProduct) _this.setState({ editaddCode: code, mode: 1 });
-        }, _this.cbSave = function (code) {
+        }, _this.cbSave = function (code, nameproduct, price, url, stock) {
             _this.setState({ editaddCode: code, mode: '' }, _this.saveChange);
         }, _this.newProduct = function (code) {
             _this.setState({ editaddCode: code, mode: 2 });
@@ -30579,7 +30579,7 @@ var EditAddProduct = function (_React$Component) {
             valide: true,
             changeProduct: false
         }, _this.save = function (EO) {
-            _this.props.cbSave(_this.props.code, _this.props.nameproduct, _this.props.price, _this.props.url, _this.props.stock);
+            _this.props.cbSave(_this.props.code, _this.state.nameproduct, _this.state.price, _this.state.url, _this.state.stock);
         }, _this.cancel = function (code) {}, _this.changeName = function (EO) {
             _this.setState({ nameproduct: EO.target.value, changeProduct: true }, _this.errorName);
         }, _this.changePrice = function (EO) {

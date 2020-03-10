@@ -4,8 +4,8 @@
   "description": "Ishop3_Nakvas",
   "main": "App.js",
   "scripts": {
-    "build": "webpack",
-    "start": "lite-server"
+    "build": ".\\node_modules\\.bin\\webpack",
+    "livebuild": ".\\node_modules\\.bin\\webpack-dev-server --progress --colors"
   },
   "author": "",
   "license": "ISC",
@@ -21,7 +21,8 @@
     "prop-types": "^15.6.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
-    "webpack": "^3.8.1"
+    "webpack": "^3.8.1",
+    "webpack-dev-server": "^2.9.4"
   },
   "devDependencies": {}
 }

@@ -11,7 +11,8 @@ class EditAddProduct extends React.Component {
         nameproduct: PropTypes.string,
         price: PropTypes.number,
         url: PropTypes.string,
-        stock: PropTypes.number
+        stock: PropTypes.number,
+        changeProduct: PropTypes.bool,
     };
 
     state= {
@@ -24,16 +25,17 @@ class EditAddProduct extends React.Component {
         errorPrice: '',
         errorUrl: '',
         errorStock: '',
+        button: '',
         valide: true,
         changeProduct: false,
     };
 
     save = (EO) => {
-        this.props.cbSave(this.props.code, this.props.nameproduct, this.props.price, this.props.url, this.props.stock);
+        this.props.cbSave(this.props.code, this.state.nameproduct, this.state.price, this.state.url, this.state.stock);
     };
 
     cancel = (code) => {
-
+        this.props.cbCancel(this.props.code, this.state.nameproduct, this.state.price, this.state.url, this.state.stock);
     };
 
     changeName = (EO) => {
@@ -90,14 +92,14 @@ class EditAddProduct extends React.Component {
 
     render() {
         return (
-            <div key={this.props.code} className='EditAddProduct'>
+            <div key={this.props.code} changeproduct= {(this.state.changeProduct)?'true':'false'} className='EditAddProduct'>
                 <span>{this.props.title}</span><br/>
                 <span>ID: </span><span>{this.props.code}</span><br/>
                 <span>Name: </span><input type='text' defaultValue={this.props.nameproduct} onChange= {this.changeName}/><span>{this.state.errorName}</span><br/>
                 <span>Price: </span><input type='text' defaultValue = {this.props.price} onChange= {this.changePrice}/><span>{this.state.errorPrice}</span><br/>
                 <span>URL: </span><input type='text' defaultValue = {this.props.url} onChange= {this.changeUrl}/><span>{this.state.errorUrl}</span><br/>
                 <span>Quantity: </span><input type='text' defaultValue = {this.props.stock} onChange= {this.changeStock}/><span>{this.state.errorStock}</span><br/>
-                <input type='button' value={(this.props.mode===2)?'Add':'Save'} onClick={this.save} disabled = {(this.state.valide)?false:true}/>
+                <input type='button' value={this.props.button} onClick={this.save} disabled = {(this.state.valide)?false:true}/>
                 <input type='button' value='Cancel' onClick={this.cancel}/>
             </div>
         )
