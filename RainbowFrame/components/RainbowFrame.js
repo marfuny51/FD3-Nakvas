@@ -3,51 +3,33 @@ import PropTypes from 'prop-types';
 
 import './RainbowFrame.css';
 
-import Frame from './Frame';
-
 class RainbowFrame extends React.Component {
 
     static propTypes = {
-      colors: PropTypes.arrayOf(
-        PropTypes.shape({
-            color: PropTypes.string,
-        })
-        ),
+      colors: PropTypes.array.isRequired
     };
   
-    state = {
-      ourColors: this.props.colors,
-      curColor: ''
-    }
-
-    componentWillMount = () => {
-        var colors = this.state.ourColors.slice();
-        var newColor = colors[Math.floor(Math.random() * colors.length)];
-        this.setState({curColor:newColor, ourColors: colors.filter(c => c!==newColor)});
-    }
+    /*createRainbowFrame = () => {
+        let {children:children, colors:colors} = this.props;
+        for (let i = 0; i < colors.length; i++) {
+            children =
+                <div style={{padding: '10px', textAlign: 'center', border: `solid 5px ${colors[i]}`}}>
+                    {children}
+                </div>
+        }
+        return children
+    };*/
 
     render() {
-    
-        return (
-            <div className='RainbowFrame'>
-                <Frame color={this.state.curColor}>
-                <Frame >
-                <Frame >
-                <Frame >
-                <Frame >
-                <Frame >
-                <Frame >
-                    Hello!
-                </Frame>
-                </Frame>
-                </Frame>
-                </Frame>
-                </Frame>
-                </Frame>
-                </Frame>
-            </div>
-        );
+        var colors = this.props.colors;
+        for (let i = 0; i < colors.length; i++) {
+            var children =
+                <div style={{padding: '10px', textAlign: 'center', border: `solid 5px ${colors[i]}`}}>
+                    {children}
+                </div>
+        }
+        return children;
     }
 }
     
-    export default RainbowFrame;
+export default RainbowFrame;

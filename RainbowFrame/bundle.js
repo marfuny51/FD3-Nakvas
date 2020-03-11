@@ -1002,19 +1002,20 @@ var _reactDom = __webpack_require__(19);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _Frame = __webpack_require__(32);
+var _RainbowFrame = __webpack_require__(32);
 
-var _Frame2 = _interopRequireDefault(_Frame);
+var _RainbowFrame2 = _interopRequireDefault(_RainbowFrame);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var text = 'Hello!';
 var colorsArr = ['red', 'orange', 'yellow', 'green', '#00BFFF', 'blue', 'purple'];
 
-_reactDom2.default.render(_react2.default.createElement(_Frame2.default, {
-  colors: colorsArr,
-  ourText: text
-}), document.getElementById('rainbowFrame'));
+_reactDom2.default.render(_react2.default.createElement(
+  _RainbowFrame2.default,
+  { colors: colorsArr },
+  'Hello!'
+), document.getElementById('rainbowFrame'));
 
 /***/ }),
 /* 17 */
@@ -21188,7 +21189,7 @@ module.exports = function() {
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+    value: true
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -21201,6 +21202,8 @@ var _propTypes = __webpack_require__(15);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
+__webpack_require__(33);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -21209,33 +21212,58 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Frames = function (_React$Component) {
-  _inherits(Frames, _React$Component);
+var RainbowFrame = function (_React$Component) {
+    _inherits(RainbowFrame, _React$Component);
 
-  function Frames() {
-    _classCallCheck(this, Frames);
+    function RainbowFrame() {
+        _classCallCheck(this, RainbowFrame);
 
-    return _possibleConstructorReturn(this, (Frames.__proto__ || Object.getPrototypeOf(Frames)).apply(this, arguments));
-  }
-
-  _createClass(Frames, [{
-    key: 'render',
-    value: function render() {
-      return _react2.default.createElement(
-        'div',
-        { style: { border: "solid 2px " + this.props.color, padding: "10px" } },
-        this.props.children
-      );
+        return _possibleConstructorReturn(this, (RainbowFrame.__proto__ || Object.getPrototypeOf(RainbowFrame)).apply(this, arguments));
     }
-  }]);
 
-  return Frames;
+    _createClass(RainbowFrame, [{
+        key: 'render',
+
+
+        /*createRainbowFrame = () => {
+            let {children:children, colors:colors} = this.props;
+            for (let i = 0; i < colors.length; i++) {
+                children =
+                    <div style={{padding: '10px', textAlign: 'center', border: `solid 5px ${colors[i]}`}}>
+                        {children}
+                    </div>
+            }
+            return children
+        };*/
+
+        value: function render() {
+            var colors = this.props.colors.slice();
+            for (var i = 0; i < colors.length; i++) {
+                var children = _react2.default.createElement(
+                    'div',
+                    { style: { padding: '10px', textAlign: 'center', border: 'solid 5px ' + colors[i] } },
+                    children
+                );
+            }
+            return children;
+        }
+    }]);
+
+    return RainbowFrame;
 }(_react2.default.Component);
 
-Frames.propTypes = {
-  color: _propTypes2.default.string.isRequired
+RainbowFrame.propTypes = {
+    colors: _propTypes2.default.arrayOf(_propTypes2.default.shape({
+        color: _propTypes2.default.string
+    }))
 };
-exports.default = Frames;
+exports.default = RainbowFrame;
+
+/***/ }),
+/* 33 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);
