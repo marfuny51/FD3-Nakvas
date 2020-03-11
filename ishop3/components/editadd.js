@@ -12,6 +12,7 @@ class EditAddProduct extends React.Component {
         price: PropTypes.number,
         url: PropTypes.string,
         stock: PropTypes.number,
+        error:PropTypes.func,
     };
 
     state= {

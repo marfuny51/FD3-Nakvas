@@ -29312,12 +29312,12 @@ var Ishop3 = function (_React$Component) {
                         product.nameproduct = nameproduct;
                         product.price = parseInt(price);
                         product.url = url;
-                        product.stock = stock;
+                        product.stock = parseInt(stock);
                     }
                 });
             };
             if (_this.state.mode === 2) {
-                var newObject = { code: products.length + 1, nameproduct: nameproduct, price: parseInt(price), url: url, stock: stock };
+                var newObject = { code: products.length + 1, nameproduct: nameproduct, price: parseInt(price), url: url, stock: parseInt(stock) };
                 products.push(newObject);
             }
             _this.setState({ editaddCode: code, mode: '', oursProducts: products, changeproduct: false });
@@ -30703,7 +30703,7 @@ var EditAddProduct = function (_React$Component) {
                 _react2.default.createElement('input', { type: 'text', defaultValue: this.props.nameproduct, onChange: this.changeName }),
                 _react2.default.createElement(
                     'span',
-                    null,
+                    { className: 'Error' },
                     this.state.errorName
                 ),
                 _react2.default.createElement('br', null),
@@ -30715,7 +30715,7 @@ var EditAddProduct = function (_React$Component) {
                 _react2.default.createElement('input', { type: 'text', defaultValue: this.props.price, onChange: this.changePrice }),
                 _react2.default.createElement(
                     'span',
-                    null,
+                    { className: 'Error' },
                     this.state.errorPrice
                 ),
                 _react2.default.createElement('br', null),
@@ -30727,7 +30727,7 @@ var EditAddProduct = function (_React$Component) {
                 _react2.default.createElement('input', { type: 'text', defaultValue: this.props.url, onChange: this.changeUrl }),
                 _react2.default.createElement(
                     'span',
-                    null,
+                    { className: 'Error' },
                     this.state.errorUrl
                 ),
                 _react2.default.createElement('br', null),
@@ -30739,7 +30739,7 @@ var EditAddProduct = function (_React$Component) {
                 _react2.default.createElement('input', { type: 'text', defaultValue: this.props.stock, onChange: this.changeStock }),
                 _react2.default.createElement(
                     'span',
-                    null,
+                    { className: 'Error' },
                     this.state.errorStock
                 ),
                 _react2.default.createElement('br', null),
