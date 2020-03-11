@@ -29288,11 +29288,9 @@ var Ishop3 = function (_React$Component) {
             products = products.filter(function (product) {
                 return product.code !== _this.state.deleteCode;
             });
-            _this.setState({ oursProducts: products });
+            _this.setState({ oursProducts: products, mode: '' });
         }, _this.cblineSelected = function (code) {
-            if (_this.state.mode === 2) {
-                _this.setState({ selectedCode: null });
-            } else {
+            if (_this.state.changeproduct === false) {
                 _this.setState({ selectedCode: code, mode: 0 });
             }
         }, _this.cblineDelete = function (code) {
@@ -29301,12 +29299,13 @@ var Ishop3 = function (_React$Component) {
                 _this.setState({ deleteCode: code }, _this.deleteLine);
             }
         }, _this.cblineEdit = function (code) {
-            _this.setState({ editaddCode: code, mode: 1 });
+            if (_this.state.changeproduct === false) {
+                _this.setState({ editaddCode: code, mode: 1 });
+            }
         }, _this.cbChange = function (changeProduct) {
             _this.setState({ changeproduct: changeProduct });
         }, _this.cbSave = function (code, nameproduct, price, url, stock) {
             var products = _this.state.oursProducts;
-            console.log(products.length + 1);
             if (_this.state.mode === 1) {
                 products.forEach(function (product) {
                     if (product.code === code) {
@@ -29321,10 +29320,10 @@ var Ishop3 = function (_React$Component) {
                 var newObject = { code: products.length + 1, nameproduct: nameproduct, price: parseInt(price), url: url, stock: stock };
                 products.push(newObject);
             }
-            _this.setState({ editaddCode: code, mode: '', oursProducts: products });
+            _this.setState({ editaddCode: code, mode: '', oursProducts: products, changeproduct: false });
         }, _this.cbCancel = function (code) {
             var products = _this.state.oursProducts;
-            _this.setState({ editaddCode: code, mode: '', oursProducts: products });
+            _this.setState({ editaddCode: code, mode: '', oursProducts: products, changeproduct: false });
         }, _this.newProduct = function (code) {
             _this.setState({ editaddCode: code, mode: 2 });
         }, _temp), _possibleConstructorReturn(_this, _ret);
@@ -29335,16 +29334,13 @@ var Ishop3 = function (_React$Component) {
         value: function render() {
             var _this2 = this;
 
-            if (this.state.mode === 0) {
-                var foundProduct = this.state.oursProducts.find(function (p) {
-                    return p.code === _this2.state.selectedCode;
-                });
-            }
-            if (this.state.mode === 1) {
-                var editProduct = this.state.oursProducts.find(function (p) {
-                    return p.code === _this2.state.editaddCode;
-                });
-            }
+            var foundProduct = this.state.oursProducts.find(function (p) {
+                return p.code === _this2.state.selectedCode;
+            });
+
+            var editProduct = this.state.oursProducts.find(function (p) {
+                return p.code === _this2.state.editaddCode;
+            });
 
             return _react2.default.createElement(
                 'div',
@@ -29429,6 +29425,7 @@ var Ishop3 = function (_React$Component) {
                     cbCancel: this.cbCancel,
                     cbChange: this.cbChange }),
                 this.state.mode === 2 && _react2.default.createElement(_editadd2.default, { key: this.props.code,
+                    code: this.state.oursProducts.length + 1,
                     mode: this.state.mode,
                     title: 'Add new product',
                     button: 'Add',
@@ -30615,20 +30612,38 @@ var EditAddProduct = function (_React$Component) {
             valide: true,
             changeProduct: false
         }, _this.save = function (EO) {
-            _this.props.cbSave(_this.props.code, _this.state.nameproduct, _this.state.price, _this.state.url, _this.state.stock);
+            _this.state.changeProduct = false;
+            _this.props.cbSave(_this.props.code, _this.state.nameproduct, _this.state.price, _this.state.url, _this.state.stock, _this.state.changeProduct);
         }, _this.cancel = function (EO) {
-            _this.props.cbCancel(_this.props.code, _this.state.nameproduct, _this.state.price, _this.state.url, _this.state.stock);
+            _this.state.changeProduct = false;
+            _this.props.cbCancel(_this.props.code, _this.state.nameproduct, _this.state.price, _this.state.url, _this.state.stock, _this.state.changeProduct);
         }, _this.changeName = function (EO) {
-            _this.setState({ nameproduct: EO.target.value, changeProduct: true }, _this.errorName);
+            if (_this.props.nameproduct === EO.target.value) {
+                _this.setState({ changeProduct: false });
+            } else {
+                _this.setState({ nameproduct: EO.target.value, changeProduct: true }, _this.errorName);
+            }
             _this.props.cbChange(_this.state.changeProduct);
         }, _this.changePrice = function (EO) {
-            _this.setState({ price: EO.target.value, changeProduct: true }, _this.errorPrice);
+            if (_this.props.price === EO.target.value) {
+                _this.setState({ changeProduct: false });
+            } else {
+                _this.setState({ price: EO.target.value, changeProduct: true }, _this.errorPrice);
+            }
             _this.props.cbChange(_this.state.changeProduct);
         }, _this.changeUrl = function (EO) {
-            _this.setState({ url: EO.target.value, changeProduct: true }, _this.errorUrl);
+            if (_this.props.url === EO.target.value) {
+                _this.setState({ changeProduct: false });
+            } else {
+                _this.setState({ url: EO.target.value, changeProduct: true }, _this.errorUrl);
+            }
             _this.props.cbChange(_this.state.changeProduct);
         }, _this.changeStock = function (EO) {
-            _this.setState({ stock: EO.target.value, changeProduct: true }, _this.errorStock);
+            if (_this.props.stock === EO.target.value) {
+                _this.setState({ changeProduct: false });
+            } else {
+                _this.setState({ stock: EO.target.value, changeProduct: true }, _this.errorStock);
+            }
             _this.props.cbChange(_this.state.changeProduct);
         }, _this.errorName = function () {
             if (!_this.state.nameproduct.match(/^[A-Za-z]+$/)) {

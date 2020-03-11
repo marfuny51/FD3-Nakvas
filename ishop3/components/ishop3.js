@@ -69,11 +69,11 @@ class Ishop3 extends React.Component {
                     product.nameproduct = nameproduct;
                     product.price = parseInt(price);
                     product.url = url;
-                    product.stock = stock}
+                    product.stock = parseInt(stock)}
             })
         };
         if (this.state.mode===2) {
-            let newObject = {code:products.length+1, nameproduct: nameproduct, price: parseInt(price), url: url, stock: stock}; 
+            let newObject = {code:products.length+1, nameproduct: nameproduct, price: parseInt(price), url: url, stock: parseInt(stock)}; 
             products.push(newObject);
         }
         this.setState({editaddCode:code, mode:'', oursProducts: products, changeproduct: false});

@@ -3,3 +3,7 @@
     width: 500px;
     padding-top: 30px;
 }
+
+.EditAddProduct .Error {
+    color: red;
+}
