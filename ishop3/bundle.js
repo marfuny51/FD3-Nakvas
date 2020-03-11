@@ -29281,7 +29281,8 @@ var Ishop3 = function (_React$Component) {
             selectedCode: null,
             deleteCode: null,
             editaddCode: null,
-            mode: null //0 -view, 1- edit, 2 - add
+            mode: null, //0 -view, 1- edit, 2 - add
+            changeproduct: false
         }, _this.deleteLine = function () {
             var products = _this.state.oursProducts;
             products = products.filter(function (product) {
@@ -29289,26 +29290,37 @@ var Ishop3 = function (_React$Component) {
             });
             _this.setState({ oursProducts: products });
         }, _this.cblineSelected = function (code) {
-            if (!_this.props.changeproduct) _this.setState({ selectedCode: code, mode: 0 });
+            if (_this.state.mode === 2) {
+                _this.setState({ selectedCode: null });
+            } else {
+                _this.setState({ selectedCode: code, mode: 0 });
+            }
         }, _this.cblineDelete = function (code) {
             var question = confirm('Do you want to delete this product?');
             if (question == true) {
                 _this.setState({ deleteCode: code }, _this.deleteLine);
             }
         }, _this.cblineEdit = function (code) {
-            if (!_this.props.changeproduct) _this.setState({ editaddCode: code, mode: 1 });
+            _this.setState({ editaddCode: code, mode: 1 });
+        }, _this.cbChange = function (changeProduct) {
+            _this.setState({ changeproduct: changeProduct });
         }, _this.cbSave = function (code, nameproduct, price, url, stock) {
             var products = _this.state.oursProducts;
             console.log(products.length + 1);
-            _this.state.mode === 1 ? products.forEach(function (product) {
-                if (product.code === code) {
-                    product.nameproduct = nameproduct;
-                    product.price = parseInt(price);
-                    product.url = url;
-                    product.stock = stock;
-                }
-            }) : products.push(newObject);
-            var newObject = { code: products.length + 1, nameproduct: nameproduct, price: parseInt(price), url: url, stock: stock };
+            if (_this.state.mode === 1) {
+                products.forEach(function (product) {
+                    if (product.code === code) {
+                        product.nameproduct = nameproduct;
+                        product.price = parseInt(price);
+                        product.url = url;
+                        product.stock = stock;
+                    }
+                });
+            };
+            if (_this.state.mode === 2) {
+                var newObject = { code: products.length + 1, nameproduct: nameproduct, price: parseInt(price), url: url, stock: stock };
+                products.push(newObject);
+            }
             _this.setState({ editaddCode: code, mode: '', oursProducts: products });
         }, _this.cbCancel = function (code) {
             var products = _this.state.oursProducts;
@@ -29388,6 +29400,7 @@ var Ishop3 = function (_React$Component) {
                                 return _react2.default.createElement(_goods2.default, { key: v.code,
                                     nameproduct: v.nameproduct, price: v.price, code: v.code,
                                     url: v.url, stock: v.stock,
+                                    mode: _this2.state.mode,
                                     cblineSelected: _this2.cblineSelected,
                                     selectedCode: _this2.state.selectedCode,
                                     cblineDelete: _this2.cblineDelete,
@@ -29402,12 +29415,28 @@ var Ishop3 = function (_React$Component) {
                 ),
                 this.state.mode === 0 && _react2.default.createElement(_view2.default, foundProduct),
                 this.state.mode === 1 && _react2.default.createElement(_editadd2.default, { key: editProduct.code,
+                    mode: this.state.mode,
                     title: 'Edit existing Product',
-                    nameproduct: editProduct.nameproduct, price: editProduct.price, code: editProduct.code, changeproduct: editProduct.changeproduct,
-                    url: editProduct.url, stock: editProduct.stock, button: 'Save', editaddCode: this.state.editaddCode, cblineEdit: this.cblineEdit, cbSave: this.cbSave, cbCancel: this.cbCancel }),
+                    nameproduct: editProduct.nameproduct,
+                    price: editProduct.price,
+                    code: editProduct.code,
+                    url: editProduct.url,
+                    stock: editProduct.stock,
+                    button: 'Save',
+                    editaddCode: this.state.editaddCode,
+                    cblineEdit: this.cblineEdit,
+                    cbSave: this.cbSave,
+                    cbCancel: this.cbCancel,
+                    cbChange: this.cbChange }),
                 this.state.mode === 2 && _react2.default.createElement(_editadd2.default, { key: this.props.code,
+                    mode: this.state.mode,
                     title: 'Add new product',
-                    button: 'Add', editaddCode: this.state.editaddCode, cblineEdit: this.cblineEdit, cbSave: this.cbSave, cbCancel: this.cbCancel })
+                    button: 'Add',
+                    editaddCode: this.state.editaddCode,
+                    cblineEdit: this.cblineEdit,
+                    cbSave: this.cbSave,
+                    cbCancel: this.cbCancel,
+                    cbChange: this.cbChange })
             );
         }
     }]);
@@ -30393,7 +30422,7 @@ var Goods = function (_React$Component) {
                 _react2.default.createElement(
                     'td',
                     { className: 'Control' },
-                    _react2.default.createElement('input', { className: 'ButtonContro2', type: 'button', value: 'Edit', onClick: this.lineEdit }),
+                    _react2.default.createElement('input', { className: 'ButtonContro2', type: 'button', value: 'Edit', onClick: this.lineEdit, disabled: this.props.mode === 2 ? true : false }),
                     _react2.default.createElement('input', { className: 'ButtonContro', type: 'button', value: 'Delete', onClick: this.lineDeleted, disabled: this.props.mode === 1 || this.props.mode === 2 ? true : false })
                 )
             );
@@ -30587,16 +30616,20 @@ var EditAddProduct = function (_React$Component) {
             changeProduct: false
         }, _this.save = function (EO) {
             _this.props.cbSave(_this.props.code, _this.state.nameproduct, _this.state.price, _this.state.url, _this.state.stock);
-        }, _this.cancel = function (code) {
+        }, _this.cancel = function (EO) {
             _this.props.cbCancel(_this.props.code, _this.state.nameproduct, _this.state.price, _this.state.url, _this.state.stock);
         }, _this.changeName = function (EO) {
             _this.setState({ nameproduct: EO.target.value, changeProduct: true }, _this.errorName);
+            _this.props.cbChange(_this.state.changeProduct);
         }, _this.changePrice = function (EO) {
             _this.setState({ price: EO.target.value, changeProduct: true }, _this.errorPrice);
+            _this.props.cbChange(_this.state.changeProduct);
         }, _this.changeUrl = function (EO) {
             _this.setState({ url: EO.target.value, changeProduct: true }, _this.errorUrl);
+            _this.props.cbChange(_this.state.changeProduct);
         }, _this.changeStock = function (EO) {
             _this.setState({ stock: EO.target.value, changeProduct: true }, _this.errorStock);
+            _this.props.cbChange(_this.state.changeProduct);
         }, _this.errorName = function () {
             if (!_this.state.nameproduct.match(/^[A-Za-z]+$/)) {
                 _this.setState({ errorName: 'Name should includes only letters!', valide: false });
@@ -30629,7 +30662,7 @@ var EditAddProduct = function (_React$Component) {
         value: function render() {
             return _react2.default.createElement(
                 'div',
-                { key: this.props.code, changeproduct: this.state.changeProduct ? 'true' : 'false', className: 'EditAddProduct' },
+                { key: this.props.code, className: 'EditAddProduct' },
                 _react2.default.createElement(
                     'span',
                     null,
@@ -30710,8 +30743,7 @@ EditAddProduct.propTypes = {
     nameproduct: _propTypes2.default.string,
     price: _propTypes2.default.number,
     url: _propTypes2.default.string,
-    stock: _propTypes2.default.number,
-    changeProduct: _propTypes2.default.bool
+    stock: _propTypes2.default.number
 };
 exports.default = EditAddProduct;
 

@@ -30,30 +30,52 @@ class EditAddProduct extends React.Component {
     };
 
     save = (EO) => {
-        this.props.cbSave(this.props.code, this.state.nameproduct, this.state.price, this.state.url, this.state.stock);
+        this.state.changeProduct = false;
+        this.props.cbSave(this.props.code, this.state.nameproduct, this.state.price, this.state.url, this.state.stock, this.state.changeProduct);
     };
 
     cancel = (EO) => {
-        this.props.cbCancel(this.props.code, this.state.nameproduct, this.state.price, this.state.url, this.state.stock);
+        this.state.changeProduct = false;
+        this.props.cbCancel(this.props.code, this.state.nameproduct, this.state.price, this.state.url, this.state.stock, this.state.changeProduct);
     };
 
     changeName = (EO) => {
-        this.setState({nameproduct: EO.target.value, changeProduct: true}, this.errorName);
+        if(this.props.nameproduct===EO.target.value) {
+            this.setState({changeProduct: false});
+        }
+        else {
+            this.setState({nameproduct: EO.target.value, changeProduct: true}, this.errorName);
+        }
         this.props.cbChange(this.state.changeProduct);
     };
 
     changePrice = (EO) => {
-        this.setState({price: EO.target.value, changeProduct: true}, this.errorPrice);
+        if(this.props.price===EO.target.value) {
+            this.setState({changeProduct: false});
+        }
+        else {
+            this.setState({price: EO.target.value, changeProduct: true}, this.errorPrice);
+        }
         this.props.cbChange(this.state.changeProduct);
     };
 
     changeUrl = (EO) => {
-        this.setState({url: EO.target.value, changeProduct: true}, this.errorUrl);
+        if(this.props.url===EO.target.value) {
+            this.setState({changeProduct: false});
+        }
+        else {
+            this.setState({url: EO.target.value, changeProduct: true}, this.errorUrl);
+        }
         this.props.cbChange(this.state.changeProduct);
     };
 
     changeStock = (EO) => {
-        this.setState({stock: EO.target.value, changeProduct: true}, this.errorStock);
+        if(this.props.stock===EO.target.value) {
+            this.setState({changeProduct: false});
+        }
+        else {
+            this.setState({stock: EO.target.value, changeProduct: true}, this.errorStock);
+        }
         this.props.cbChange(this.state.changeProduct);
     };
 

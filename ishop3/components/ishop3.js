@@ -35,14 +35,11 @@ class Ishop3 extends React.Component {
     deleteLine = () => {
         let products = this.state.oursProducts;
         products = products.filter(product => product.code !== this.state.deleteCode);
-        this.setState({oursProducts: products});
+        this.setState({oursProducts: products, mode:''});
     }
 
     cblineSelected = (code) => {
-        if(this.state.mode===2){
-            this.setState( {selectedCode:null});
-        }
-        else {
+        if(this.state.changeproduct===false) {
         this.setState( {selectedCode:code, mode:0});
         }
     }
@@ -55,7 +52,9 @@ class Ishop3 extends React.Component {
     }
 
     cblineEdit = (code) => {
+        if(this.state.changeproduct===false) {
         this.setState( {editaddCode:code, mode:1} );
+        }
     }
 
     cbChange = (changeProduct) => {
@@ -64,7 +63,6 @@ class Ishop3 extends React.Component {
 
     cbSave = (code, nameproduct, price, url, stock) => {
         let products = this.state.oursProducts;
-        console.log(products.length+1);
         if (this.state.mode===1) {
             products.forEach(product => {
                 if (product.code === code) {
@@ -78,12 +76,12 @@ class Ishop3 extends React.Component {
             let newObject = {code:products.length+1, nameproduct: nameproduct, price: parseInt(price), url: url, stock: stock}; 
             products.push(newObject);
         }
-        this.setState({editaddCode:code, mode:'', oursProducts: products});
+        this.setState({editaddCode:code, mode:'', oursProducts: products, changeproduct: false});
     };
 
     cbCancel = (code) => {
         let products = this.state.oursProducts;
-        this.setState({editaddCode:code, mode:'', oursProducts: products});
+        this.setState({editaddCode:code, mode:'', oursProducts: products, changeproduct: false});
     };
 
     newProduct = (code) => {
@@ -91,14 +89,14 @@ class Ishop3 extends React.Component {
     }
 
     render() {
-        if (this.state.mode===0) {
+        
         var foundProduct = this.state.oursProducts.find( p => 
                 p.code === this.state.selectedCode
-            );}
-        if (this.state.mode===1) {
+            );
+        
         var editProduct = this.state.oursProducts.find( p => 
                 p.code === this.state.editaddCode
-            );}
+            );
 
         return (
         <div className='Ishop3'>
