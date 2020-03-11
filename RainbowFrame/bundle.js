@@ -1008,7 +1008,6 @@ var _RainbowFrame2 = _interopRequireDefault(_RainbowFrame);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var text = 'Hello!';
 var colorsArr = ['red', 'orange', 'yellow', 'green', '#00BFFF', 'blue', 'purple'];
 
 _reactDom2.default.render(_react2.default.createElement(
@@ -21237,7 +21236,7 @@ var RainbowFrame = function (_React$Component) {
         };*/
 
         value: function render() {
-            var colors = this.props.colors.slice();
+            var colors = this.props.colors;
             for (var i = 0; i < colors.length; i++) {
                 var children = _react2.default.createElement(
                     'div',
@@ -21253,9 +21252,7 @@ var RainbowFrame = function (_React$Component) {
 }(_react2.default.Component);
 
 RainbowFrame.propTypes = {
-    colors: _propTypes2.default.arrayOf(_propTypes2.default.shape({
-        color: _propTypes2.default.string
-    }))
+    colors: _propTypes2.default.array.isRequired
 };
 exports.default = RainbowFrame;
 
