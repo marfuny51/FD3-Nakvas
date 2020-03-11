@@ -155,6 +155,7 @@ class Ishop3 extends React.Component {
         {
             (this.state.mode===2)&&
             <EditAddProduct key={this.props.code}
+            code={this.state.oursProducts.length+1}
             mode={this.state.mode}
             title='Add new product'
             button='Add' 
