@@ -158,7 +158,8 @@ class Ishop3 extends React.Component {
             code={this.state.oursProducts.length+1}
             mode={this.state.mode}
             title='Add new product'
-            button='Add' 
+            button='Add'
+            valide = {false}
             editaddCode={this.state.editaddCode} 
             cblineEdit={this.cblineEdit} 
             cbSave={this.cbSave} 

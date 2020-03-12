@@ -26,7 +26,7 @@ class EditAddProduct extends React.Component {
         errorUrl: '',
         errorStock: '',
         button: '',
-        valide: true,
+        valide: '',
         changeProduct: false,
     };
 

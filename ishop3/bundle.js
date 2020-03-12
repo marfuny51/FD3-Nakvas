@@ -29413,13 +29413,13 @@ var Ishop3 = function (_React$Component) {
                 this.state.mode === 1 && _react2.default.createElement(_editadd2.default, { key: editProduct.code,
                     mode: this.state.mode,
                     title: 'Edit existing Product',
+                    editaddCode: this.state.editaddCode,
                     nameproduct: editProduct.nameproduct,
                     price: editProduct.price,
                     code: editProduct.code,
                     url: editProduct.url,
                     stock: editProduct.stock,
                     button: 'Save',
-                    editaddCode: this.state.editaddCode,
                     cblineEdit: this.cblineEdit,
                     cbSave: this.cbSave,
                     cbCancel: this.cbCancel,
@@ -30646,8 +30646,7 @@ var EditAddProduct = function (_React$Component) {
             }
             _this.props.cbChange(_this.state.changeProduct);
         }, _this.errorName = function () {
-            //if (!this.state.nameproduct.match(/^[A-Za-z]+$/)) {
-            if (_this.state.nameproduct === '') {
+            if (!_this.state.nameproduct.match(/^[A-Za-z]+$/)) {
                 _this.setState({ errorName: 'Name should includes only letters!', valide: false });
             } else {
                 _this.setState({ errorName: '', valide: true });
@@ -30701,7 +30700,7 @@ var EditAddProduct = function (_React$Component) {
                     null,
                     'Name: '
                 ),
-                _react2.default.createElement('input', { type: 'text', defaultValue: this.props.nameproduct, onChange: this.changeName }),
+                _react2.default.createElement('input', { type: 'text', defaultValue: this.state.nameproduct, onChange: this.changeName }),
                 _react2.default.createElement(
                     'span',
                     { className: 'Error' },
@@ -30713,7 +30712,7 @@ var EditAddProduct = function (_React$Component) {
                     null,
                     'Price: '
                 ),
-                _react2.default.createElement('input', { type: 'text', defaultValue: this.props.price, onChange: this.changePrice }),
+                _react2.default.createElement('input', { type: 'text', defaultValue: this.state.price, onChange: this.changePrice }),
                 _react2.default.createElement(
                     'span',
                     { className: 'Error' },
@@ -30725,7 +30724,7 @@ var EditAddProduct = function (_React$Component) {
                     null,
                     'URL: '
                 ),
-                _react2.default.createElement('input', { type: 'text', defaultValue: this.props.url, onChange: this.changeUrl }),
+                _react2.default.createElement('input', { type: 'text', defaultValue: this.state.url, onChange: this.changeUrl }),
                 _react2.default.createElement(
                     'span',
                     { className: 'Error' },
@@ -30737,7 +30736,7 @@ var EditAddProduct = function (_React$Component) {
                     null,
                     'Quantity: '
                 ),
-                _react2.default.createElement('input', { type: 'text', defaultValue: this.props.stock, onChange: this.changeStock }),
+                _react2.default.createElement('input', { type: 'text', defaultValue: this.state.stock, onChange: this.changeStock }),
                 _react2.default.createElement(
                     'span',
                     { className: 'Error' },
