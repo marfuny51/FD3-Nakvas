@@ -21222,28 +21222,16 @@ var RainbowFrame = function (_React$Component) {
 
     _createClass(RainbowFrame, [{
         key: 'render',
-
-
-        /*createRainbowFrame = () => {
-            let {children:children, colors:colors} = this.props;
-            for (let i = 0; i < colors.length; i++) {
-                children =
-                    <div style={{padding: '10px', textAlign: 'center', border: `solid 5px ${colors[i]}`}}>
-                        {children}
-                    </div>
-            }
-            return children
-        };*/
-
         value: function render() {
             var colors = this.props.colors;
-            for (var i = 0; i < colors.length; i++) {
-                var children = _react2.default.createElement(
+            var children = this.props.children;
+            colors.map(function (color) {
+                children = _react2.default.createElement(
                     'div',
-                    { style: { padding: '10px', textAlign: 'center', border: 'solid 5px ' + colors[i] } },
+                    { style: { padding: '10px', textAlign: 'center', border: 'solid 5px ' + color } },
                     children
                 );
-            }
+            });
             return children;
         }
     }]);
