@@ -30646,7 +30646,8 @@ var EditAddProduct = function (_React$Component) {
             }
             _this.props.cbChange(_this.state.changeProduct);
         }, _this.errorName = function () {
-            if (!_this.state.nameproduct.match(/^[A-Za-z]+$/)) {
+            //if (!this.state.nameproduct.match(/^[A-Za-z]+$/)) {
+            if (_this.state.nameproduct === '') {
                 _this.setState({ errorName: 'Name should includes only letters!', valide: false });
             } else {
                 _this.setState({ errorName: '', valide: true });
@@ -30758,7 +30759,8 @@ EditAddProduct.propTypes = {
     nameproduct: _propTypes2.default.string,
     price: _propTypes2.default.number,
     url: _propTypes2.default.string,
-    stock: _propTypes2.default.number
+    stock: _propTypes2.default.number,
+    error: _propTypes2.default.func
 };
 exports.default = EditAddProduct;
 

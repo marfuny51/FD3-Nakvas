@@ -121,10 +121,10 @@ class EditAddProduct extends React.Component {
             <div key={this.props.code} className='EditAddProduct'>
                 <span>{this.props.title}</span><br/>
                 <span>ID: </span><span>{this.props.code}</span><br/>
-                <span>Name: </span><input type='text' defaultValue={this.props.nameproduct} onChange= {this.changeName}/><span className='Error'>{this.state.errorName}</span><br/>
-                <span>Price: </span><input type='text' defaultValue = {this.props.price} onChange= {this.changePrice}/><span className='Error'>{this.state.errorPrice}</span><br/>
-                <span>URL: </span><input type='text' defaultValue = {this.props.url} onChange= {this.changeUrl}/><span className='Error'>{this.state.errorUrl}</span><br/>
-                <span>Quantity: </span><input type='text' defaultValue = {this.props.stock} onChange= {this.changeStock}/><span className='Error'>{this.state.errorStock}</span><br/>
+                <span>Name: </span><input type='text' defaultValue={this.state.nameproduct} onChange= {this.changeName}/><span className='Error'>{this.state.errorName}</span><br/>
+                <span>Price: </span><input type='text' defaultValue = {this.state.price} onChange= {this.changePrice}/><span className='Error'>{this.state.errorPrice}</span><br/>
+                <span>URL: </span><input type='text' defaultValue = {this.state.url} onChange= {this.changeUrl}/><span className='Error'>{this.state.errorUrl}</span><br/>
+                <span>Quantity: </span><input type='text' defaultValue = {this.state.stock} onChange= {this.changeStock}/><span className='Error'>{this.state.errorStock}</span><br/>
                 <input type='button' value={this.props.button} onClick={this.save} disabled = {(this.state.valide)?false:true}/>
                 <input type='button' value='Cancel' onClick={this.cancel}/>
             </div>

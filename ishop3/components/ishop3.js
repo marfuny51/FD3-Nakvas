@@ -140,13 +140,13 @@ class Ishop3 extends React.Component {
             <EditAddProduct key={editProduct.code}
             mode={this.state.mode}
             title='Edit existing Product'
+            editaddCode={this.state.editaddCode} 
             nameproduct={editProduct.nameproduct} 
             price={editProduct.price} 
             code={editProduct.code} 
             url={editProduct.url} 
             stock={editProduct.stock} 
             button='Save' 
-            editaddCode={this.state.editaddCode} 
             cblineEdit={this.cblineEdit} 
             cbSave={this.cbSave} 
             cbCancel={this.cbCancel}
