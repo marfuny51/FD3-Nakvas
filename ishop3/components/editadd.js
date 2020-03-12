@@ -41,41 +41,41 @@ class EditAddProduct extends React.Component {
     };
 
     changeName = (EO) => {
-        if(this.props.nameproduct===EO.target.value) {
-            this.setState({changeProduct: false});
+        if(this.props.nameproduct!==EO.target.value) {
+            this.setState({nameproduct: EO.target.value, changeProduct: true}, this.errorName);
         }
         else {
-            this.setState({nameproduct: EO.target.value, changeProduct: true}, this.errorName);
+            this.setState({changeProduct: false});            
         }
         this.props.cbChange(this.state.changeProduct);
     };
 
     changePrice = (EO) => {
-        if(this.props.price===EO.target.value) {
-            this.setState({changeProduct: false});
+        if(this.props.price!==EO.target.value) {
+            this.setState({price: EO.target.value, changeProduct: true}, this.errorPrice);
         }
         else {
-            this.setState({price: EO.target.value, changeProduct: true}, this.errorPrice);
+            this.setState({changeProduct: false});
         }
         this.props.cbChange(this.state.changeProduct);
     };
 
     changeUrl = (EO) => {
-        if(this.props.url===EO.target.value) {
-            this.setState({changeProduct: false});
+        if(this.props.url!==EO.target.value) {
+            this.setState({url: EO.target.value, changeProduct: true}, this.errorUrl);
         }
         else {
-            this.setState({url: EO.target.value, changeProduct: true}, this.errorUrl);
+            this.setState({changeProduct: false});
         }
         this.props.cbChange(this.state.changeProduct);
     };
 
     changeStock = (EO) => {
         if(this.props.stock===EO.target.value) {
-            this.setState({changeProduct: false});
+            this.setState({stock: EO.target.value, changeProduct: true}, this.errorStock);
         }
         else {
-            this.setState({stock: EO.target.value, changeProduct: true}, this.errorStock);
+            this.setState({changeProduct: false}); 
         }
         this.props.cbChange(this.state.changeProduct);
     };

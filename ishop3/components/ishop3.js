@@ -11,16 +11,7 @@ class Ishop3 extends React.Component {
 
     static propTypes = {
         nameShop: PropTypes.string,
-        products: PropTypes.arrayOf(
-            PropTypes.shape({
-                nameproduct: PropTypes.string,
-                code: PropTypes.number,
-                price: PropTypes.number,
-                url: PropTypes.string,
-                stock: PropTypes.number,
-                mode: PropTypes.number,
-            })
-            ),
+        products: PropTypes.array.isRequired
     };
 
     state = {
@@ -73,7 +64,7 @@ class Ishop3 extends React.Component {
             })
         };
         if (this.state.mode===2) {
-            let newObject = {code:products.length+1, nameproduct: nameproduct, price: parseInt(price), url: url, stock: parseInt(stock)}; 
+            let newObject = {code:products.length+2, nameproduct: nameproduct, price: parseInt(price), url: url, stock: parseInt(stock)}; 
             products.push(newObject);
         }
         this.setState({editaddCode:code, mode:'', oursProducts: products, changeproduct: false});
@@ -147,6 +138,7 @@ class Ishop3 extends React.Component {
             url={editProduct.url} 
             stock={editProduct.stock} 
             button='Save' 
+            valide={true}
             cblineEdit={this.cblineEdit} 
             cbSave={this.cbSave} 
             cbCancel={this.cbCancel}
@@ -155,11 +147,11 @@ class Ishop3 extends React.Component {
         {
             (this.state.mode===2)&&
             <EditAddProduct key={this.props.code}
-            code={this.state.oursProducts.length+1}
+            code={this.state.oursProducts.length+2}
             mode={this.state.mode}
             title='Add new product'
             button='Add'
-            valide = {false}
+            valide={false}
             editaddCode={this.state.editaddCode} 
             cblineEdit={this.cblineEdit} 
             cbSave={this.cbSave} 
