@@ -7,18 +7,19 @@ class RainbowFrame extends React.Component {
 
     static propTypes = {
       colors: PropTypes.array.isRequired,
+      children: PropTypes.object.isRequired
     };
 
     render() {
-        var colors = this.props.colors;
-        var children = this.props.children;
-        colors.map(color => {
-            children= 
+        var ourcolors = this.props.colors;
+        var ourchildren = this.props.children;
+        ourcolors.forEach(color => {
+            ourchildren= 
             <div style={{padding: '10px', textAlign: 'center', border: 'solid 5px ' + color}}>
-            {children}
+            {ourchildren}
             </div>
         })
-        return children;
+        return ourchildren;
     }
 }
     
