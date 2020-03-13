@@ -29317,7 +29317,7 @@ var Ishop3 = function (_React$Component) {
                 });
             };
             if (_this.state.mode === 2) {
-                var newObject = { code: products.length + 1, nameproduct: nameproduct, price: parseInt(price), url: url, stock: parseInt(stock) };
+                var newObject = { code: products.length + 2, nameproduct: nameproduct, price: parseInt(price), url: url, stock: parseInt(stock) };
                 products.push(newObject);
             }
             _this.setState({ editaddCode: code, mode: '', oursProducts: products, changeproduct: false });
@@ -29420,15 +29420,17 @@ var Ishop3 = function (_React$Component) {
                     url: editProduct.url,
                     stock: editProduct.stock,
                     button: 'Save',
+                    valide: true,
                     cblineEdit: this.cblineEdit,
                     cbSave: this.cbSave,
                     cbCancel: this.cbCancel,
                     cbChange: this.cbChange }),
                 this.state.mode === 2 && _react2.default.createElement(_editadd2.default, { key: this.props.code,
-                    code: this.state.oursProducts.length + 1,
+                    code: this.state.oursProducts.length + 2,
                     mode: this.state.mode,
                     title: 'Add new product',
                     button: 'Add',
+                    valide: false,
                     editaddCode: this.state.editaddCode,
                     cblineEdit: this.cblineEdit,
                     cbSave: this.cbSave,
@@ -29443,14 +29445,7 @@ var Ishop3 = function (_React$Component) {
 
 Ishop3.propTypes = {
     nameShop: _propTypes2.default.string,
-    products: _propTypes2.default.arrayOf(_propTypes2.default.shape({
-        nameproduct: _propTypes2.default.string,
-        code: _propTypes2.default.number,
-        price: _propTypes2.default.number,
-        url: _propTypes2.default.string,
-        stock: _propTypes2.default.number,
-        mode: _propTypes2.default.number
-    }))
+    products: _propTypes2.default.array.isRequired
 };
 exports.default = Ishop3;
 
@@ -30609,7 +30604,7 @@ var EditAddProduct = function (_React$Component) {
             errorUrl: '',
             errorStock: '',
             button: '',
-            valide: true,
+            valide: '',
             changeProduct: false
         }, _this.save = function (EO) {
             _this.state.changeProduct = false;
@@ -30618,31 +30613,31 @@ var EditAddProduct = function (_React$Component) {
             _this.state.changeProduct = false;
             _this.props.cbCancel(_this.props.code, _this.state.nameproduct, _this.state.price, _this.state.url, _this.state.stock, _this.state.changeProduct);
         }, _this.changeName = function (EO) {
-            if (_this.props.nameproduct === EO.target.value) {
-                _this.setState({ changeProduct: false });
-            } else {
+            if (_this.props.nameproduct !== EO.target.value) {
                 _this.setState({ nameproduct: EO.target.value, changeProduct: true }, _this.errorName);
+            } else {
+                _this.setState({ changeProduct: false });
             }
             _this.props.cbChange(_this.state.changeProduct);
         }, _this.changePrice = function (EO) {
-            if (_this.props.price === EO.target.value) {
-                _this.setState({ changeProduct: false });
-            } else {
+            if (_this.props.price !== EO.target.value) {
                 _this.setState({ price: EO.target.value, changeProduct: true }, _this.errorPrice);
+            } else {
+                _this.setState({ changeProduct: false });
             }
             _this.props.cbChange(_this.state.changeProduct);
         }, _this.changeUrl = function (EO) {
-            if (_this.props.url === EO.target.value) {
-                _this.setState({ changeProduct: false });
-            } else {
+            if (_this.props.url !== EO.target.value) {
                 _this.setState({ url: EO.target.value, changeProduct: true }, _this.errorUrl);
+            } else {
+                _this.setState({ changeProduct: false });
             }
             _this.props.cbChange(_this.state.changeProduct);
         }, _this.changeStock = function (EO) {
             if (_this.props.stock === EO.target.value) {
-                _this.setState({ changeProduct: false });
-            } else {
                 _this.setState({ stock: EO.target.value, changeProduct: true }, _this.errorStock);
+            } else {
+                _this.setState({ changeProduct: false });
             }
             _this.props.cbChange(_this.state.changeProduct);
         }, _this.errorName = function () {

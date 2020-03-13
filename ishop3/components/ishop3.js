@@ -30,7 +30,7 @@ class Ishop3 extends React.Component {
     }
 
     cblineSelected = (code) => {
-        if(this.state.changeproduct===false) {
+        if(this.state.changeproduct===false&&this.state.mode!==2) {
         this.setState( {selectedCode:code, mode:0});
         }
     }
@@ -138,7 +138,6 @@ class Ishop3 extends React.Component {
             url={editProduct.url} 
             stock={editProduct.stock} 
             button='Save' 
-            valide={true}
             cblineEdit={this.cblineEdit} 
             cbSave={this.cbSave} 
             cbCancel={this.cbCancel}
@@ -150,9 +149,16 @@ class Ishop3 extends React.Component {
             code={this.state.oursProducts.length+2}
             mode={this.state.mode}
             title='Add new product'
+            nameproduct='' 
+            price={this.props.price}
+            url=''
+            stock={this.props.stock}
             button='Add'
-            valide={false}
             editaddCode={this.state.editaddCode} 
+            valideName={this.state.valideName}
+            validePrice={this.state.validePrice}
+            valideUrl={this.state.valideUrl}
+            valideStock={this.state.valideStock}
             cblineEdit={this.cblineEdit} 
             cbSave={this.cbSave} 
             cbCancel={this.cbCancel}

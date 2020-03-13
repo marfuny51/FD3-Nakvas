@@ -26,9 +26,39 @@ class EditAddProduct extends React.Component {
         errorUrl: '',
         errorStock: '',
         button: '',
-        valide: '',
+        valideName: true,
+        validePrice: true,
+        valideUrl: true,
+        valideStock: true,
         changeProduct: false,
     };
+
+    componentDidMount() {
+        if (!this.state.nameproduct.match(/^[A-Za-z]+$/)) {
+            this.setState({errorName:'Name should includes only letters!', valideName: false}); 
+        }
+        else {
+            this.setState({errorName:'', valideName: true});
+        }
+        if (!(String(this.state.price)).match(/^[0-9]{1,5}$/)) {
+            this.setState({errorPrice:'Price should includes of no more than 5 numerals. Do not enter letters!', validePrice: false});
+        }
+        else {
+            this.setState({errorPrice:'', validePrice: true});
+        }
+        if (!this.state.url.match(/^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/)) {
+            this.setState({errorUrl:'Url should start with http://!', valideUrl: false});
+        }
+        else {
+            this.setState({errorUrl:'', valideUrl: true});
+        }
+        if (!(String(this.state.stock)).match(/^[0-9]{1,10}$/)) {
+            this.setState({errorStock:'Stock should includes of no more than 10 numerals. Do not enter letters!', valideStock: false});
+        }
+        else {
+            this.setState({errorStock:'', valideStock: true});
+        }
+    }
 
     save = (EO) => {
         this.state.changeProduct = false;
@@ -71,7 +101,7 @@ class EditAddProduct extends React.Component {
     };
 
     changeStock = (EO) => {
-        if(this.props.stock===EO.target.value) {
+        if(this.props.stock!==EO.target.value) {
             this.setState({stock: EO.target.value, changeProduct: true}, this.errorStock);
         }
         else {
@@ -82,37 +112,37 @@ class EditAddProduct extends React.Component {
 
     errorName = () => {
         if (!this.state.nameproduct.match(/^[A-Za-z]+$/)) {
-            this.setState({errorName:'Name should includes only letters!', valide: false}); 
+            this.setState({errorName:'Name should includes only letters!', valideName: false}); 
         }
         else {
-            this.setState({errorName:'', valide: true});
+            this.setState({errorName:'', valideName: true});
         }
     };
 
     errorPrice = () => {
         if (!(String(this.state.price)).match(/^[0-9]{1,5}$/)) {
-            this.setState({errorPrice:'Price should includes of no more than 5 numerals. Do not enter letters!', valide: false});
+            this.setState({errorPrice:'Price should includes of no more than 5 numerals. Do not enter letters!', validePrice: false});
         }
         else {
-            this.setState({errorPrice:'', valide: true});
+            this.setState({errorPrice:'', validePrice: true});
         }
     }
 
     errorUrl = () => {
         if (!this.state.url.match(/^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/)) {
-            this.setState({errorUrl:'Url should start with http://!', valide: false});
+            this.setState({errorUrl:'Url should start with http://!', valideUrl: false});
         }
         else {
-            this.setState({errorUrl:'', valide: true});
+            this.setState({errorUrl:'', valideUrl: true});
         }
     }
 
     errorStock = () => {
         if (!(String(this.state.stock)).match(/^[0-9]{1,10}$/)) {
-            this.setState({errorStock:'Stock should includes of no more than 10 numerals. Do not enter letters!', valide: false});
+            this.setState({errorStock:'Stock should includes of no more than 10 numerals. Do not enter letters!', valideStock: false});
         }
         else {
-            this.setState({errorStock:'', valide: true});
+            this.setState({errorStock:'', valideStock: true});
         }
     }
 
@@ -125,7 +155,7 @@ class EditAddProduct extends React.Component {
                 <span>Price: </span><input type='text' defaultValue = {this.state.price} onChange= {this.changePrice}/><span className='Error'>{this.state.errorPrice}</span><br/>
                 <span>URL: </span><input type='text' defaultValue = {this.state.url} onChange= {this.changeUrl}/><span className='Error'>{this.state.errorUrl}</span><br/>
                 <span>Quantity: </span><input type='text' defaultValue = {this.state.stock} onChange= {this.changeStock}/><span className='Error'>{this.state.errorStock}</span><br/>
-                <input type='button' value={this.props.button} onClick={this.save} disabled = {(this.state.valide)?false:true}/>
+                <input type='button' value={this.props.button} onClick={this.save} disabled = {(this.state.valideName&&this.state.validePrice&&this.state.valideUrl&&this.state.valideStock)?false:true}/>
                 <input type='button' value='Cancel' onClick={this.cancel}/>
             </div>
         )

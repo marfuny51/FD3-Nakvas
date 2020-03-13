@@ -29233,12 +29233,12 @@ var BrComponent = function (_React$Component) {
                 'div',
                 { className: 'Text' },
                 lines.map(function (line, index) {
-                    return _react2.default.createElement(
+                    return index < lines.length - 1 ? _react2.default.createElement(
                         _react2.default.Fragment,
                         { key: index },
                         line,
                         _react2.default.createElement('br', null)
-                    );
+                    ) : line;
                 })
             );
         }
