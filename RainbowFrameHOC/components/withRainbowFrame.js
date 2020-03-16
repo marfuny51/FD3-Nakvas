@@ -1,13 +1,13 @@
 import React from 'react';
 
-function withRainbowFrame(Component) {
-    // HOC withColorBackground должен вернуть КОМПОНЕНТ
-    // в данном случае возвращаем компонент в функциональном стиле
+function withRainbowFrame(colors) {
+  return function(Component) {
     return props => (
-      <div style={{backgroundColor:"yellow"}}>
+      <div style={{padding: '10px', textAlign: 'center', border: 'solid 5px ' + color}}>
         <Component {...props} />
       </div>
     );
+};
 }
 
 export { withRainbowFrame };

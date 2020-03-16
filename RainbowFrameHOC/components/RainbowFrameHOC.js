@@ -13,7 +13,7 @@ class RainbowFrameHOC extends React.Component {
     render() {
         var ourcolors = this.props.colors;
         var ourchildren = this.props.children;
-        ourcolors.forEach(color => {
+        ourcolors.map(color => {
             ourchildren= 
             <div style={{padding: '10px', textAlign: 'center', border: 'solid 5px ' + color}}>
             {ourchildren}
