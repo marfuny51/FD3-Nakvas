@@ -29233,16 +29233,11 @@ var RainbowFrameHOC = function (_React$Component) {
     _createClass(RainbowFrameHOC, [{
         key: 'render',
         value: function render() {
-            var ourcolors = this.props.colors;
-            var ourchildren = this.props.children;
-            ourcolors.forEach(function (color) {
-                ourchildren = _react2.default.createElement(
-                    'div',
-                    { style: { padding: '10px', textAlign: 'center', border: 'solid 5px ' + color } },
-                    ourchildren
-                );
-            });
-            return ourchildren;
+            _react2.default.createElement(
+                'div',
+                null,
+                this.props.children
+            );
         }
     }]);
 
@@ -29250,8 +29245,7 @@ var RainbowFrameHOC = function (_React$Component) {
 }(_react2.default.Component);
 
 RainbowFrameHOC.propTypes = {
-    colors: _propTypes2.default.array.isRequired,
-    children: _propTypes2.default.object.isRequired
+    children: _propTypes2.default.string.isRequired
 };
 exports.default = RainbowFrameHOC;
 
@@ -30190,7 +30184,7 @@ function withRainbowFrame(colors) {
   return function (Component) {
     return function (props) {
       return colors.forEach(function (color) {
-        ourchildren = _react2.default.createElement(
+        _react2.default.createElement(
           'div',
           { style: { padding: '10px', textAlign: 'center', border: 'solid 5px ' + color } },
           _react2.default.createElement(Component, props)

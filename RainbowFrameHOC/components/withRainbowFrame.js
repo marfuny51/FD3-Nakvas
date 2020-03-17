@@ -10,7 +10,7 @@ function withRainbowFrame(colors) {
         <Component {...props} />
         </div>
     })
-    )
+    );
 };
 }
 

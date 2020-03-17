@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import './RainbowFrameHOC.css';
+//import { withRainbowFrame } from './withRainbowFrame';
 
 class RainbowFrameHOC extends React.Component {
 
@@ -10,7 +11,11 @@ class RainbowFrameHOC extends React.Component {
     };
 
     render() { 
-        <div>{this.props.children}</div>
+      var ourchildren = this.props.children;
+      return (
+        ourchildren=
+      <div>{ourchildren}</div>
+      );
     }
 }
     
