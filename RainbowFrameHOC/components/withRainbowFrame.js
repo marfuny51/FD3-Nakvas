@@ -1,18 +1,18 @@
 import React from 'react';
 
-function withRainbowFrame(color) {
-    return function(Component) {
-    
-      return props => (
-         
-        <div style={{padding: '10px', textAlign: 'center', border: 'solid 5px ' + color}}>
-        <Component {...props} />
-        </div>
-        
-      )
-    
+function withRainbowFrame(colorsArr) {
+    return function(Component) {  
+      return props => { 
+        let frames = <Component {...props}/>; 
+        colorsArr.forEach(color => {
+          frames = 
+            <div style={{padding: '10px', textAlign: 'center', border: 'solid 5px ' + color}}>
+              {frames}
+            </div>
+        })
+        return frames;
+      }
+      }  
   }
-
-}
 
 export { withRainbowFrame };

@@ -510,7 +510,7 @@ var _withRainbowFrame = __webpack_require__(17);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var colors = ['red', 'orange', 'yellow', 'green', '#00BFFF', 'blue', 'purple'];
-var FramedFragment = (0, _withRainbowFrame.withRainbowFrame)(colors)(Fragment);
+var FramedFragment = (0, _withRainbowFrame.withRainbowFrame)(colors)(_react2.default.Fragment);
 
 _reactDom2.default.render(_react2.default.createElement(
   FramedFragment,
@@ -29190,8 +29190,8 @@ var _react2 = _interopRequireDefault(_react);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function withRainbowFrame(color) {
-
   return function (Component) {
+
     return function (props) {
       return _react2.default.createElement(
         'div',
