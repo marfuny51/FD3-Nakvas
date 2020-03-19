@@ -29189,15 +29189,18 @@ var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function withRainbowFrame(color) {
+function withRainbowFrame(colorsArr) {
   return function (Component) {
-
     return function (props) {
-      return _react2.default.createElement(
-        'div',
-        { style: { padding: '10px', textAlign: 'center', border: 'solid 5px ' + color } },
-        _react2.default.createElement(Component, props)
-      );
+      var frames = _react2.default.createElement(Component, props);
+      colorsArr.forEach(function (color) {
+        frames = _react2.default.createElement(
+          'div',
+          { style: { padding: '10px', textAlign: 'center', border: 'solid 5px ' + color } },
+          frames
+        );
+      });
+      return frames;
     };
   };
 }
