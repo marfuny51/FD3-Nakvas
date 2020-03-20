@@ -1,26 +1,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import './RainbowFrame.css';
+import './RainbowFrameRekursia.css';
 
-class RainbowFrame extends React.Component {
+class RainbowFrameRekursia extends React.Component {
 
     static propTypes = {
       colors: PropTypes.array.isRequired,
-      children: PropTypes.object.isRequired
+      children: PropTypes.string.isRequired
     };
 
     render() {
         var ourcolors = this.props.colors;
         var ourchildren = this.props.children;
-        ourcolors.forEach(color => {
-            ourchildren= 
-            <div style={{padding: '10px', textAlign: 'center', border: 'solid 5px ' + color}}>
-            {ourchildren}
+        if (ourcolors.length==0) {
+            return ourchildren;
+        }
+        else {
+            return (
+            <div style={{padding: '10px', textAlign: 'center', border: 'solid 5px ' + ourcolors[0]}}>
+                <RainbowFrameRekursia colors={ourcolors.slice(1)}>{ourchildren}</RainbowFrameRekursia>
             </div>
-        })
-        return ourchildren;
+            )
+        }
     }
 }
     
-export default RainbowFrame;
+export default RainbowFrameRekursia;

@@ -3,14 +3,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import RainbowFrame  from './components/RainbowFrame';
+import RainbowFrameRekursia  from './components/RainbowFrameRekursia';
 
 let colorsArr = ['red','orange', 'yellow','green', '#00BFFF', 'blue', 'purple'];
 
 ReactDOM.render(
-  <RainbowFrame colors={colorsArr}>
+  <RainbowFrameRekursia colors={colorsArr}>
     Hello!
-    </RainbowFrame>
+    </RainbowFrameRekursia>
   , document.getElementById('rainbowFrame') 
 );
 
