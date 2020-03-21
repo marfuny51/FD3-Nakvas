@@ -29192,7 +29192,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function withRainbowFrame(colorsArr) {
   return function (Component) {
     return function (props) {
-      var frames = _react2.default.createElement(Component, props);
+      var frames = props.children;
       colorsArr.forEach(function (color) {
         frames = _react2.default.createElement(
           'div',
