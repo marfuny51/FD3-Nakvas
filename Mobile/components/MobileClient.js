@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {voteEvents} from './events';
 
 import './MobileClient.css';
 
@@ -24,6 +25,14 @@ class MobileClient extends React.PureComponent {
     this.setState({clients:newProps.clients});
   };
 
+  idClickedDelete = (EO) => {
+    voteEvents.emit('EIdClickedDelete',this.props.clients.id);
+  }
+
+  idClickedEdit = (EO) => {
+    voteEvents.emit('EIdClickedEdit',this.props.clients.id);
+  }
+
   render() {
 
     console.log("MobileClient id="+this.state.clients.id+" render");
@@ -34,9 +43,9 @@ class MobileClient extends React.PureComponent {
             <td>{this.state.clients.name}</td>
             <td>{this.state.clients.otch}</td>
             <td>{this.state.clients.balance}</td>
-            <td>Статус</td>
-            <td><input type="button" value="Edit"/></td>
-            <td><input type="button" value="Delete"/></td>
+            <td className={(this.state.clients.balance>0)?'ActiveClient':'BlockedClient'}>{(this.state.clients.balance>0)?'active':'blocked'}</td>
+            <td><input type="button" value="Edit" onClick={this.idClickedEdit}/></td>
+            <td><input type="button" value="Delete" onClick={this.idClickedDelete}/></td>
         </tr>
  
     );
