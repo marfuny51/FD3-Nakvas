@@ -26,6 +26,7 @@ class MobileCompany extends React.PureComponent {
     clients: this.props.clients,
     deleteCode: null,
     editCode: null,
+    mode: null, //0 -view, 1- edit, 2 - add
   };
 
   componentDidMount = () => {
@@ -47,7 +48,7 @@ class MobileCompany extends React.PureComponent {
   };
 
   idDelete = (id) => {
-    this.setState( {deleteCode:id}, this.clientDelete);
+    this.setState( {deleteCode:id, mode:''}, this.clientDelete);
   }
 
   clientDelete = () => {
@@ -57,7 +58,7 @@ class MobileCompany extends React.PureComponent {
   }
 
   idEdit = (id) => {
-    this.setState( {editCode:id}, this.clientEdit);
+    this.setState( {editCode:id, mode:1}, this.clientEdit);
   }
 
   clientEdit = () => {
