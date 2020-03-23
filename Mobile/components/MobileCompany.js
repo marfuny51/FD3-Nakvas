@@ -18,11 +18,11 @@ class MobileCompany extends React.PureComponent {
   };
 
   setName1 = () => {
-    this.setState({name:'МТС'});
+    this.setState({name:'Velcom'});
   };
 
   setName2 = () => {
-    this.setState({name:'Velcom'});
+    this.setState({name:'MTS'});
   };
   
   render() {

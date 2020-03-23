@@ -572,7 +572,7 @@ var _MobileCompany2 = _interopRequireDefault(_MobileCompany);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var companyName = 'Velcom';
-var clientsArr = [{ id: 101, surname: 'Иванов', name: 'Иван', otch: 'Иванович', balance: 200 }, { id: 102, surname: 'Сидоров', name: 'Сидор', otch: 'Сидорович', balance: 250 }, { id: 103, surname: 'Петров', name: 'Петр', otch: 'Петрович', balance: 180 }, { id: 104, surname: 'Григорьев', name: 'Григорий', otch: 'Григорьевич', balance: -220 }];
+var clientsArr = [{ id: 101, surname: 'Ivanov', name: 'Ivan', otch: 'Ivanovich', balance: 200 }, { id: 102, surname: 'Sidorov', name: 'Sidor', otch: 'Sidorovich', balance: 250 }, { id: 103, surname: 'Petrov', name: 'Petr', otch: 'Petrovich', balance: 180 }, { id: 104, surname: 'Grigoriev', name: 'Grigoriy', otch: 'Grigorievich', balance: -220 }];
 
 _reactDom2.default.render(_react2.default.createElement(_MobileCompany2.default, {
   name: companyName,
@@ -29232,9 +29232,9 @@ var MobileCompany = function (_React$PureComponent) {
       name: _this.props.name,
       clients: _this.props.clients
     }, _this.setName1 = function () {
-      _this.setState({ name: 'МТС' });
-    }, _this.setName2 = function () {
       _this.setState({ name: 'Velcom' });
+    }, _this.setName2 = function () {
+      _this.setState({ name: 'MTS' });
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
@@ -29245,29 +29245,80 @@ var MobileCompany = function (_React$PureComponent) {
       console.log("MobileCompany render");
 
       var clientsCode = this.state.clients.map(function (client) {
-        return _react2.default.createElement(_MobileClient2.default, { key: client.id, info: client });
+        return _react2.default.createElement(_MobileClient2.default, { key: client.id, clients: client });
       });
 
       return _react2.default.createElement(
         'div',
         { className: 'MobileCompany' },
         _react2.default.createElement('input', { type: 'button', value: 'Velcom', onClick: this.setName1 }),
-        _react2.default.createElement('input', { type: 'button', value: 'MTC', onClick: this.setName2 }),
+        _react2.default.createElement('input', { type: 'button', value: 'MTS', onClick: this.setName2 }),
         _react2.default.createElement(
           'div',
           { className: 'MobileCompanyName' },
-          '\u041A\u043E\u043C\u043F\u0430\u043D\u0438\u044F:',
+          'Company:',
           this.state.name
         ),
-        _react2.default.createElement('input', { type: 'button', value: '=\u0412\u0441\u0435' }),
-        _react2.default.createElement('input', { type: 'button', value: '=\u0410\u043A\u0442\u0438\u0432\u043D\u044B\u0435' }),
-        _react2.default.createElement('input', { type: 'button', value: '=\u0417\u0430\u0431\u043B\u043E\u043A\u0438\u0440\u043E\u0432\u0430\u043D\u043D\u044B\u0435' }),
+        _react2.default.createElement('br', null),
+        _react2.default.createElement('input', { type: 'button', value: 'All' }),
+        _react2.default.createElement('input', { type: 'button', value: 'Active' }),
+        _react2.default.createElement('input', { type: 'button', value: 'Blocked' }),
+        _react2.default.createElement('br', null),
+        _react2.default.createElement('br', null),
         _react2.default.createElement(
-          'div',
-          { className: 'MobileCompanyClients' },
-          clientsCode
+          'table',
+          { className: 'AllTable' },
+          _react2.default.createElement(
+            'thead',
+            { className: 'Title' },
+            _react2.default.createElement(
+              'tr',
+              null,
+              _react2.default.createElement(
+                'th',
+                null,
+                'Surname'
+              ),
+              _react2.default.createElement(
+                'th',
+                null,
+                'Name'
+              ),
+              _react2.default.createElement(
+                'th',
+                null,
+                'Middle name'
+              ),
+              _react2.default.createElement(
+                'th',
+                null,
+                'Balance'
+              ),
+              _react2.default.createElement(
+                'th',
+                null,
+                'Status'
+              ),
+              _react2.default.createElement(
+                'th',
+                null,
+                'Edit'
+              ),
+              _react2.default.createElement(
+                'th',
+                null,
+                'Delete'
+              )
+            )
+          ),
+          _react2.default.createElement(
+            'tbody',
+            { className: 'Table' },
+            clientsCode
+          )
         ),
-        _react2.default.createElement('input', { type: 'button', value: '\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u043A\u043B\u0438\u0435\u043D\u0442\u0430' })
+        _react2.default.createElement('br', null),
+        _react2.default.createElement('input', { type: 'button', value: 'Add new client' })
       );
     }
   }]);
@@ -29277,11 +29328,7 @@ var MobileCompany = function (_React$PureComponent) {
 
 MobileCompany.propTypes = {
   name: _propTypes2.default.string.isRequired,
-  clients: _propTypes2.default.arrayOf(_propTypes2.default.shape({
-    id: _propTypes2.default.number.isRequired,
-    fio: _propTypes2.default.string.isRequired,
-    balance: _propTypes2.default.number.isRequired
-  }))
+  clients: _propTypes2.default.array.isRequired
 };
 exports.default = MobileCompany;
 
@@ -30226,93 +30273,42 @@ var MobileClient = function (_React$PureComponent) {
       console.log("MobileClient id=" + this.state.clients.id + " render");
 
       return _react2.default.createElement(
-        'table',
-        { className: 'MobileClient' },
+        'tr',
+        null,
         _react2.default.createElement(
-          'thead',
+          'td',
           null,
-          _react2.default.createElement(
-            'tr',
-            null,
-            _react2.default.createElement(
-              'th',
-              null,
-              '\u0424\u0430\u043C\u0438\u043B\u0438\u044F'
-            ),
-            _react2.default.createElement(
-              'th',
-              null,
-              '\u0418\u043C\u044F'
-            ),
-            _react2.default.createElement(
-              'th',
-              null,
-              '\u041E\u0442\u0447\u0435\u0441\u0442\u0432\u043E'
-            ),
-            _react2.default.createElement(
-              'th',
-              null,
-              '\u0411\u0430\u043B\u0430\u043D\u0441'
-            ),
-            _react2.default.createElement(
-              'th',
-              null,
-              '\u0421\u0442\u0430\u0442\u0443\u0441'
-            ),
-            _react2.default.createElement(
-              'th',
-              null,
-              '\u0420\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C'
-            ),
-            _react2.default.createElement(
-              'th',
-              null,
-              '\u0423\u0434\u0430\u043B\u0438\u0442\u044C'
-            )
-          )
+          this.state.clients.surname
         ),
         _react2.default.createElement(
-          'tbody',
+          'td',
           null,
-          _react2.default.createElement(
-            'tr',
-            null,
-            _react2.default.createElement(
-              'th',
-              null,
-              this.state.clients.surname
-            ),
-            _react2.default.createElement(
-              'th',
-              null,
-              this.state.clients.sname
-            ),
-            _react2.default.createElement(
-              'th',
-              null,
-              this.state.clients.otch
-            ),
-            _react2.default.createElement(
-              'th',
-              null,
-              this.state.clients.balance
-            ),
-            _react2.default.createElement(
-              'th',
-              null,
-              '\u0421\u0442\u0430\u0442\u0443\u0441'
-            ),
-            _react2.default.createElement(
-              'th',
-              null,
-              _react2.default.createElement('input', { type: 'button', value: '\u0420\u0435\u0434\u0430\u043A\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C' })
-            ),
-            _react2.default.createElement(
-              'th',
-              null,
-              _react2.default.createElement('input', { type: 'button', value: '\u0423\u0434\u0430\u043B\u0438\u0442\u044C' })
-            )
-          )
+          this.state.clients.name
+        ),
+        _react2.default.createElement(
+          'td',
+          null,
+          this.state.clients.otch
+        ),
+        _react2.default.createElement(
+          'td',
+          null,
+          this.state.clients.balance
+        ),
+        _react2.default.createElement(
+          'td',
+          null,
+          '\u0421\u0442\u0430\u0442\u0443\u0441'
+        ),
+        _react2.default.createElement(
+          'td',
+          null,
+          _react2.default.createElement('input', { type: 'button', value: 'Edit' })
+        ),
+        _react2.default.createElement(
+          'td',
+          null,
+          _react2.default.createElement('input', { type: 'button', value: 'Delete' })
         )
       );
     }
