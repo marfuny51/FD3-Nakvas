@@ -1,11 +1,11 @@
-.EditAdd {
-    margin-top: 25px;
-}.ActiveClient {
+.ActiveClient {
     background-color: green;
 }
 
 .BlockedClient {
     background-color: red;
+}.EditAdd {
+    margin-top: 25px;
 }th, td{
     text-align: center; 
     padding: 5px; 

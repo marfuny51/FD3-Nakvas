@@ -98,19 +98,20 @@ class MobileCompany extends React.PureComponent {
   }
 
   allClicked = () => {
-    this.setState({clients:this.state.clients});
+    let clients = [...this.state.clients];
+    this.setState({clients:clients});
   }
 
   activeClicked = () => {
-    let activeClients =this.state.clients.slice();
-    activeClients = activeClients.filter(client => client.balance>0);
+    let clients = [...this.state.clients];
+    let activeClients = clients.filter(client => client.balance>0);
     this.setState({clients:activeClients});
   }
 
   blockedClicked = () => {
-    let activeClients =this.state.clients.slice();
-    activeClients = activeClients.filter(client => client.balance<0);
-    this.setState({clients:activeClients});
+    let clients = [...this.state.clients];
+    let blockedClients = clients.filter(client => client.balance<0);
+    this.setState({clients:blockedClients});
   }
   
   render() {
