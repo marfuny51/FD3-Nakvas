@@ -37,12 +37,16 @@ class EditAdd extends React.PureComponent {
     this.newBalance = ref
   }
 
-  save = (EO) => {
-      let surname=this.newSurname.value;
-      let name=this.newName.value;
-      let otch=this.newOtch.value;
-      let balance=this.newBalance.value;
-      voteEvents.emit('ESave', this.props.id, surname, name, otch, balance);
+  save = () => {
+    let surname=this.newSurname.value;
+    let name=this.newName.value;
+    let otch=this.newOtch.value;
+    let balance=this.newBalance.value;
+    voteEvents.emit('ESave', this.props.id, surname, name, otch, balance);
+  }
+
+  cancel = () => {
+    voteEvents.emit('ECancel');
   }
 
   render() {
@@ -55,7 +59,7 @@ class EditAdd extends React.PureComponent {
             <span>Middle name: </span><input type='text'defaultValue={this.props.otch} ref={this.setNewOtch}/><br/>
             <span>Balance: </span><input type='text'defaultValue={this.props.balance} ref={this.setNewBalance}/><br/>
             <input type="button" value="Save" onClick={this.save}/>
-            <input type="button" value="Cancel"/>
+            <input type="button" value="Cancel" onClick={this.cancel}/>
         </div>
  
     );

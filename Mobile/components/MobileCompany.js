@@ -35,12 +35,14 @@ class MobileCompany extends React.PureComponent {
     voteEvents.addListener('EIdClickedDelete',this.idDelete);
     voteEvents.addListener('EIdClickedEdit',this.idEdit);
     voteEvents.addListener('ESave',this.clientSave);
+    voteEvents.addListener('ECancel',this.clientCancel);
   };
 
   componentWillUnmount = () => {
     voteEvents.removeListener('EIdClickedDelete',this.idDelete);
     voteEvents.removeListener('EIdClickedEdit',this.idEdit);
     voteEvents.removeListener('ESave',this.clientSave);
+    voteEvents.removeListener('ECancel',this.clientCancel);
   };
 
   setName1 = () => {
@@ -85,24 +87,28 @@ class MobileCompany extends React.PureComponent {
     }; 
     if (this.state.mode===2) {
         let newObject = {id:clients.length+2, surname: surname, name: name, otch: otch, balance: parseInt(balance)}; 
-        clients.push(newObject);
+        clients = [...clients, newObject];
     }
-    console.log(clients);
     this.setState({ mode:'', clients: clients});
-};
+  };
+
+  clientCancel = () => {
+    let clients = [...this.state.clients];
+    this.setState({mode:'', clients: clients});
+  }
 
   allClicked = () => {
-    this.setState({clients:this.props.clients});
+    this.setState({clients:this.state.clients});
   }
 
   activeClicked = () => {
-    let activeClients =this.props.clients.slice();
+    let activeClients =this.state.clients.slice();
     activeClients = activeClients.filter(client => client.balance>0);
     this.setState({clients:activeClients});
   }
 
   blockedClicked = () => {
-    let activeClients =this.props.clients.slice();
+    let activeClients =this.state.clients.slice();
     activeClients = activeClients.filter(client => client.balance<0);
     this.setState({clients:activeClients});
   }
@@ -110,12 +116,12 @@ class MobileCompany extends React.PureComponent {
   render() {
 
     console.log("MobileCompany render");
-
-    var clientsCode=this.state.clients.map( client =>
+    let clients = [...this.state.clients];
+    var clientsCode=clients.map( client =>
       <MobileClient key={client.id} clients={client}  />
     );
 
-    var editClient = this.state.clients.find(client => 
+    var editClient = clients.find(client => 
       client.id===this.state.editCode  
     );
 
