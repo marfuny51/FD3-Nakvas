@@ -2,9 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import MobileClient from './MobileClient';
+import EditAdd from './editadd';
 import {voteEvents} from './events';
 
 import './MobileCompany.css';
+
 
 class MobileCompany extends React.PureComponent {
 
@@ -32,11 +34,13 @@ class MobileCompany extends React.PureComponent {
   componentDidMount = () => {
     voteEvents.addListener('EIdClickedDelete',this.idDelete);
     voteEvents.addListener('EIdClickedEdit',this.idEdit);
+    voteEvents.addListener('ESave',this.clientSave);
   };
 
   componentWillUnmount = () => {
     voteEvents.removeListener('EIdClickedDelete',this.idDelete);
     voteEvents.removeListener('EIdClickedEdit',this.idEdit);
+    voteEvents.removeListener('ESave',this.clientSave);
   };
 
   setName1 = () => {
@@ -58,12 +62,34 @@ class MobileCompany extends React.PureComponent {
   }
 
   idEdit = (id) => {
-    this.setState( {editCode:id, mode:1}, this.clientEdit);
+    this.setState( {editCode:id, mode:1});
   }
 
-  clientEdit = () => {
-
+  idAdd = (EO) => {
+    this.setState( {mode:2});
   }
+
+  clientSave = (id, surname, name, otch, balance) => {
+    let clients = [...this.state.clients];
+    if (this.state.mode===1) {
+      clients.forEach( (c, i) => {
+        if (c.id == id) {
+          let client={...c};
+          client.surname = surname;
+          client.name = name;
+          client.otch = otch;
+          client.balance = parseInt(balance);
+          clients[i]=client;
+        }
+      })
+    }; 
+    if (this.state.mode===2) {
+        let newObject = {id:clients.length+2, surname: surname, name: name, otch: otch, balance: parseInt(balance)}; 
+        clients.push(newObject);
+    }
+    console.log(clients);
+    this.setState({ mode:'', clients: clients});
+};
 
   allClicked = () => {
     this.setState({clients:this.props.clients});
@@ -87,6 +113,10 @@ class MobileCompany extends React.PureComponent {
 
     var clientsCode=this.state.clients.map( client =>
       <MobileClient key={client.id} clients={client}  />
+    );
+
+    var editClient = this.state.clients.find(client => 
+      client.id===this.state.editCode  
     );
 
     return (
@@ -113,7 +143,28 @@ class MobileCompany extends React.PureComponent {
           {clientsCode}
           </tbody>
       </table><br/>
-        <input type="button" value="Add new client" />
+        <input type="button" value="Add new client" onClick={this.idAdd}/>
+      {
+        (this.state.mode===1)&&
+        <EditAdd key={editClient.id}
+        mode={this.state.mode}
+        id={editClient.id}
+        surname={editClient.surname}
+        name={editClient.name}
+        otch={editClient.otch}
+        balance={editClient.balance}/>
+      }
+
+      {
+        (this.state.mode===2)&&
+        <EditAdd key={this.state.clients.length+2}
+        mode={this.state.mode}
+        id={this.state.clients.length+2}
+        surname=''
+        name=''
+        otch=''
+        balance=''/>
+      }
       </div>
     )
     ;
