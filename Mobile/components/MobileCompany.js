@@ -29,6 +29,7 @@ class MobileCompany extends React.PureComponent {
     deleteCode: null,
     editCode: null,
     mode: null, //0 -view, 1- edit, 2 - add
+    button: 0, //0 -all, 1- active, 2 - blocked
   };
 
   componentDidMount = () => {
@@ -58,17 +59,17 @@ class MobileCompany extends React.PureComponent {
   }
 
   clientDelete = () => {
-    let clients = this.state.clients;
+    let clients = [...this.state.clients];
     clients = clients.filter(client => client.id !== this.state.deleteCode);
-    this.setState({clients: clients});
+    this.setState({clients: clients} );
   }
 
   idEdit = (id) => {
-    this.setState( {editCode:id, mode:1});
+    this.setState( {editCode:id, mode:1} );
   }
 
   idAdd = (EO) => {
-    this.setState( {mode:2});
+    this.setState( {mode:2} );
   }
 
   clientSave = (id, surname, name, otch, balance) => {
@@ -98,29 +99,35 @@ class MobileCompany extends React.PureComponent {
   }
 
   allClicked = () => {
-    let clients = [...this.state.clients];
-    this.setState({clients:clients});
+    this.setState({button:0});
   }
 
   activeClicked = () => {
-    let clients = [...this.state.clients];
-    let activeClients = clients.filter(client => client.balance>0);
-    this.setState({clients:activeClients});
+    this.setState({button:1});
   }
 
   blockedClicked = () => {
-    let clients = [...this.state.clients];
-    let blockedClients = clients.filter(client => client.balance<0);
-    this.setState({clients:blockedClients});
+    this.setState({button:2});
   }
   
   render() {
 
     console.log("MobileCompany render");
     let clients = [...this.state.clients];
+    if (this.state.button == 0) {
     var clientsCode=clients.map( client =>
       <MobileClient key={client.id} clients={client}  />
-    );
+    )};
+    if (this.state.button == 1) {
+      let activeClients = clients.filter(client => client.balance>0);
+      var clientsCode=activeClients.map( client =>
+        <MobileClient key={client.id} clients={client}  />
+    )};
+    if (this.state.button == 2) {
+      let blockedClients = clients.filter(client => client.balance<0);
+      var clientsCode=blockedClients.map( client =>
+        <MobileClient key={client.id} clients={client}  />
+    )};
 
     var editClient = clients.find(client => 
       client.id===this.state.editCode  

@@ -29265,8 +29265,7 @@ var MobileCompany = function (_React$PureComponent) {
       clients: _this.props.clients,
       deleteCode: null,
       editCode: null,
-      mode: null, //0 -view, 1- edit, 2 - add
-      button: null //0 -all, 1- active, 2 - blocked
+      mode: null //0 -view, 1- edit, 2 - add
     }, _this.componentDidMount = function () {
       _events.voteEvents.addListener('EIdClickedDelete', _this.idDelete);
       _events.voteEvents.addListener('EIdClickedEdit', _this.idEdit);
@@ -29315,25 +29314,21 @@ var MobileCompany = function (_React$PureComponent) {
     }, _this.clientCancel = function () {
       var clients = [].concat(_toConsumableArray(_this.state.clients));
       _this.setState({ mode: '', clients: clients });
-    }, _this.showTable = function () {
-      var clients = [].concat(_toConsumableArray(_this.state.clients));
-      if (_this.state.button == 1) {
-        clients = clients.filter(function (client) {
-          return client.balance > 0;
-        });
-      }
-      if (_this.state.button == 2) {
-        clients = clients.filter(function (client) {
-          return client.balance < 0;
-        });
-      }
-      _this.setState({ clients: clients });
     }, _this.allClicked = function () {
-      _this.setState({ button: 0 }, _this.showTable);
+      var clients = [].concat(_toConsumableArray(_this.state.clients));
+      _this.setState({ clients: clients });
     }, _this.activeClicked = function () {
-      _this.setState({ button: 1 });
+      var clients = [].concat(_toConsumableArray(_this.state.clients));
+      var activeClients = clients.filter(function (client) {
+        return client.balance > 0;
+      });
+      _this.setState({ clients: activeClients });
     }, _this.blockedClicked = function () {
-      _this.setState({ button: 2 });
+      var clients = [].concat(_toConsumableArray(_this.state.clients));
+      var blockedClients = clients.filter(function (client) {
+        return client.balance < 0;
+      });
+      _this.setState({ clients: blockedClients });
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
