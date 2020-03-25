@@ -29369,9 +29369,9 @@ var MobileCompany = function (_React$PureComponent) {
           this.state.name
         ),
         _react2.default.createElement('br', null),
-        _react2.default.createElement('input', { type: 'button', value: 'All', onClick: this.allClicked }),
-        _react2.default.createElement('input', { type: 'button', value: 'Active', onClick: this.activeClicked }),
-        _react2.default.createElement('input', { type: 'button', value: 'Blocked', onClick: this.blockedClicked }),
+        _react2.default.createElement('input', { type: 'button', id: 'All', value: 'All', onClick: this.allClicked }),
+        _react2.default.createElement('input', { type: 'button', id: 'Active', value: 'Active', onClick: this.activeClicked }),
+        _react2.default.createElement('input', { type: 'button', id: 'Blocked', value: 'Blocked', onClick: this.blockedClicked }),
         _react2.default.createElement('br', null),
         _react2.default.createElement('br', null),
         _react2.default.createElement(
