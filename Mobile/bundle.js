@@ -29265,7 +29265,8 @@ var MobileCompany = function (_React$PureComponent) {
       clients: _this.props.clients,
       deleteCode: null,
       editCode: null,
-      mode: null //0 -view, 1- edit, 2 - add
+      mode: null, //0 -view, 1- edit, 2 - add
+      button: 0 //0 -all, 1- active, 2 - blocked
     }, _this.componentDidMount = function () {
       _events.voteEvents.addListener('EIdClickedDelete', _this.idDelete);
       _events.voteEvents.addListener('EIdClickedEdit', _this.idEdit);
@@ -29283,7 +29284,7 @@ var MobileCompany = function (_React$PureComponent) {
     }, _this.idDelete = function (id) {
       _this.setState({ deleteCode: id, mode: '' }, _this.clientDelete);
     }, _this.clientDelete = function () {
-      var clients = _this.state.clients;
+      var clients = [].concat(_toConsumableArray(_this.state.clients));
       clients = clients.filter(function (client) {
         return client.id !== _this.state.deleteCode;
       });
@@ -29315,20 +29316,11 @@ var MobileCompany = function (_React$PureComponent) {
       var clients = [].concat(_toConsumableArray(_this.state.clients));
       _this.setState({ mode: '', clients: clients });
     }, _this.allClicked = function () {
-      var clients = [].concat(_toConsumableArray(_this.state.clients));
-      _this.setState({ clients: clients });
+      _this.setState({ button: 0 });
     }, _this.activeClicked = function () {
-      var clients = [].concat(_toConsumableArray(_this.state.clients));
-      var activeClients = clients.filter(function (client) {
-        return client.balance > 0;
-      });
-      _this.setState({ clients: activeClients });
+      _this.setState({ button: 1 });
     }, _this.blockedClicked = function () {
-      var clients = [].concat(_toConsumableArray(_this.state.clients));
-      var blockedClients = clients.filter(function (client) {
-        return client.balance < 0;
-      });
-      _this.setState({ clients: blockedClients });
+      _this.setState({ button: 2 });
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
@@ -29339,9 +29331,27 @@ var MobileCompany = function (_React$PureComponent) {
 
       console.log("MobileCompany render");
       var clients = [].concat(_toConsumableArray(this.state.clients));
-      var clientsCode = clients.map(function (client) {
-        return _react2.default.createElement(_MobileClient2.default, { key: client.id, clients: client });
-      });
+      if (this.state.button == 0) {
+        var clientsCode = clients.map(function (client) {
+          return _react2.default.createElement(_MobileClient2.default, { key: client.id, clients: client });
+        });
+      };
+      if (this.state.button == 1) {
+        var activeClients = clients.filter(function (client) {
+          return client.balance > 0;
+        });
+        var clientsCode = activeClients.map(function (client) {
+          return _react2.default.createElement(_MobileClient2.default, { key: client.id, clients: client });
+        });
+      };
+      if (this.state.button == 2) {
+        var blockedClients = clients.filter(function (client) {
+          return client.balance < 0;
+        });
+        var clientsCode = blockedClients.map(function (client) {
+          return _react2.default.createElement(_MobileClient2.default, { key: client.id, clients: client });
+        });
+      };
 
       var editClient = clients.find(function (client) {
         return client.id === _this2.state.editCode;

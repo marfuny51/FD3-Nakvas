@@ -22,7 +22,7 @@ class MobileClient extends React.PureComponent {
   };
 
   componentWillReceiveProps = (newProps) => {
-    console.log("MobileClient id="+this.props.clients.id+" componentWillReceiveProps");
+    //console.log("MobileClient id="+this.props.clients.id+" componentWillReceiveProps");
     this.setState({clients:newProps.clients});
   };
 
