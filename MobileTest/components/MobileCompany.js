@@ -138,9 +138,9 @@ class MobileCompany extends React.PureComponent {
         <input type="button" value="Velcom" onClick={this.setName1} />
         <input type="button" value="MTS" onClick={this.setName2} />
         <div className='MobileCompanyName'>Company:{this.state.name}</div><br/>
-        <input type="button" value="All" onClick={this.allClicked}/>
-        <input type="button" value="Active" onClick={this.activeClicked}/>
-        <input type="button" value="Blocked" onClick={this.blockedClicked}/><br/><br/>
+        <input type="button" id='All' value="All" onClick={this.allClicked}/>
+        <input type="button" id='Active' value="Active" onClick={this.activeClicked}/>
+        <input type="button" id='Blocked' value="Blocked" onClick={this.blockedClicked}/><br/><br/>
         <table className='AllTable'>
           <thead className='Title'>
               <tr>

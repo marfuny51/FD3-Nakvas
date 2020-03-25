@@ -30392,7 +30392,7 @@ var MobileClient = function (_React$PureComponent) {
     return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = MobileClient.__proto__ || Object.getPrototypeOf(MobileClient)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
       clients: _this.props.clients
     }, _this.componentWillReceiveProps = function (newProps) {
-      console.log("MobileClient id=" + _this.props.clients.id + " componentWillReceiveProps");
+      //console.log("MobileClient id="+this.props.clients.id+" componentWillReceiveProps");
       _this.setState({ clients: newProps.clients });
     }, _this.idClickedDelete = function (EO) {
       _events.voteEvents.emit('EIdClickedDelete', _this.props.clients.id);
