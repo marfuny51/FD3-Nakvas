@@ -23,52 +23,75 @@ test('работа MobileCompany', () => {
   let componentTree=component.toJSON();
   expect(componentTree).toMatchSnapshot();
 
-  // найдём в вёрстке компонента кнопку фильтрации 'All'
-  const buttonFiltrAll = component.root.find( el => el.props.value == 'All'); 
-  // и "нажмём" на неё
-  buttonFiltrAll.props.onClick();
-
   // найдём в вёрстке компонента кнопку фильтрации 'Active'
-  const buttonFiltrActive = component.root.find( el => el.props.value=='Active'); 
+  const buttonFiltrActive = component.root.findByProps( {value:'Active'}); 
   // и "нажмём" на неё
   buttonFiltrActive.props.onClick();
-
-  // найдём в вёрстке компонента кнопку фильтрации 'Blocked'
-  const buttonFiltrBlocked = component.root.find( el => el.props.value=='Blocked'); 
-  // и "нажмём" на неё
-  buttonFiltrBlocked.props.onClick();
-
-  // найдём в вёрстке компонента кнопку фильтрации 'Add new client'
-  const buttonAdd = component.root.find( el => el.props.value=='Add new client'); 
-  // и "нажмём" на неё
-  buttonAdd.props.onClick();
-
-  // найдём в вёрстке компонента кнопку фильтрации 'Edit'
-  //const buttonEdit = component.root.find( el => el.props.value=='Edit'); 
-  // и "нажмём" на неё
-  //buttonEdit.props.onClick();
-
-  // найдём в вёрстке компонента кнопку фильтрации 'Delete'
-  //const buttonDelete = component.root.find( el => el.props.value=='Delete'); 
-  // и "нажмём" на неё
-  //buttonDelete.props.onClick();
 
   // получаем уже изменённый снэпшот
   componentTree=component.toJSON();
   expect(componentTree).toMatchSnapshot();
 
-  // "нажмём" кнопки ещё раз
+  // найдём в вёрстке компонента кнопку фильтрации 'All'
+  const buttonFiltrAll = component.root.findByProps( {value:'All'}); 
+  // и "нажмём" на неё
   buttonFiltrAll.props.onClick();
-  buttonFiltrActive.props.onClick();
-  buttonFiltrBlocked.props.onClick();
-  buttonAdd.props.onClick();
-  //buttonEdit.props.onClick();
-  //buttonDelete.props.onClick();
-  
-  // и получаем окончательный снэпшот
+
+  // получаем уже изменённый снэпшот
   componentTree=component.toJSON();
   expect(componentTree).toMatchSnapshot();
+
+  // найдём в вёрстке компонента кнопку фильтрации 'Blocked'
+  const buttonFiltrBlocked = component.root.findByProps(  {value:'Blocked'}); 
+  // и "нажмём" на неё
+  buttonFiltrBlocked.props.onClick();
+
+  // получаем уже изменённый снэпшот
+  componentTree=component.toJSON();
+  expect(componentTree).toMatchSnapshot();
+
+  buttonFiltrActive.props.onClick();
+
+  // получаем уже изменённый снэпшот
+  componentTree=component.toJSON();
+  expect(componentTree).toMatchSnapshot();
+
+  buttonFiltrAll.props.onClick();
+
+  // получаем уже изменённый снэпшот
+  componentTree=component.toJSON();
+  expect(componentTree).toMatchSnapshot();
+
+  // найдём в вёрстке компонента кнопку фильтрации 'Add new client'
+  const buttonAdd = component.root.findByProps( {value:'Add new client'}); 
+  // и "нажмём" на неё
+  buttonAdd.props.onClick();
+
+  // получаем уже изменённый снэпшот
+  componentTree=component.toJSON();
+  expect(componentTree).toMatchSnapshot();
+
+  // найдём в вёрстке компонента кнопки 'Edit'
+  const buttonEdit = component.root.findAll( el => el.props.value=='Edit'); 
+  // и "нажмём" на каждую кнопку
+  buttonEdit.forEach(button => {
+    button.props.onClick();
+    // и получим уже изменённый снэпшот
+    componentTree=component.toJSON();
+    expect(componentTree).toMatchSnapshot();
+  });
   
+  // найдём в вёрстке компонента кнопки 'Delete'
+  const buttonDelete = component.root.findAll( el => el.props.value=='Delete'); 
+  // и "нажмём" на каждую кнопку
+  buttonDelete.forEach(button => {
+    button.props.onClick();
+    //и получим уже изменённый снэпшот
+    componentTree=component.toJSON();
+    expect(componentTree).toMatchSnapshot();
+  });
+  
+    
   /*
   // можно эмулировать события, передавая в качестве объекта события то что нам нужно:
   wrapper.find('select').simulate('change', {
