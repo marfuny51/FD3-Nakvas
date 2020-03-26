@@ -5,13 +5,10 @@ import MobileClient from './MobileClient';
 import EditAdd from './editadd';
 import {voteEvents} from './events';
 
-import './MobileCompany.css';
-
 
 class MobileCompany extends React.PureComponent {
 
   static propTypes = {
-    name: PropTypes.string.isRequired,
     clients:PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.number.isRequired,
@@ -24,7 +21,6 @@ class MobileCompany extends React.PureComponent {
   };
 
   state = {
-    name: this.props.name,
     clients: this.props.clients,
     deleteCode: null,
     editCode: null,
@@ -44,14 +40,6 @@ class MobileCompany extends React.PureComponent {
     voteEvents.removeListener('EIdClickedEdit',this.idEdit);
     voteEvents.removeListener('ESave',this.clientSave);
     voteEvents.removeListener('ECancel',this.clientCancel);
-  };
-
-  setName1 = () => {
-    this.setState({name:'Velcom'});
-  };
-
-  setName2 = () => {
-    this.setState({name:'MTS'});
   };
 
   idDelete = (id) => {
@@ -112,7 +100,6 @@ class MobileCompany extends React.PureComponent {
   
   render() {
 
-    console.log("MobileCompany render");
     let clients = [...this.state.clients];
     if (this.state.button == 0) {
     var clientsCode=clients.map( client =>
@@ -135,12 +122,9 @@ class MobileCompany extends React.PureComponent {
 
     return (
       <div className='MobileCompany'>
-        <input type="button" value="Velcom" onClick={this.setName1} />
-        <input type="button" value="MTS" onClick={this.setName2} />
-        <div className='MobileCompanyName'>Company:{this.state.name}</div><br/>
-        <input type="button" id='All' value="All" onClick={this.allClicked}/>
-        <input type="button" id='Active' value="Active" onClick={this.activeClicked}/>
-        <input type="button" id='Blocked' value="Blocked" onClick={this.blockedClicked}/><br/><br/>
+        <input type="button" value="All" onClick={this.allClicked}/>
+        <input type="button" value="Active" onClick={this.activeClicked}/>
+        <input type="button" value="Blocked" onClick={this.blockedClicked}/><br/><br/>
         <table className='AllTable'>
           <thead className='Title'>
               <tr>

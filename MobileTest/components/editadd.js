@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {voteEvents} from './events';
 
-import './editadd.css';
 
 class EditAdd extends React.PureComponent {
 
