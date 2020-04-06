@@ -62,6 +62,7 @@ class Apple extends Product {
     
     getName(_name:string):void {
         super.getName(this.name);
+        console.log(this.name);
     }
 
     getScale(_weight:number):void {
@@ -97,4 +98,4 @@ let apple2:Apple = new Apple ("Gloster", 5);
 let tomato1:Tomato = new Tomato ("Red", 2);
 let tomato2:Tomato = new Tomato ("Yellow", 3);
 
-firstScales.add(apple1);
+//firstScales.add(apple1);
