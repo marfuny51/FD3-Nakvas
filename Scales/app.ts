@@ -1,4 +1,5 @@
 class Scales {
+
     products:any[];
 
     constructor() {
@@ -9,15 +10,6 @@ class Scales {
         this.products.push(product);
     }
 
-    getSumScale():number {
-        let scales:number;
-        for(let i=0; i<this.products.length; i++) {
-            scales =+ this.products[i].weightproduct.getScale;
-        }
-        console.log(scales);
-        return scales;
-    }
-
     getNameList():string[] {
         let names:string[]=[];
         for(let i=0; i<this.products.length; i++) {
@@ -26,26 +18,29 @@ class Scales {
         console.log(names);
         return names;
     }
-    
+
+    getSumScale():number {
+        let scales:number;
+        for(let i=0; i<this.products.length; i++) {
+            scales =+ this.products[i].weightproduct.getScale;
+        }
+        console.log(scales);
+        return scales;
+    }   
 }
 
 class Product extends Scales {
     
-    weight:number;
-    name:string;
-
     constructor() {
         super();
-        this.weight=0;
-        this.name=''; 
+    }
+
+    getName(_name:string):void {
+        this.products.nameproduct=_name;
     }
 
     getScale(_weight:number):void {
         this.weight=_weight;
-    }
-
-    getName(_name:string):void {
-        this.name=_name;
     }
 }
 
@@ -54,18 +49,17 @@ class Apple extends Product {
     name:string;
     weight:number;
         
-    constructor( _name:string,_weight:number) {
+    constructor(_name:string,_weight:number) {
         super();
         this.name=_name;
         this.weight=_weight;
     }
     
-    getName(_name:string):void {
+    getName():void {
         super.getName(this.name);
-        console.log(this.name);
     }
 
-    getScale(_weight:number):void {
+    getScale():void {
         super.getScale(this.weight);
     }
 }
@@ -81,11 +75,12 @@ class Tomato extends Product {
         this.weight=_weight;
     }
     
-    getName(_name:string):void {
+    getName():void {
         super.getName(this.name);
+        console.log(this.name);
     }
 
-    getScale(_weight:number):void {
+    getScale():void {
         super.getScale(this.weight);
     }
 }
