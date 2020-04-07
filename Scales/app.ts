@@ -13,7 +13,7 @@ class Scales {
 
     getNameList():string[] {
         let names:string[]=[];
-        for(let i=0; i<this.products.length; i++) {
+        for(let i:number=0; i<this.products.length; i++) {
             names.push(this.products[i].getName());
         }
         return names;
@@ -21,7 +21,7 @@ class Scales {
 
     getSumScale():number {
         let scales:number=0;
-        for(let i=0; i<this.products.length; i++) {
+        for(let i:number=0; i<this.products.length; i++) {
             scales += this.products[i].getScale();
         }
         return scales;
