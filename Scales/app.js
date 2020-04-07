@@ -17,22 +17,21 @@ var Scales = /** @class */ (function () {
     }
     Scales.prototype.add = function (product) {
         this.products.push(product);
+        return this.products;
     };
     Scales.prototype.getNameList = function () {
         var names = [];
         for (var i = 0; i < this.products.length; i++) {
             names.push(this.products[i].getName());
         }
-        console.log(names);
         return names;
     };
     Scales.prototype.getSumScale = function () {
-        var scales;
+        var scales = 0;
         for (var i = 0; i < this.products.length; i++) {
-            scales = +this.products[i].getScale();
+            scales += this.products[i].getScale();
         }
         return scales;
-        console.log(scales);
     };
     return Scales;
 }());
@@ -52,32 +51,30 @@ var Product = /** @class */ (function () {
 var Apple = /** @class */ (function (_super) {
     __extends(Apple, _super);
     function Apple(_name, _weight) {
-        var _this = _super.call(this, _name, _weight) || this;
-        _this.name = _name;
-        _this.weight = _weight;
-        return _this;
+        return _super.call(this, _name, _weight) || this;
     }
     return Apple;
 }(Product));
 var Tomato = /** @class */ (function (_super) {
     __extends(Tomato, _super);
     function Tomato(_name, _weight) {
-        var _this = _super.call(this, _name, _weight) || this;
-        _this.name = _name;
-        _this.weight = _weight;
-        return _this;
+        return _super.call(this, _name, _weight) || this;
     }
     return Tomato;
 }(Product));
 var firstScales = new Scales;
 var apple1 = new Apple("RedPrince", 10);
 var apple2 = new Apple("Gloster", 5);
+var apple3 = new Apple("Antonovka", 7);
 var tomato1 = new Tomato("Red", 2);
 var tomato2 = new Tomato("Yellow", 3);
+var tomato3 = new Tomato("Black", 8);
 firstScales.add(apple1);
 firstScales.add(apple2);
+firstScales.add(apple3);
 firstScales.add(tomato1);
 firstScales.add(tomato2);
-firstScales.getNameList();
-firstScales.getSumScale();
+firstScales.add(tomato3);
+console.log('List of all products: ' + firstScales.getNameList());
+console.log('Total weight of all products: ' + firstScales.getSumScale());
 //# sourceMappingURL=app.js.map

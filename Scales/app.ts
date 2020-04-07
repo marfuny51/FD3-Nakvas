@@ -1,96 +1,82 @@
 class Scales {
 
-    products:any[];
+    products:Product[];
 
     constructor() {
         this.products=[]; 
     }
 
-    add(product:{nameproduct:string,weightproduct:number}):void {
+    add(product:Product):Product[] {
         this.products.push(product);
+        return this.products;
     }
 
     getNameList():string[] {
         let names:string[]=[];
         for(let i=0; i<this.products.length; i++) {
-            names.push(this.products[i].nameproduct.getName);
+            names.push(this.products[i].getName());
         }
-        console.log(names);
         return names;
     }
 
     getSumScale():number {
-        let scales:number;
+        let scales:number=0;
         for(let i=0; i<this.products.length; i++) {
-            scales =+ this.products[i].weightproduct.getScale;
+            scales += this.products[i].getScale();
         }
-        console.log(scales);
         return scales;
     }   
 }
 
-class Product extends Scales {
+class Product {
+
+    name:string;
+    weight:number;
     
-    constructor() {
-        super();
-    }
-
-    getName(_name:string):void {
-        this.products.nameproduct=_name;
-    }
-
-    getScale(_weight:number):void {
+    constructor(_name:string, _weight:number) {
+        this.name=_name;
         this.weight=_weight;
+    }
+
+    getName():string {
+        return this.name;
+    }
+
+    getScale():number {
+        return this.weight;
     }
 }
 
 class Apple extends Product {
-
-    name:string;
-    weight:number;
         
     constructor(_name:string,_weight:number) {
-        super();
-        this.name=_name;
-        this.weight=_weight;
-    }
-    
-    getName():void {
-        super.getName(this.name);
-    }
-
-    getScale():void {
-        super.getScale(this.weight);
+        super(_name, _weight);
     }
 }
 
 class Tomato extends Product {
 
-    name:string;
-    weight:number;
-        
     constructor( _name:string,_weight:number) {
-        super();
-        this.name=_name;
-        this.weight=_weight;
-    }
-    
-    getName():void {
-        super.getName(this.name);
-        console.log(this.name);
-    }
-
-    getScale():void {
-        super.getScale(this.weight);
+        super(_name, _weight);
     }
 }
 
-let firstScales:Scales;
+let firstScales:Scales = new Scales;
 
 let apple1:Apple = new Apple ("RedPrince", 10);
 let apple2:Apple = new Apple ("Gloster", 5);
+let apple3:Apple = new Apple ("Antonovka", 7);
 
 let tomato1:Tomato = new Tomato ("Red", 2);
 let tomato2:Tomato = new Tomato ("Yellow", 3);
+let tomato3:Tomato = new Tomato ("Black", 8);
 
-//firstScales.add(apple1);
+firstScales.add(apple1);
+firstScales.add(apple2);
+firstScales.add(apple3);
+firstScales.add(tomato1);
+firstScales.add(tomato2);
+firstScales.add(tomato3);
+
+console.log('List of all products: ' + firstScales.getNameList());
+console.log('Total weight of all products: ' + firstScales.getSumScale());
