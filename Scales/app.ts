@@ -1,14 +1,9 @@
 class Scales {
 
-    products:Product[];
+    products:Product[]=[];
 
-    constructor() {
-        this.products=[]; 
-    }
-
-    add(product:Product):Product[] {
+    add(product:Product):void {
         this.products.push(product);
-        return this.products;
     }
 
     getNameList():string[] {

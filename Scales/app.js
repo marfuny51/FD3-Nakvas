@@ -17,21 +17,20 @@ var Scales = /** @class */ (function () {
     }
     Scales.prototype.add = function (product) {
         this.products.push(product);
-        return this.products;
     };
     Scales.prototype.getNameList = function () {
         var names = [];
         for (var i = 0; i < this.products.length; i++) {
             names.push(this.products[i].getName());
         }
-        return names;
+        //return names;
     };
     Scales.prototype.getSumScale = function () {
         var scales = 0;
         for (var i = 0; i < this.products.length; i++) {
             scales += this.products[i].getScale();
         }
-        return scales;
+        //return scales;
     };
     return Scales;
 }());
