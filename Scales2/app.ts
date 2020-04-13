@@ -7,9 +7,9 @@ interface IScalable {
 
 class Scales {
 
-    products:Product[]=[];
+    products:IScalable[]=[];
 
-    add(product:Product):void {
+    add(product:IScalable):void {
         this.products.push(product);
     }
 
@@ -28,25 +28,6 @@ class Scales {
         }
         return scales;
     }   
-}
-
-class Product implements IScalable {
-
-    name:string;
-    weight:number;
-    
-    constructor(_name:string, _weight:number) {
-        this.name=_name;
-        this.weight=_weight;
-    }
-
-    getName():string {
-        return this.name;
-    }
-
-    getScale():number {
-        return this.weight;
-    }
 }
 
 class Apple implements IScalable {
