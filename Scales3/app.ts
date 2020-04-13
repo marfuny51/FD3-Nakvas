@@ -45,8 +45,8 @@ class Scales<StorageEngine extends IStorageEngine> {
 
 class Product {
 
-    name:string;
-    weight:number;
+    private name:string;
+    private weight:number;
     
     constructor(_name:string, _weight:number) {
         this.name=_name;
