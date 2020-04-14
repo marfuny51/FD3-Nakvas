@@ -43,80 +43,7 @@ class Scales <StorageEngine extends IStorageEngine> {
     }  
 }
 
-class ScalesStorageEngineArray implements IStorageEngine {
-
-    products: IStorageEngine[];
-
-    constructor() {
-        this.products = [];
-    }
-    
-    addItem(product:IStorageEngine):void {
-        this.products.push(product);
-    }
-
-    getItem(index:number):IStorageEngine {
-        return this.products[index];
-    }
-
-    getCount():number {
-        return this.products.length;
-    }
-
-}
-
-class ScalesStorageEngineLocalStorage implements IStorageEngine {
-
-    storage:IStorageEngine = {};
-
-    addItem(product:IStorageEngine):void {
-        this.products.push(product);
-    }
-
-    getItem(index:number):IStorageEngine {
-        return this.products[index];
-    }
-
-    getCount():number {
-        return this.products.length;
-    }
-
-      addValue(key, value) {
-        this.storage[key] = value;
-        localStorage.setItem(this.keyLoc, JSON.stringify(this.storage));
-      }
-      getValue(key) {
-        return this.storage[key];
-      }
-      deleteValue(key) {
-        if (key in this.storage) {
-          delete this.storage[key];
-          localStorage.setItem(this.keyLoc, JSON.stringify(this.storage));
-          return true;
-        }
-        else {
-          return false;
-        }
-      }
-      getKeys() {
-        return Object.keys(this.storage);
-      }
-    
-    addItem(product:IStorageEngine):void {
-        this.products.push(product);
-    }
-
-    getItem(index:number):IStorageEngine {
-        return this.products[index];
-    }
-
-    getCount():number {
-        return this.products.length;
-    }
-
-}
-
-class Product implements IStorageEngine{
+class Product {
 
     private name:string;
     private weight:number;
@@ -135,22 +62,71 @@ class Product implements IStorageEngine{
     }
 }
 
-/*let firstScales:Scales = new Scales;
+class ScalesStorageEngineArray implements IStorageEngine {
 
-let apple1:Apple = new Apple ("RedPrince", 10);
-let apple2:Apple = new Apple ("Gloster", 5);
-let apple3:Apple = new Apple ("Antonovka", 7);
+    products: Product[];
 
-let tomato1:Tomato = new Tomato ("Red", 2);
-let tomato2:Tomato = new Tomato ("Yellow", 3);
-let tomato3:Tomato = new Tomato ("Black", 8);
+    constructor() {
+        this.products = [];
+    }
+    
+    addItem(product:Product):void {
+        this.products.push(product);
+    }
 
-firstScales.add(apple1);
-firstScales.add(apple2);
-firstScales.add(apple3);
-firstScales.add(tomato1);
-firstScales.add(tomato2);
-firstScales.add(tomato3);
+    getItem(index:number):Product {
+        return this.products[index];
+    }
 
-console.log('List of all products: ' + firstScales.getNameList());
-console.log('Total weight of all products: ' + firstScales.getSumScale());*/
+    getCount():number {
+        return this.products.length;
+    }
+
+}
+
+class ScalesStorageEngineLocalStorage implements IStorageEngine {
+
+    storage: Product[];
+
+    constructor() {
+        this.storage = [];
+    }
+
+    addItem(product:Product):void {
+        this.storage.push(product);
+        localStorage.setItem('Scales', JSON.stringify(this.storage));
+    }
+
+    getItem(index:number):Product {
+        return localStorage.Scales(index);
+    }
+
+    getCount():number {
+        return localStorage.length;
+    }
+
+}
+
+
+
+let storageArray = new ScalesStorageEngineArray();
+let locStorage = new ScalesStorageEngineLocalStorage();
+let newScales = new Scales();
+
+let apple1:Product = new Product ("RedPrince", 10);
+let apple2:Product = new Product ("Gloster", 5);
+let apple3:Product = new Product ("Antonovka", 7);
+
+let tomato1:Product = new Product ("Red", 2);
+let tomato2:Product = new Product ("Yellow", 3);
+let tomato3:Product = new Product ("Black", 8);
+
+newScales.addItem(apple1);
+newScales.addItem(apple2);
+newScales.addItem(apple3);
+newScales.addItem(tomato1);
+newScales.addItem(tomato2);
+newScales.addItem(tomato3);
+
+console.log('List of all products: ' + newScales.getNameList());
+console.log('Total weight of all products: ' + newScales.getSumScale());
