@@ -51,18 +51,17 @@ var ScalesStorageEngineArray = /** @class */ (function () {
 }());
 var ScalesStorageEngineLocalStorage = /** @class */ (function () {
     function ScalesStorageEngineLocalStorage() {
-        this.key = 'Scales';
-        this.storage = [];
+        this.key = 'scales';
     }
     ScalesStorageEngineLocalStorage.prototype.addItem = function (product) {
-        this.storage.push(product);
-        localStorage.setItem(this.key, JSON.stringify(this.storage));
+        localStorage.setItem(this.key, JSON.stringify(product));
     };
     ScalesStorageEngineLocalStorage.prototype.getItem = function (index) {
-        return this.storage[index];
+        var storage = localStorage.getItem(this.key);
+        return new Product(storage[index].name, storage[index].weight);
     };
     ScalesStorageEngineLocalStorage.prototype.getCount = function () {
-        return this.storage.length;
+        return localStorage.length;
     };
     return ScalesStorageEngineLocalStorage;
 }());
