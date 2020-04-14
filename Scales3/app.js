@@ -54,7 +54,9 @@ var ScalesStorageEngineLocalStorage = /** @class */ (function () {
         this.key = 'scales';
     }
     ScalesStorageEngineLocalStorage.prototype.addItem = function (product) {
-        localStorage.setItem(this.key, JSON.stringify(product));
+        var products = JSON.parse(localStorage.scales);
+        products.push(product);
+        localStorage.setItem(this.key, JSON.stringify(products));
     };
     ScalesStorageEngineLocalStorage.prototype.getItem = function (index) {
         var storage = localStorage.getItem(this.key);
