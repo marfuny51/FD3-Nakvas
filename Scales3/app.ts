@@ -1,12 +1,12 @@
 interface IStorageEngine {
 
-    addItem(product:any):void; // добавление продукта на весы
-    getItem(index:number):void; // нахождение продукта по индексу
+    addItem(product:Product):void; // добавление продукта на весы
+    getItem(index:number):Product; // нахождение продукта по индексу
     getCount():number; // количество продуктов на весах
 
 }
 
-class Scales<StorageEngine extends IStorageEngine> {
+class Scales <StorageEngine extends IStorageEngine> {
 
     products: StorageEngine[];
 
@@ -43,7 +43,80 @@ class Scales<StorageEngine extends IStorageEngine> {
     }  
 }
 
-class Product {
+class ScalesStorageEngineArray implements IStorageEngine {
+
+    products: IStorageEngine[];
+
+    constructor() {
+        this.products = [];
+    }
+    
+    addItem(product:IStorageEngine):void {
+        this.products.push(product);
+    }
+
+    getItem(index:number):IStorageEngine {
+        return this.products[index];
+    }
+
+    getCount():number {
+        return this.products.length;
+    }
+
+}
+
+class ScalesStorageEngineLocalStorage implements IStorageEngine {
+
+    storage:IStorageEngine = {};
+
+    addItem(product:IStorageEngine):void {
+        this.products.push(product);
+    }
+
+    getItem(index:number):IStorageEngine {
+        return this.products[index];
+    }
+
+    getCount():number {
+        return this.products.length;
+    }
+
+      addValue(key, value) {
+        this.storage[key] = value;
+        localStorage.setItem(this.keyLoc, JSON.stringify(this.storage));
+      }
+      getValue(key) {
+        return this.storage[key];
+      }
+      deleteValue(key) {
+        if (key in this.storage) {
+          delete this.storage[key];
+          localStorage.setItem(this.keyLoc, JSON.stringify(this.storage));
+          return true;
+        }
+        else {
+          return false;
+        }
+      }
+      getKeys() {
+        return Object.keys(this.storage);
+      }
+    
+    addItem(product:IStorageEngine):void {
+        this.products.push(product);
+    }
+
+    getItem(index:number):IStorageEngine {
+        return this.products[index];
+    }
+
+    getCount():number {
+        return this.products.length;
+    }
+
+}
+
+class Product implements IStorageEngine{
 
     private name:string;
     private weight:number;
@@ -53,11 +126,11 @@ class Product {
         this.weight=_weight;
     }
 
-    getName():string {
+    public getName():string {
         return this.name;
     }
 
-    getScale():number {
+    public getScale():number {
         return this.weight;
     }
 }
