@@ -6,38 +6,30 @@ interface IStorageEngine {
 
 }
 
-class Scales <StorageEngine extends IStorageEngine> {
+class Scales<StorageEngine extends IStorageEngine> {
 
-    products: StorageEngine[];
+    engine:IStorageEngine; // место для хранения продуктов на весах
 
-    constructor() {
-        this.products = [];
+    constructor(_engine:IStorageEngine) {
+        this.engine = _engine;
     }
 
-    addItem(product:StorageEngine):void {
-        this.products.push(product);
-    }
-
-    getItem(index:number):StorageEngine {
-        return this.products[index];
-    }
-
-    getCount():number {
-        return this.products.length;
+    add(product:Product):void {
+        this.engine.addItem(product);
     }
 
     getNameList():string[] {
         let names:string[]=[];
-        for(let i:number=0; i<this.getCount(); i++) {
-            names.push(this.getItem(i).getName());
+        for(let i:number=0; i<this.engine.getCount(); i++) {
+            names.push(this.engine.getItem(i).getName());
         }
         return names;
     }
 
     getSumScale():number {
         let scales:number=0;
-        for(let i:number=0; i<this.getCount(); i++) {
-            scales += this.getItem(i).getScale();
+        for(let i:number=0; i<this.engine.getCount(); i++) {
+            scales += this.engine.getItem(i).getScale();
         }
         return scales;
     }  
@@ -87,6 +79,7 @@ class ScalesStorageEngineArray implements IStorageEngine {
 class ScalesStorageEngineLocalStorage implements IStorageEngine {
 
     storage: Product[];
+    key:string = 'Scales';
 
     constructor() {
         this.storage = [];
@@ -94,11 +87,11 @@ class ScalesStorageEngineLocalStorage implements IStorageEngine {
 
     addItem(product:Product):void {
         this.storage.push(product);
-        localStorage.setItem('Scales', JSON.stringify(this.storage));
+        localStorage.setItem(this.key, JSON.stringify(this.storage));
     }
 
     getItem(index:number):Product {
-        return localStorage.Scales(index);
+        return this.storage[index];
     }
 
     getCount():number {
@@ -108,10 +101,10 @@ class ScalesStorageEngineLocalStorage implements IStorageEngine {
 }
 
 
-
 let storageArray = new ScalesStorageEngineArray();
 let locStorage = new ScalesStorageEngineLocalStorage();
-let newScales = new Scales();
+let newScalesArray = new Scales(storageArray);
+let newScalesLocStorage = new Scales(locStorage);
 
 let apple1:Product = new Product ("RedPrince", 10);
 let apple2:Product = new Product ("Gloster", 5);
@@ -121,12 +114,22 @@ let tomato1:Product = new Product ("Red", 2);
 let tomato2:Product = new Product ("Yellow", 3);
 let tomato3:Product = new Product ("Black", 8);
 
-newScales.addItem(apple1);
-newScales.addItem(apple2);
-newScales.addItem(apple3);
-newScales.addItem(tomato1);
-newScales.addItem(tomato2);
-newScales.addItem(tomato3);
+newScalesArray.add(apple1);
+newScalesArray.add(apple2);
+newScalesArray.add(apple3);
+newScalesArray.add(tomato1);
+newScalesArray.add(tomato2);
+newScalesArray.add(tomato3);
 
-console.log('List of all products: ' + newScales.getNameList());
-console.log('Total weight of all products: ' + newScales.getSumScale());
+console.log('Array of all products: ' + newScalesArray.getNameList());
+console.log('Total weight of all products from array: ' + newScalesArray.getSumScale());
+
+newScalesLocStorage.add(apple1);
+newScalesLocStorage.add(apple2);
+newScalesLocStorage.add(apple3);
+newScalesLocStorage.add(tomato1);
+newScalesLocStorage.add(tomato2);
+newScalesLocStorage.add(tomato3);
+
+console.log('LocalStorage of all products: ' + newScalesLocStorage.getNameList());
+console.log('Total weight of all products from LocalStorage: ' + newScalesLocStorage.getSumScale());
