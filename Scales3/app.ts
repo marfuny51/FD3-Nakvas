@@ -121,8 +121,9 @@ newScalesArray.add(tomato1);
 newScalesArray.add(tomato2);
 newScalesArray.add(tomato3);
 
-console.log('Array of all products: ' + newScalesArray.getNameList());
-console.log('Total weight of all products from array: ' + newScalesArray.getSumScale());
+console.log('Array:');
+console.log('List of all products: ' + newScalesArray.getNameList());
+console.log('Total weight of all products: ' + newScalesArray.getSumScale());
 
 newScalesLocStorage.add(apple1);
 newScalesLocStorage.add(apple2);
@@ -131,5 +132,6 @@ newScalesLocStorage.add(tomato1);
 newScalesLocStorage.add(tomato2);
 newScalesLocStorage.add(tomato3);
 
-console.log('LocalStorage of all products: ' + newScalesLocStorage.getNameList());
-console.log('Total weight of all products from LocalStorage: ' + newScalesLocStorage.getSumScale());
+console.log('LocalStorage:');
+console.log('List of all products: ' + newScalesLocStorage.getNameList());
+console.log('Total weight of all products: ' + newScalesLocStorage.getSumScale());
