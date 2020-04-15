@@ -86,16 +86,14 @@ class ScalesStorageEngineLocalStorage implements IStorageEngine {
 
     addItem(product:Product):void {
         let products:Product[];
-        if (products !== null) {
-            products.push(product);
-        }   
+        products.push(product);
         localStorage.setItem(this.key, JSON.stringify(products));
     }
 
     getItem(index:number):Product {
         let storage:Product[] = JSON.parse(localStorage.getItem(this.key));
         let prod:Product = storage[index];
-        return new Product (prod.getName(), prod.getScale());
+        return prod;
     }
 
     getCount():number {

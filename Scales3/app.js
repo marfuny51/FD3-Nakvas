@@ -55,23 +55,14 @@ var ScalesStorageEngineLocalStorage = /** @class */ (function () {
         localStorage.clear();
     }
     ScalesStorageEngineLocalStorage.prototype.addItem = function (product) {
-        /*let products:Product[] = JSON.parse(localStorage.getItem(this.key));
-        if (products !== null) {
-            products.push(product);
-        }
-        localStorage.setItem(this.key, JSON.stringify(products));*/
-        var products = [];
-        if (!localStorage.scales)
-            localStorage.scales = [];
-        if (localStorage.scales)
-            products = JSON.parse(localStorage.scales);
+        var products;
         products.push(product);
-        localStorage.scales = JSON.stringify(products);
+        localStorage.setItem(this.key, JSON.stringify(products));
     };
     ScalesStorageEngineLocalStorage.prototype.getItem = function (index) {
         var storage = JSON.parse(localStorage.getItem(this.key));
         var prod = storage[index];
-        return new Product(prod.getName(), prod.getScale());
+        return prod;
     };
     ScalesStorageEngineLocalStorage.prototype.getCount = function () {
         return localStorage.length;
