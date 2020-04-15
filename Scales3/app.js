@@ -55,14 +55,16 @@ var ScalesStorageEngineLocalStorage = /** @class */ (function () {
         localStorage.clear();
     }
     ScalesStorageEngineLocalStorage.prototype.addItem = function (product) {
-        var products;
-        products.push(product);
+        var products = JSON.parse(localStorage.getItem(this.key));
+        if (products !== null) {
+            products.push(product);
+        }
         localStorage.setItem(this.key, JSON.stringify(products));
     };
     ScalesStorageEngineLocalStorage.prototype.getItem = function (index) {
         var storage = JSON.parse(localStorage.getItem(this.key));
-        var prod = storage[index];
-        return prod;
+        console.log(storage[index]);
+        return storage[index];
     };
     ScalesStorageEngineLocalStorage.prototype.getCount = function () {
         return localStorage.length;
