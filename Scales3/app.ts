@@ -77,16 +77,25 @@ class ScalesStorageEngineArray implements IStorageEngine {
 }
 
 class ScalesStorageEngineLocalStorage implements IStorageEngine {
-
+    
     key:string = 'scales';
 
+    constructor() {
+        localStorage.clear();
+    }
+
     addItem(product:Product):void {
-        localStorage.setItem(this.key, JSON.stringify(product));
+        let products:Product[];
+        if (products !== null) {
+            products.push(product);
+        }   
+        localStorage.setItem(this.key, JSON.stringify(products));
     }
 
     getItem(index:number):Product {
         let storage:Product[] = JSON.parse(localStorage.getItem(this.key));
-        return storage[index];
+        let prod:Product = storage[index];
+        return new Product (prod.getName(), prod.getScale());
     }
 
     getCount():number {
