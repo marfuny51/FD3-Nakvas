@@ -52,6 +52,14 @@ class Product {
     getScale():number {
         return this.weight;
     }
+
+    get nameProd():string {
+        return this.name;
+    }
+
+    get weightProd():number {
+        return this.weight;
+    }
 }
 
 class ScalesStorageEngineArray implements IStorageEngine {
@@ -87,10 +95,10 @@ class ScalesStorageEngineLocalStorage implements IStorageEngine {
     addItem(product:Product):void {
         let products:Product[];
         if(!localStorage.getItem(this.key)) {
-            products=[]
+            products=[];
         }
         else {
-            products = JSON.parse(localStorage.getItem(this.key))
+            products = JSON.parse(localStorage.getItem(this.key));
         }
         products.push(product);
         localStorage.setItem(this.key, JSON.stringify(products));
@@ -99,7 +107,7 @@ class ScalesStorageEngineLocalStorage implements IStorageEngine {
     getItem(index:number):Product {
         let storage:Product[] = JSON.parse(localStorage.getItem(this.key));
         console.log(storage[index]);
-        return new Product(storage[index].name, storage[index].weight);
+        return new Product(storage[index].nameProd, storage[index].weightProd);
     }
 
     getCount():number {

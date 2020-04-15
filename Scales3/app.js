@@ -32,6 +32,20 @@ var Product = /** @class */ (function () {
     Product.prototype.getScale = function () {
         return this.weight;
     };
+    Object.defineProperty(Product.prototype, "nameProd", {
+        get: function () {
+            return this.name;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Product.prototype, "weightProd", {
+        get: function () {
+            return this.weight;
+        },
+        enumerable: true,
+        configurable: true
+    });
     return Product;
 }());
 var ScalesStorageEngineArray = /** @class */ (function () {
@@ -68,7 +82,7 @@ var ScalesStorageEngineLocalStorage = /** @class */ (function () {
     ScalesStorageEngineLocalStorage.prototype.getItem = function (index) {
         var storage = JSON.parse(localStorage.getItem(this.key));
         console.log(storage[index]);
-        return new Product(storage[index].getName(), Number(storage[index].getScale()));
+        return new Product(storage[index].nameProd, storage[index].weightProd);
     };
     ScalesStorageEngineLocalStorage.prototype.getCount = function () {
         return localStorage.length;
