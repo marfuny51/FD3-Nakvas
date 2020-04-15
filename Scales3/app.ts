@@ -45,11 +45,11 @@ class Product {
         this.weight=_weight;
     }
 
-    public getName():string {
+    getName():string {
         return this.name;
     }
 
-    public getScale():number {
+    getScale():number {
         return this.weight;
     }
 }
@@ -85,17 +85,21 @@ class ScalesStorageEngineLocalStorage implements IStorageEngine {
     }
 
     addItem(product:Product):void {
-        let products:Product[] = JSON.parse(localStorage.getItem(this.key));
-        if (products !== null) {
-            products.push(product);
+        let products:Product[];
+        if(!localStorage.getItem(this.key)) {
+            products=[]
         }
+        else {
+            products = JSON.parse(localStorage.getItem(this.key))
+        }
+        products.push(product);
         localStorage.setItem(this.key, JSON.stringify(products));
     }
 
     getItem(index:number):Product {
         let storage:Product[] = JSON.parse(localStorage.getItem(this.key));
         console.log(storage[index]);
-        return storage[index];
+        return new Product(storage[index].name, storage[index].weight);
     }
 
     getCount():number {
