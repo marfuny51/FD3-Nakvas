@@ -123,21 +123,16 @@ let tomato3:Product = new Product ("Black", 8);
 
 newScalesArray.add(apple1);
 newScalesArray.add(apple2);
-newScalesArray.add(apple3);
 newScalesArray.add(tomato1);
-newScalesArray.add(tomato2);
 newScalesArray.add(tomato3);
 
 console.log('Array:');
 console.log('List of all products: ' + newScalesArray.getNameList());
 console.log('Total weight of all products: ' + newScalesArray.getSumScale());
 
-newScalesLocStorage.add(apple1);
 newScalesLocStorage.add(apple2);
 newScalesLocStorage.add(apple3);
-newScalesLocStorage.add(tomato1);
 newScalesLocStorage.add(tomato2);
-newScalesLocStorage.add(tomato3);
 
 console.log('LocalStorage:');
 console.log('List of all products: ' + newScalesLocStorage.getNameList());
