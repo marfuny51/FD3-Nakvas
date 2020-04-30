@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
   templateUrl: 'sprite.component.html',
   styleUrls: ['sprite.component.css']
 })
-export class SpriteComponent {
+export class BoxComponent {
 
   private photo:string="http://fe.it-academy.by/Examples/cards2.png";
 
