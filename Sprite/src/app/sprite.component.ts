@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   moduleId: module.id,
@@ -8,14 +8,25 @@ import { Component } from '@angular/core';
 })
 export class SpriteComponent {
 
-  private photo:string="http://fe.it-academy.by/Examples/cards2.png";
+  @Input("url")
+  public url:string;
 
-  getPhoto():string {
-    return this.photo;
-  };
+  @Input("width")
+  public width:number;
 
-  move():void {
-    
+  @Input("height")
+  public height:number;
+
+  @Input("offset-x")
+  public offsetx:number;
+
+  @Input("offset-y")
+  public offsety:number;
+
+  @Output("clickSprite")
+  private clickSprite = new EventEmitter<number>();
+
+  click():void {
+    this.clickSprite.emit();
   }
-
 }
