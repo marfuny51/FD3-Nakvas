@@ -2,12 +2,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-
+import { NumwordComponent } from './numword.component';
 
 @NgModule({
   imports: [ BrowserModule, FormsModule ],
-  declarations: [ ],
+  declarations: [NumwordComponent],
   providers: [],
-  bootstrap: []
+  bootstrap: [NumwordComponent]
 })
 export class AppModule { }
