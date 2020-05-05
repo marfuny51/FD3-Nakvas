@@ -9,6 +9,6 @@ import { BoxComponent } from './box.component';
   imports: [ BrowserModule, FormsModule ],
   declarations: [ SpriteComponent, BoxComponent ],
   providers: [],
-  bootstrap: [SpriteComponent, BoxComponent]
+  bootstrap: [BoxComponent]
 })
 export class AppModule { }

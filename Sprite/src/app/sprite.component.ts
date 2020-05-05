@@ -23,10 +23,10 @@ export class SpriteComponent {
   @Input("offset-y")
   public offsety:number;
 
-  @Output("clickSprite")
-  private clickSprite = new EventEmitter<number>();
+  @Output("changeoutput")
+  private clickSpriteEE = new EventEmitter<number>();
 
-  click():void {
-    this.clickSprite.emit();
+  move():void {
+    this.clickSpriteEE.emit();
   }
 }
