@@ -1,7 +1,7 @@
 <div class='Main'>
     <div class='Podmain'>
-        <span class='Span'>Please, enter a number:</span> <input #apples type="text" (input)="false">
+        <span class='Span'>Пожалуйста, введите число:</span> <input #apples type="text" (input)="false">
         <br><br>
-        <span class='Span'>Result:</span> <span class='Apple'>{{apples.value|numword:'яблоко':'яблока':'яблок'}}</span>
+        <span class='Span'>У вас </span> <span>{{apples.value|numword:'яблоко':'яблока':'яблок'}}</span>
     </div>   
 </div>
