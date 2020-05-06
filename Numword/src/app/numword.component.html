@@ -2,6 +2,6 @@
     <div class='Podmain'>
         <span class='Span'>Пожалуйста, введите число:</span> <input #apples type="text" (input)="false">
         <br><br>
-        <span class='Span'>У вас </span> <span>{{apples.value|numword:'яблоко':'яблока':'яблок'}}</span>
+        <span class='Span'>У вас {{apples.value|numword:'яблоко':'яблока':'яблок'}}</span>
     </div>   
 </div>
