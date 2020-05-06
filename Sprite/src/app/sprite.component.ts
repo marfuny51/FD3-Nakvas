@@ -24,7 +24,7 @@ export class SpriteComponent {
   public offsety:number;
 
   @Output("changeoutput")
-  private clickSpriteEE = new EventEmitter<number>();
+  private clickSpriteEE = new EventEmitter<void>();
 
   move():void {
     this.clickSpriteEE.emit();
