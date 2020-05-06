@@ -3,10 +3,11 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { NumwordComponent } from './numword.component';
+import { NumwordPipe } from './numword.pipe';
 
 @NgModule({
   imports: [ BrowserModule, FormsModule ],
-  declarations: [NumwordComponent],
+  declarations: [NumwordComponent, NumwordPipe],
   providers: [],
   bootstrap: [NumwordComponent]
 })
