@@ -8,7 +8,7 @@ export class NumwordPipe implements PipeTransform {
 
   transform(num:number,word1:string,word2:string,word5:string):string {
     if (num.toString() === '') {
-      return num.toString();
+      return '';
     }
     var dd=num%100;
     if ( (dd>=11) && (dd<=19) )
