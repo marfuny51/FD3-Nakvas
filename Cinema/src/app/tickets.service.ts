@@ -31,12 +31,11 @@ export class Tickets {
     this.getTickets = [];
     let num:number = 0;
     for (let i:number=0; i < places.length; i++) {
-      let index = Math.floor(Math.random() * (places.length - 0 + 1)) + 0;
       if (num < count) {
-        if (places[index].free === true) {
-          places[index].free = false;
+        if (places[i].free === true) {
+          places[i].free = false;
           num += 1;
-          this.getTickets.push(places[index].number)
+          this.getTickets.push(places[i].number)
         }
       }
     }
