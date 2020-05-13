@@ -13,6 +13,10 @@ export class HallComponent {
   constructor(private data:Tickets) {
   }
 
+  getAll():number {
+    return this.data.getAll();
+  };
+
   getFree():number {
     return this.data.getFree();
   };

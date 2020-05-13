@@ -14,30 +14,49 @@ export class Tickets {
     { number:8, free: true },
     { number:9, free: true },
     { number:10, free: true },
-    { number:10, free: true },
     { number:11, free: true },
     { number:12, free: true },
     { number:13, free: true },
     { number:14, free: true },
     { number:15, free: true },
-    { number:16, free: true }
+    { number:16, free: true },
+    { number:17, free: true }
   ];
 
-  getNumber(count:number):string {
-    let places = this.places.filter(place => place.free===true);
-    if (count===1) {
-        let rand = Math.floor(Math.random() * places.length);
-        return places[rand].number.toString();
+  public getTickets:Array<number> = [];
+
+  
+  getNumber(count:number):void {
+    let places = [...this.places];
+    this.getTickets = [];
+    let num:number = 0;
+    for (let i:number=0; i < places.length; i++) {
+      let index = Math.floor(Math.random() * (places.length - 0 + 1)) + 0;
+      if (num < count) {
+        if (places[index].free === true) {
+          places[index].free = false;
+          num += 1;
+          this.getTickets.push(places[index].number)
+        }
+      }
     }
   };
 
+  getAll():number {
+    let places = [...this.places];
+    let allPlaces = places.length;
+    return allPlaces;
+  };
+
   getFree():number {
-    let freePlaces = this.places.filter(place => place.free===true).length;
+    let places = [...this.places];
+    let freePlaces = places.filter(place => place.free===true).length;
     return freePlaces;
   };
 
   getTake():number {
-    let takePlaces = this.places.filter(place => place.free===false).length;
+    let places = [...this.places];
+    let takePlaces = places.filter(place => place.free===false).length;
     return takePlaces;
   };
 

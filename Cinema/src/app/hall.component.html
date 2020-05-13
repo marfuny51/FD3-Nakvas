@@ -1,7 +1,11 @@
 <div class='Hall'>
 
     <h1>Welcome to the cinema!</h1>
-  
+    <div>
+        All places:
+        {{getAll()}}
+    </div>
+
     <div>
         Free places:
         {{getFree()}}
@@ -11,8 +15,11 @@
         Take places:
         {{getTake()}}
     </div><br><br>
-
-    <cash></cash>
+    <span>Buy ticket in cash</span>
+    <cash></cash><br><br>
+    <span>Buy ticket in online-cash</span>
+    <cash></cash><br>
+    
   
   </div>
   

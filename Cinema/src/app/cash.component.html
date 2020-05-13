@@ -1,5 +1,4 @@
-<span>Buy ticket in cash</span>
 <div>
-    Enter count of tickets: <input #ticket type="number"> <input type="button" value='Get tickets' (click)="getNumber()"><br>
-    Your tickets: <span>{{getNumber(ticket.value)}}</span>
+    Enter count of tickets: <input #ticket type="number"> <input type="button" value='Get tickets' (click)="getCount(ticket.value)"><br>
+    Your tickets: <span>{{getTickets}}</span>
 </div>

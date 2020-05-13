@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 import { Tickets } from './tickets.service';
 
@@ -10,11 +10,18 @@ import { Tickets } from './tickets.service';
 })
 export class CashComponent {
 
+  @Input("count")
+  private count:number;
+
+  public getTickets:Array<number> = [];
+
   constructor(private data:Tickets) {
   }
 
-  getNumber(count:number):string {
-    return this.data.getNumber(count);
-  };
+  getCount(a:number):void {
+    this.count = a;
+    this.data.getNumber(this.count);
+    this.getTickets = this.data.getTickets;
+  }
 
 }
