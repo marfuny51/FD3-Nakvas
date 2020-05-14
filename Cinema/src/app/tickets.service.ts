@@ -30,6 +30,7 @@ export class Tickets {
     let places = [...this.places];
     this.getTickets = [];
     let num:number = 0;
+    if (count <= this.getFree()) {
     for (let i:number=0; i < places.length; i++) {
       if (num < count) {
         if (places[i].free === true) {
@@ -39,6 +40,8 @@ export class Tickets {
         }
       }
     }
+  }
+  else alert('Not enough free places!');
   };
 
   getAll():number {
