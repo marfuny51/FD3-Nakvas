@@ -31,17 +31,17 @@ export class Tickets {
     this.getTickets = [];
     let num:number = 0;
     if (count <= this.getFree()) {
-    for (let i:number=0; i < places.length; i++) {
-      if (num < count) {
-        if (places[i].free === true) {
-          places[i].free = false;
-          num += 1;
-          this.getTickets.push(places[i].number)
+      for (let i:number=0; i < places.length; i++) {
+        if (num < count) {
+          if (places[i].free === true) {
+            places[i].free = false;
+            num += 1;
+            this.getTickets.push(places[i].number)
+          }
         }
       }
     }
-  }
-  else alert('Not enough free places!');
+    else alert('Not enough free places!');
   };
 
   getAll():number {
