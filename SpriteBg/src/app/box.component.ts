@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   moduleId: module.id,
@@ -6,6 +6,4 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
   templateUrl: 'box.component.html',
   styleUrls: ['box.component.css']
 })
-export class BoxComponent {
-
-}
+export class BoxComponent { }
