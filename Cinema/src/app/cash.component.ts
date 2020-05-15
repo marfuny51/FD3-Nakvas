@@ -8,6 +8,7 @@ import { Tickets } from './tickets.service';
   templateUrl: 'cash.component.html',
   styleUrls: ['cash.component.css']
 })
+
 export class CashComponent {
 
   @Input("count")
@@ -20,8 +21,10 @@ export class CashComponent {
 
   getCount(a:number):void {
     this.count = a;
-    this.data.getNumber(this.count);
-    this.getTickets = this.data.getTickets;
+    this.getTickets = this.data.getNumber(this.count);
+    if (this.getTickets === null) {
+      alert ("We don't have free places!");
+    }
   }
 
 }
