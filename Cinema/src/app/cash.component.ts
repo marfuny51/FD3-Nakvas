@@ -11,18 +11,14 @@ import { Tickets } from './tickets.service';
 
 export class CashComponent {
 
-  @Input("count")
-  private count:number;
-
-  public getTickets:Array<number> = [];
+  public tickets:Array<number> = [];
 
   constructor(private data:Tickets) {
   }
 
-  getCount(a:number):void {
-    this.count = a;
-    this.getTickets = this.data.getNumber(this.count);
-    if (this.getTickets === null) {
+  getCount(count:number):void {
+    this.tickets = this.data.getNumber(count);
+    if (this.tickets === null) {
       alert ("We don't have free places!");
     }
   }

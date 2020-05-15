@@ -25,7 +25,7 @@ export class Tickets {
  
   getNumber(count:number):any {
     let places = [...this.places];
-    let getTickets:Array<number> = [];
+    let arrTickets:Array<number> = [];
     let num:number = 0;
     if (count <= this.getFree()) {
       for (let i:number=0; i < places.length; i++) {
@@ -33,13 +33,13 @@ export class Tickets {
           if (places[i].free === true) {
             places[i].free = false;
             num += 1;
-            getTickets.push(places[i].number)
+            arrTickets.push(places[i].number)
           }
         }
       }
     }
-    else {getTickets = null;}
-    return getTickets;
+    else {arrTickets = null;}
+    return arrTickets;
   };
 
   getAll():number {
