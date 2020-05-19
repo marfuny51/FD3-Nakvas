@@ -8,6 +8,7 @@
   },
   "private": true,
   "dependencies": {
+    "@angular-devkit/core": "^9.1.6",
     "@angular/common": "^5.0.0",
     "@angular/compiler": "^5.0.0",
     "@angular/core": "^5.0.0",

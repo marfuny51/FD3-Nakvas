@@ -1,0 +1,27 @@
+<div class='Hall'>
+
+    <h1>Welcome to the cinema!</h1>
+    <div>
+        All places:
+        {{getAll()}}
+    </div><br>
+    <div class="Place" *ngFor="let place of getPlacesArray()"></div><br><br>
+    
+
+    <div>
+        Free places:
+        {{getFree()}}
+    </div>
+
+    <div>
+        Take places:
+        {{getTake()}}
+    </div><br><br>
+    <span>Buy ticket in cash</span>
+    <cash></cash><br><br>
+    <span>Buy ticket in online-cash</span>
+    <cash></cash><br>
+    
+  
+  </div>
+  
