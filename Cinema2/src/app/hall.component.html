@@ -5,8 +5,10 @@
         All places:
         {{getAll()}}
     </div><br>
-    <div class="Place" *ngFor="let place of getPlacesArray()"></div><br><br>
-    
+    <div class="Place" *ngFor="let chair of getPlaces()"><span *ngIf="chair===true; else full">Free</span></div><br><br>
+    <ng-template #full>
+        <span>Take</span>
+      </ng-template>
 
     <div>
         Free places:
@@ -15,7 +17,7 @@
 
     <div>
         Take places:
-        {{getTake()}}
+        {{getAll()-getFree()}}
     </div><br><br>
     <span>Buy ticket in cash</span>
     <cash></cash><br><br>

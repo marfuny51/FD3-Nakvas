@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import {Observable} from 'rxjs';
 
 @Injectable()
 export class Tickets {
@@ -22,7 +23,19 @@ export class Tickets {
     { number:16, free: true },
     { number:17, free: true }
   ];
- 
+
+  
+  private places2:Array<boolean> = [true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true];
+  private places2$:Observable<Array<boolean>>;
+
+  constructor() {
+    this.places2$ = new Observable<Array<boolean>>(event=> event.next(this.places2))
+  }
+
+  getPlacesObservable():Observable<Array<boolean>> {
+    return this.places2$;
+  }
+
   getNumber(count:number):any {
     let places = [...this.places];
     let arrTickets:Array<number> = [];
@@ -53,25 +66,5 @@ export class Tickets {
     let freePlaces = places.filter(place => place.free===true).length;
     return freePlaces;
   };
-
-  getTake():number {
-    let places = [...this.places];
-    let takePlaces = places.filter(place => place.free===false).length;
-    return takePlaces;
-  };
-
-  getPlacesArray():Array<number> {
-    let places = [...this.places];
-    return new Array(places.length);
-  };
-
-  /*getFreeOrTake():any {
-    let places = [...this.places];
-    for (let i:number=0; i < this.getPlacesArray().length; i++) {
-        if (this.getPlacesArray()[i].free === true) {
-            ret
-        }
-    }
-  }*/
 
 }

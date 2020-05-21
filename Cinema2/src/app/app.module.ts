@@ -8,12 +8,8 @@ import { CashComponent } from './cash.component';
 
 @NgModule({
   imports: [ BrowserModule, FormsModule ],
-  declarations: [
-    HallComponent, CashComponent
-  ],
-  providers: [
-    Tickets
-  ],
+  declarations: [ HallComponent, CashComponent ],
+  providers: [ Tickets ],
   bootstrap: [HallComponent]
 })
 export class AppModule { }

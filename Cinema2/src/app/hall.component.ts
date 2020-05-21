@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-
 import { Tickets } from './tickets.service';
 
 @Component({
@@ -10,7 +9,10 @@ import { Tickets } from './tickets.service';
 })
 export class HallComponent {
 
+  private places2:Array<boolean>
+
   constructor(private data:Tickets) {
+    data.getPlacesObservable().subscribe( res => {this.places2 = res})
   }
 
   getAll():number {
@@ -21,12 +23,8 @@ export class HallComponent {
     return this.data.getFree();
   };
 
-  getTake():number {
-    return this.data.getTake();
-  };
-
-  getPlacesArray():Array<number> {
-    return this.data.getPlacesArray();
+  getPlaces():Array<boolean> {
+    return this.places2;
   }
 
 }
