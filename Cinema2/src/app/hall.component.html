@@ -5,9 +5,9 @@
         All places:
         {{getAll()}}
     </div><br>
-    <div class="Place" *ngFor="let chair of getPlaces()"><span *ngIf="chair===true; else full">Free</span></div><br><br>
+    <div class="Place" *ngFor="let chair of getPlaces()"><span class="True" *ngIf="chair===true; else full">Free</span></div><br><br>
     <ng-template #full>
-        <span>Take</span>
+        <span class="False">Taken</span>
       </ng-template>
 
     <div>
